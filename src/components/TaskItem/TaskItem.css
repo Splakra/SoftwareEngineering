@@ -1,0 +1,53 @@
+.task-item {
+    display: flex;
+    padding: 20px;
+    border: 1px solid var(--rich-mahogany);
+    border-radius: var(--border-radius-big);
+}
+
+.task-item__infos {
+    margin-right: auto;
+}
+
+.task-item__profile {
+    display: inline-flex;
+    gap: 3px;
+    margin-bottom: 8px;
+    padding: 5px 10px;
+    border: 1px solid var(--rich-mahogany);
+    border-radius: var(--border-radius-small);
+    font-size: var(--font-size-l);
+}
+
+.task-item__icon {
+    flex: 0 0 25px;
+}
+
+.task-item__person {
+    width: 25px;
+}
+
+.task-item__checkmark {
+    width: 70px;
+}
+
+.task-item__medication {
+    font-size: var(--font-size-base);
+    font-weight: bold;
+}
+
+.task-item__status {
+    font-size: var(--font-size-s);
+}
+
+.task-item__button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 1;
+    flex: 0 0 auto;
+    padding: 8px;
+    background-color: var(--tea-green);
+    border-radius: 50%;
+    border: none;
+}

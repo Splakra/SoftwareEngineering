@@ -1,23 +1,28 @@
-import logo from './logo.svg';
+import TaskItem from './components/TaskItem/TaskItem';
 import './App.css';
 
 function App() {
+    const tasks = [
+        {
+            name: "Paulchen",
+            medication: "Medikament 1"
+        },
+        {
+            name: "Pupsi",
+            medication: "Medikament 2"
+        },
+        {
+            name: "Schnucki",
+            medication: "Medikament 3"
+        },
+        {
+            name: "Socke",
+            medication: "Medikament 4"
+        }
+    ]
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        {tasks.map(task => <TaskItem {...task} />)}
     </div>
   );
 }
