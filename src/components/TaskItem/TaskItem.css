@@ -1,38 +1,82 @@
 .task-item {
-    display: flex;
-    padding: 20px;
-    border: 1px solid var(--rich-mahogany);
+    --infos-border-left-width: 0.8rem; /* custom variable: width of the colored left border */
+    display: flex; /* places child elements next to each other */
+    gap: 1.25rem; /* space between the children */
+    margin-bottom: 1.75rem;
+}
+
+.task-item__time {
+    flex: 0 0 3rem;
+    font-variant-numeric: tabular-nums; /* sets all numbers to same size */
+    font-weight: 600;
+    font-style: italic;
+    letter-spacing: 0.07rem;
+}
+
+.task-item--checked .task-item__time {
+    opacity: 0.4;
+}
+
+.task-item__button {
+    all: unset; /* removes default button styles */
+    position: relative; /* allows absolutely positioned checkmark inside */
+    flex: 1; /* makes the button take up remaining space */
     border-radius: var(--border-radius-big);
+    overflow: hidden;
+    background-color: white;
+    /* solid orange gradient that will “wipe” from left to right when checked */
+    background-image: linear-gradient(to right, var(--tangerine-dream) 0, var(--tangerine-dream) 100%);
+    background-size: 0 100%; /* start with gradient width = 0 (hidden), then to 100% (animates from left to right)  */
+    background-repeat: no-repeat;
+    transition: background-size 0.25s ease-in-out; /* when checked: transition of gradient width */
+    box-shadow: 0.1rem 0.4rem 1.5rem color-mix(in oklab, var(--tangerine-dream) 30%, transparent);
+}
+
+/* Animation that fades the button background color from solid orange
+   to a transparent version of the same color after the gradient */
+@keyframes buttonBackgroundTransition {
+    0% {
+        background: var(--tangerine-dream)
+    }
+    100% {
+        background: color-mix(in oklab, var(--tangerine-dream), transparent);
+    }
+}
+
+.task-item--checked .task-item__button {
+    background-size: 100% 100%; /* runs gradient wipe */
+    animation: buttonBackgroundTransition 0.25s forwards; /* fades background after the gradient */
+    animation-delay: 0.25s;
+    box-shadow: none;
 }
 
 .task-item__infos {
-    margin-right: auto;
+    padding: 1rem;
+    border-left: var(--infos-border-left-width) solid var(--tangerine-dream);
+}
+
+.task-item--checked .task-item__infos {
+    opacity: 0.4;
+    border-left-color: transparent;
 }
 
 .task-item__profile {
     display: inline-flex;
-    gap: 3px;
-    margin-bottom: 8px;
-    padding: 5px 10px;
-    border: 1px solid var(--rich-mahogany);
+    gap: 0.3rem;
+    margin-bottom: 0.5rem;
+    padding: 0.3rem 0.7rem;
+    background: var(--tangerine-dream);
+    color: white;
     border-radius: var(--border-radius-small);
     font-size: var(--font-size-l);
-}
-
-.task-item__icon {
-    flex: 0 0 25px;
+    font-weight: bold;
 }
 
 .task-item__person {
-    width: 25px;
-}
-
-.task-item__checkmark {
-    width: 70px;
+    width: 1.5rem;
 }
 
 .task-item__medication {
-    font-size: var(--font-size-base);
     font-weight: bold;
 }
 
@@ -40,14 +84,21 @@
     font-size: var(--font-size-s);
 }
 
-.task-item__button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    aspect-ratio: 1;
-    flex: 0 0 auto;
-    padding: 8px;
-    background-color: var(--tea-green);
-    border-radius: 50%;
-    border: none;
+.task-item__checkmark-wrapper {
+    position: absolute;
+    top: -1.35rem;
+    right: -0.5rem;
+    transform: translateY(-5rem); /* starts invisible outside the button */
+    transform-origin: top;
+    transition: transform 0.1s cubic-bezier(.18, .69, .37, 1) 0.25s;
 }
+
+.task-item--checked .task-item__checkmark-wrapper {
+    transform: translateY(0); /* slides to wanted position */
+}
+
+.task-item__checkmark {
+    width: 7rem;
+    height: 7rem;
+}
+
