@@ -5,26 +5,30 @@ function App() {
     const tasks = [
         {
             name: "Paulchen",
-            medication: "Medikament 1"
+            medication: "Schmerzmittel",
+            time: "08:00"
         },
         {
             name: "Pupsi",
-            medication: "Medikament 2"
+            medication: "Polysulfated Glycosaminodinolinoglycan",
+            time: "09:00"
         },
         {
             name: "Schnucki",
-            medication: "Medikament 3"
+            medication: "Vitaminpräparat",
+            time: "13:30"
         },
         {
             name: "Socke",
-            medication: "Medikament 4"
+            medication: "Augensalbe",
+            time: "18:15"
         }
     ]
-  return (
-    <div className="App">
-        {tasks.map(task => <TaskItem {...task} />)}
-    </div>
-  );
+    return (
+        <div className="App">
+            {tasks.map(task => <TaskItem {...task} />)}
+        </div>
+    );
 }
 
 export default App;
