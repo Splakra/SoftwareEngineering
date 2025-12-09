@@ -15,7 +15,6 @@ function Dashboard() {
     db.profiles.add({name: 'Sunny'})
     db.medication.add({name: 'Melosus', type: 'fluid', amount: 3.5, reminderBuyNew: 10})
 
-
     async function addIntake() {
         const medication = await db.medication.limit(1).toArray();
         const patient = await db.profiles.limit(1).toArray();
