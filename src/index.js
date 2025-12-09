@@ -5,6 +5,7 @@ import './assets/ysabeau-office-italic-variable.ttf';
 import './assets/ysabeau-office-variable.ttf';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import Dashboard from "./dashboard/Dashboard";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

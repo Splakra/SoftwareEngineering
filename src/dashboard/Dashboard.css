@@ -1,0 +1,29 @@
+.Calendar {
+    background: #FE8C46;
+    background: linear-gradient(180deg,rgba(254, 140, 70, 1) 67%, rgba(255, 255, 255, 0) 100%);
+    padding: 2rem;
+    padding-bottom: 5rem;
+    color: #fbf4f3;
+
+}
+
+.Date{
+    font-size: 1.75rem;
+    font-weight: bolder;
+}
+
+.Week{
+    display: flex;
+    flex-direction: row;
+    margin-top: 2rem;
+}
+
+.Weekday{
+    flex-grow: 1;
+    text-align: center;
+}
+
+.Number{
+    font-size: 1.25rem;
+    font-weight: bold;
+}
