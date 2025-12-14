@@ -28,20 +28,20 @@ function Dashboard() {
 
     return (
         <div>
-            <div className="Calendar">
-                <div className="Date">
+            <div className="calendar">
+                <div className="calendar_date">
                     {weekdaysLong[currentDate.getDay()] + ", " + currentDate.getDate() + ". " + months[currentDate.getMonth()]}
                 </div>
-                <div className="Week">
+                <div className="week">
                     {
                         weekly.map(value => (
-                            <div className="Weekday">
-                                <div className="Days">
+                            <div className="week_days">
+                                <div className="week_dates">
                                     {
                                         weekdays[value.getDay()]
                                     }
                                 </div>
-                                <div className="Number">
+                                <div className="week_numbers">
                                     {value.getDate()}
                                 </div>
                             </div>
