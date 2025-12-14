@@ -1,5 +1,7 @@
 import TaskItem from './components/TaskItem/TaskItem';
 import './App.css';
+import ChooseProfile from "./components/AddTherapy/ChooseProfile";
+import ChooseMedication from "./components/AddTherapy/ChooseMedication";
 
 function App() {
     const tasks = [
@@ -26,7 +28,7 @@ function App() {
     ]
     return (
         <div className="App">
-            {tasks.map(task => <TaskItem {...task} />)}
+            <ChooseMedication/>
         </div>
     );
 }
