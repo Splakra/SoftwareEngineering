@@ -24,7 +24,7 @@ function ChooseProfile() {
                 Für wen soll eine neue Einnahme angelegt werden?
             </div>
             <div className={"choose-profile_existing-Patient"}>
-                Patient*in auswählen
+                <div>Patient*in auswählen</div>
                 <select>
                     {
                         patients.map(profile => {

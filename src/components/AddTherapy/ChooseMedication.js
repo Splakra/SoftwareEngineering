@@ -24,7 +24,7 @@ function ChooseMedication() {
                 Füge eine neue Therapie hinzu!
             </div>
             <div className={"choose-medication_existing-medication"}>
-                Vorhandenes Medikament auswählen
+                <div>Vorhandenes Medikament auswählen</div>
                 <select>
                     {
                         medication.map(medication => {
