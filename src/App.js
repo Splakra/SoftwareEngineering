@@ -2,6 +2,7 @@ import TaskItem from './components/TaskItem/TaskItem';
 import './App.css';
 import ChooseProfile from "./components/AddTherapy/ChooseProfile";
 import ChooseMedication from "./components/AddTherapy/ChooseMedication";
+import Dashboard from "./dashboard/Dashboard";
 
 function App() {
     const tasks = [
@@ -28,7 +29,7 @@ function App() {
     ]
     return (
         <div className="App">
-            <ChooseMedication/>
+            <Dashboard/>
         </div>
     );
 }

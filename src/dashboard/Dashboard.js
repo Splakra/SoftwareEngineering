@@ -19,9 +19,9 @@ function Dashboard() {
         const medication = await db.medication.limit(1).toArray();
         const patient = await db.profiles.limit(1).toArray();
         db.intakeMeds.add({
-            mediaction: medication[0].id,
+            medicaction: medication[0].id,
             patient: patient[0].id,
-            rythm: 'daily',
+            rhythm: 'daily',
             startDate: currentDate
         })
     }
