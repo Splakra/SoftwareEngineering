@@ -1,0 +1,11 @@
+.medicine-page__backdrop {
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: var(--border-radius-big);
+    overflow: hidden;
+    background-color: white;
+    /* solid orange gradient that will “wipe” from left to right when checked */
+    background-size: 0 100%; /* start with gradient width = 0 (hidden), then to 100% (animates from left to right)  */
+    background-repeat: no-repeat;
+    box-shadow: 0.1rem 0.4rem 1.5rem color-mix(in oklab, var(--tangerine-dream) 30%, transparent);
+}

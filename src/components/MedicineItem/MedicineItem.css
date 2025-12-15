@@ -1,0 +1,101 @@
+.medicine-item {
+    --infos-border-left-width: 0.8rem; /* custom variable: width of the colored left border */
+    display: flex; /* places child elements next to each other */
+    gap: 1.25rem; /* space between the children */
+    margin: 2.5%;
+    width: 45%;
+}
+
+.medicine-item--checked .medicine-item__time {
+    opacity: 0.4;
+}
+
+.medicine-item__button {
+    all: unset; /* removes default button styles */
+    position: relative; /* allows absolutely positioned checkmark inside */
+    flex: 1; /* makes the button take up remaining space */
+    border-radius: var(--border-radius-big);
+    overflow: hidden;
+    background-color: white;
+    /* solid orange gradient that will “wipe” from left to right when checked */
+    background-image: linear-gradient(to right, var(--tangerine-dream) 0, var(--tangerine-dream) 100%);
+    background-size: 0 100%; /* start with gradient width = 0 (hidden), then to 100% (animates from left to right)  */
+    background-repeat: no-repeat;
+    transition: background-size 0.25s ease-in-out; /* when checked: transition of gradient width */
+    box-shadow: 0.1rem 0.4rem 1.5rem color-mix(in oklab, var(--tangerine-dream) 30%, transparent);
+}
+
+/* Animation that fades the button background color from solid orange
+   to a transparent version of the same color after the gradient */
+@keyframes buttonBackgroundTransition {
+    0% {
+        background: var(--tangerine-dream)
+    }
+    100% {
+        background: color-mix(in oklab, var(--tangerine-dream), transparent);
+    }
+}
+
+@keyframes sideAutoScroll {
+    0% {
+        transform: translateX(0);
+    }
+    5% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(calc(-100% + 10rem));
+    }
+    55% {
+        transform: translateX(calc(-100% + 10rem));
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.medicine-item--allert .medicine-item__button {
+    background-size: 100% 100%; /* runs gradient wipe */
+    animation: buttonBackgroundTransition 0.25s forwards; /* fades background after the gradient */
+    animation-delay: 0.25s;
+    box-shadow: none;
+}
+
+.medicine-item__infos {
+    padding: 1rem;
+    border-left: var(--infos-border-left-width) solid var(--tangerine-dream);
+}
+
+.medicine-item--checked .medicine-item__infos {
+    opacity: 0.4;
+    border-left-color: transparent;
+}
+
+.medicine-item__name {
+    display: inline-flex;
+    gap: 0.3rem;
+    margin-bottom: 0.5rem;
+    padding: 0.3rem 2rem 0.3rem 0.7rem;
+    background: var(--tangerine-dream);
+    color: white;
+    border-radius: var(--border-radius-small);
+    font-size: var(--font-size-l);
+    font-weight: bold;
+}
+
+.sideScrollAnim {
+    animation: sideAutoScroll 10s infinite;
+}
+
+.medicine-item__pill {
+    width: 1.5rem;
+}
+
+.medicine-item__storage {
+    font-weight: bold;
+}
+
+.medicine-item__status {
+    font-size: var(--font-size-s);
+}
+
