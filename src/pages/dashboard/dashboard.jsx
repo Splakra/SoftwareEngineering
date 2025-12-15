@@ -1,15 +1,20 @@
-import './Dashboard.css';
-import db from '../database/DexieDatabase.js';
+import './dashboard.css';
+import db from '../../database/DexieDatabase.js';
 
-function Dashboard() {
+// for later:
+// export async function clientLoader() {
+//     // you can now fetch data here
+//     return {
+//         title: "Dashboard",
+//     };
+// }
+
+function Dashboard({loaderData}) {
     const weekly = [-3, -2, -1, 0, 1, 2, 3].map(value => {
         const today = new Date();
         today.setDate(today.getDate() + value);
         return today;
     })
-    const weekdays = ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"];
-    const weekdaysLong = ["Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag"];
-    const months = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"];
     const currentDate = new Date();
 
     db.profiles.add({name: 'Sunny'})
@@ -19,9 +24,9 @@ function Dashboard() {
         const medication = await db.medication.limit(1).toArray();
         const patient = await db.profiles.limit(1).toArray();
         db.intakeMeds.add({
-            mediaction: medication[0].id,
+            medication: medication[0].id,
             patient: patient[0].id,
-            rythm: 'daily',
+            rhythm: 'daily',
             startDate: currentDate
         })
     }
@@ -30,19 +35,17 @@ function Dashboard() {
         <div>
             <div className="Calendar">
                 <div className="Date">
-                    {weekdaysLong[currentDate.getDay()] + ", " + currentDate.getDate() + ". " + months[currentDate.getMonth()]}
+                    {currentDate.toLocaleDateString("de-DE", {weekday: "long", month: "long", day: "numeric"})}
                 </div>
                 <div className="Week">
                     {
-                        weekly.map(value => (
+                        weekly.map(day => (
                             <div className="Weekday">
                                 <div className="Days">
-                                    {
-                                        weekdays[value.getDay()]
-                                    }
+                                    {day.toLocaleDateString("de-DE", {weekday: "short"})}
                                 </div>
                                 <div className="Number">
-                                    {value.getDate()}
+                                    {day.getDate()}
                                 </div>
                             </div>
                         ))
