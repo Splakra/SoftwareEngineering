@@ -3,7 +3,7 @@ import PersonIcon from "../../assets/person-round.svg";
 import Checkmark from "../../assets/checkmark.svg";
 import "./TaskItem.css";
 
-export default function TaskItem({name, medication, time}) {
+export default function TaskItem({patientName, medications, time}) {
     const [checked, setChecked] = useState(false);
     const [checkedDate, setCheckedDate] = useState(null);
     const handleChecked = () => {
@@ -21,10 +21,10 @@ export default function TaskItem({name, medication, time}) {
                 <div className={"task-item__infos"}>
                     <div className={"task-item__profile"}>
                         <img alt="" className={"task-item__person"} src={PersonIcon}/>
-                        {name}
+                        {patientName}
                     </div>
                     <div className={"task-item__medication"}>
-                        {medication}
+                        {medications[0].name}
                     </div>
                     <div className={"task-item__status"}>
                         {status}
