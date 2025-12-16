@@ -7,6 +7,7 @@ export default function NewProfile ()
 {
     const navigate = useNavigate();
 
+
     function handleSubmit(input) {
         input.preventDefault();
 
@@ -16,12 +17,12 @@ export default function NewProfile ()
 
 
 
-        // db.profiles.create(formData);
+
 
         const formJson = Object.fromEntries(formData.entries());
         console.log(formJson);
         db.profiles.add({name: formJson.patientName});
-        alert(formJson.patientName); //test
+        //alert(formJson.patientName); //test
 
 
     }

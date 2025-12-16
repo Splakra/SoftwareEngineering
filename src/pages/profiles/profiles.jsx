@@ -1,11 +1,10 @@
 import PersonIcon from "../../assets/person-round.svg";
 import "./Profiles.css"
-import NewProfile from "./newProfile";
-import {useNavigate} from "react-router";
 import db from "../../database/DexieDatabase";
 import {useEffect, useState} from "react";
+import {useNavigate} from "react-router";
 
-export default function Profile({name}) {
+export default function Profile() {
     const navigate = useNavigate();
 
     function handleClick() {
@@ -22,25 +21,34 @@ export default function Profile({name}) {
         loadPatients();
     }, [])
 
+    function handleDelete(id) {
+        db.profiles.delete(id); //löschen von db einträgen
+        window.location.reload(); //neu laden der Seite
+        return null;
+    }
 
     return (
         <div className={"profile-item"}>
             <div className={"profile__name"}>
                 <div className={"task-item__icon"}>
-                    <img alt="" className={"task-item__person"} src={PersonIcon}/>
+
                 </div>
                 {
                     patients.map(profile => {
                         return <div>
+                            <img alt="" className={"task-item__person"} src={PersonIcon}/>
                             {
                                 profile.name
                             }
+                            <button onClick={() => handleDelete(profile.id)}>
+                                Profil löschen
+                            </button>
 
                         </div>
                     })
                 }
             </div>
-            <button onClick={handleClick}> Profil hinzufügen</button>
+            <button onClick={handleClick}> Profil hinzufügen </button>
         </div>
     )
 }
