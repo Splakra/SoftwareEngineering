@@ -1,8 +1,8 @@
 export function back() {
-    return null;
+    return null; //auf browser history zugreifen
 }
 
 export function quit() {
-    return null;
+    return null; //für automatisch zum Homescreen
 }
 

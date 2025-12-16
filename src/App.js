@@ -1,7 +1,10 @@
 import TaskItem from './components/TaskItem/TaskItem';
 import './App.css';
 
-import SetReminder from "./components/AddTherapy/SetReminder";
+import SetReminder from "./components/AddTherapy/setReminder";
+import ChooseProfile from "./components/AddTherapy/chooseProfile";
+import ChooseMedication from "./components/AddTherapy/chooseMedication";
+import ChooseDose from "./components/AddTherapy/chooseDose";
 
 function App() {
     const tasks = [
@@ -28,7 +31,7 @@ function App() {
     ]
     return (
         <div className="App">
-            <SetReminder/>
+            <ChooseDose/>
         </div>
     );
 }
