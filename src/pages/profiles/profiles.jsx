@@ -1,8 +1,15 @@
 import PersonIcon from "../../assets/person-round.svg";
-import "./Profile.css"
+import "./Profiles.css"
 import NewProfile from "./newProfile";
+import {useNavigate} from "react-router";
 
 export default function Profile({name}) {
+    const navigate = useNavigate();
+
+    function handleClick() {
+        navigate("/profile/add");
+    }
+
     return (
         <div className={"profile-item"}>
             <div className = {"profile__name"}>
@@ -11,13 +18,8 @@ export default function Profile({name}) {
                 </div>
                 {name}
             </div>
+            <button onClick={handleClick}> Profil hinzufügen </button>
         </div>
     )
 }
 
-export function AddProfile(name) {
-    //speicherung der Daten in Datenbank
-    return (
-        <button onClick={NewProfile}> Profil hinzufügen </button>
-    );
-}
