@@ -8,7 +8,6 @@ export default function SetReminderDaily() {
     }
 
     function removeTime(index) {
-
         setTimes(times.toSpliced(index, 1));
     }
 
