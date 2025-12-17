@@ -1,9 +1,9 @@
 import {useState} from "react";
-import PersonIcon from "../../assets/person-round.svg";
+import PawIcon from "../../assets/paw.svg";
 import Checkmark from "../../assets/checkmark.svg";
 import "./TaskItem.css";
 
-export default function TaskItem({patientName, medications, time}) {
+export default function TaskItem({patient, medication, time, showTime}) {
     const [checked, setChecked] = useState(false);
     const [checkedDate, setCheckedDate] = useState(null);
     const handleChecked = () => {
@@ -15,16 +15,17 @@ export default function TaskItem({patientName, medications, time}) {
     return (
         <div className={`task-item ${checked ? "task-item--checked" : ""}`}>
             <div className={"task-item__time"}>
-                {time}
+                {showTime && time}
+                {/*time wird nur ausgegeben, wenn showTime true ist*/}
             </div>
             <button onClick={handleChecked} className={"task-item__button"}>
                 <div className={"task-item__infos"}>
                     <div className={"task-item__profile"}>
-                        <img alt="" className={"task-item__person"} src={PersonIcon}/>
-                        {patientName}
+                        <img alt="" className={"task-item__icon"} src={PawIcon}/>
+                        {patient.name}
                     </div>
                     <div className={"task-item__medication"}>
-                        {medications[0].name}
+                        {medication.name}
                     </div>
                     <div className={"task-item__status"}>
                         {status}
