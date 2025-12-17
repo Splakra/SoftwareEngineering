@@ -14,7 +14,7 @@
     all: unset; /* removes default button styles */
     position: relative; /* allows absolutely positioned checkmark inside */
     flex: 1; /* makes the button take up remaining space */
-    border-radius: var(--border-radius-big);
+    border-radius: var(--border-radius-base);
     overflow: hidden;
     background-color: white;
     /* solid orange gradient that will “wipe” from left to right when checked */
