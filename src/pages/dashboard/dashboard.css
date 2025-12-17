@@ -1,29 +1,85 @@
-.calendar {
-    background: #FE8C46;
-    background: linear-gradient(180deg, rgba(254, 140, 70, 1) 67%, rgba(255, 255, 255, 0) 100%);
-    padding: 2rem;
-    padding-bottom: 5rem;
-    color: #fbf4f3;
-
-}
-
-.calendar_date {
-    font-size: 1.75rem;
-    font-weight: bolder;
-}
-
-.week {
+.dashboard__content {
     display: flex;
-    flex-direction: row;
-    margin-top: 2rem;
+    flex-direction: column; /* vertical stacking */
+    margin: -3rem 0 0 0;
+    padding: var(--border-radius-large) var(--padding-inline-base);
+    background: var(--snow);
+    border-radius: var(--border-radius-large) var(--border-radius-large) 0 0; /* rounded on top */
 }
 
-.week_days {
-    flex-grow: 1;
+.calendar {
+    padding: calc(2 * var(--padding-block-base)) var(--padding-inline-base) calc(2 * var(--padding-block-base) + var(--border-radius-large)) var(--padding-inline-base);
+    background: var(--tangerine-dream); /* fallback if gradients fail */
+    background-image: radial-gradient(
+            circle at 15% 25%,
+            var(--tangerine-dream) 30%,
+            var(--tomato) 100%
+    );
+    color: var(--snow);
+}
+
+.calendar__date {
+    all: unset;
+    display: block;
+    font-variant-numeric: tabular-nums; /* sets all numbers to same size */
+    margin-bottom: calc(2 * var(--margin-bottom-small));
+    font-size: var(--font-size-xxl);
+    font-weight: bold;
+}
+
+.calendar__week {
+    display: flex;
+    justify-content: space-between;
+    /*gap: var(--gap-small); !* space between the children *!*/
+}
+
+.calendar__weekday {
     text-align: center;
 }
 
-.week_number {
-    font-size: 1.25rem;
+.calendar__weekday-name {
+    margin-bottom: var(--margin-bottom-small);
+    font-size: var(--font-size-l);
+    font-weight: 500;
+}
+
+.calendar__weekday-number {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 1 / 1;
+    width: 3rem;
+    background: color-mix(in oklab, var(--snow), transparent 60%);
+    border-radius: 50%;
+    color: var(--rich-mahogany);
     font-weight: bold;
+    transition: all 0.25s ease-in-out;
+}
+
+.calendar__weekday-number--active {
+    background: var(--snow);
+    color: var(--rich-mahogany);
+    transform: scale(1.1);
+}
+
+.dashboard__add-button {
+    all: unset;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--gap-small);
+    margin-top: 0.75rem;
+    padding: calc(2 * var(--padding-block-small)) calc(2 * var(--padding-inline-small));
+    align-self: flex-end; /* align button to the right */
+    background: var(--tea-green);
+    border-radius: var(--border-radius-large);
+    font-size: var(--font-size-l);
+    font-weight: bold;
+    /*box-shadow: 0.1rem 0.4rem 1.5rem color-mix(in oklab, var(--tangerine-dream) 30%, transparent);*/
+}
+
+.dashboard__plus-icon {
+    width: 0.8rem;
+    padding: 0.2rem;
+    border: 0.1rem solid var(--rich-mahogany);
+    border-radius: 50%;
 }
