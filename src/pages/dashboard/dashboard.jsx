@@ -56,6 +56,7 @@ function Dashboard({loaderData}) {
         await revalidator.revalidate();
     }
 
+    // calendar day
     const [activeDay, setActiveDay] = useState(() => {
         return currentDate.getDate(); // default: today
     });
@@ -97,7 +98,10 @@ function Dashboard({loaderData}) {
                     if (index > 0) {
                         reminder.showTime = reminder.time === reminders[index - 1].time ? null : reminder.time;
                     }
-                    return (<TaskItem key={reminder.id} {...reminder} />)
+                    return (<TaskItem
+                        key={reminder.id}
+                        {...reminder}
+                    />)
                 })
                 }
                 <button className={"dashboard__add-button"} onClick={addIntake}>

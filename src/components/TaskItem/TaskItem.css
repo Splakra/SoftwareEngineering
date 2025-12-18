@@ -110,3 +110,13 @@
     height: 7rem;
 }
 
+.task-item__options {
+    all: unset;
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    width: 1rem;
+    height: 1rem;
+    background: var(--rich-mahogany);
+    border-radius: 50%;
+}
