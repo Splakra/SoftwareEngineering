@@ -3,8 +3,16 @@ import './ChooseDose.css';
 import NavigationButtons from "./NavigationButtons";
 import db from "../../database/DexieDatabase";
 import {useEffect, useState} from "react";
+import {useNavigate} from "react-router";
+import {useGlobal} from "./GlobalContext";
 
 function ChooseDose() {
+    const navigate = useNavigate();
+    const {dose, setDose} = useGlobal();
+
+    async function nextPage() {
+        navigate("/addTherapy/reminder")
+    }
 
     const [dosageForm, setDosageForm] = useState("fluid")
 
@@ -14,7 +22,7 @@ function ChooseDose() {
             In welcher Dosis soll das Medikament verabreicht werden?
         </div>
         <div className="input-line">
-            <input type="number"/>
+            <input type="number" onChange={e => setDose(e.target.value)} value={dose}/>
             <div>{(() => {
                 switch (dosageForm) {
                     case"pills":
@@ -33,7 +41,7 @@ function ChooseDose() {
             } </div>
         </div>
 
-        <button>
+        <button onClick={nextPage}>
             Weiter
         </button>
 

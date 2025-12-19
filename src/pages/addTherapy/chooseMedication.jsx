@@ -4,14 +4,24 @@ import './ChooseMedication.css';
 import NavigationButtons from "./NavigationButtons";
 import db from "../../database/DexieDatabase";
 import {useEffect, useState} from "react";
+import {useNavigate} from "react-router";
+import {useGlobal} from "./GlobalContext";
 
 
 function ChooseMedication() {
-    const [medication, setMedication] = useState([])
+    const navigate = useNavigate();
+    const {medication, setMedication} = useGlobal();
+
+    async function nextPage() {
+        navigate("/addTherapy/dose")
+    }
+
+    const [medications, setMedications] =
+        useState([])
     useEffect(() => {
         async function loadMedication() {
-            const loadedMedication = await db.medication.toArray();
-            setMedication(loadedMedication);
+            const loadedMedication = await db.medications.toArray();
+            setMedications(loadedMedication);
         }
 
         loadMedication();
@@ -25,12 +35,12 @@ function ChooseMedication() {
             </div>
             <div className={"choose-medication_existing-medication"}>
                 <div>Vorhandenes Medikament auswählen</div>
-                <select>
+                <select onChange={e => setMedication(e.target.value)} value={medication}>
                     {
-                        medication.map(medication => {
+                        medications.map(med => {
                             return <option>
                                 {
-                                    medication.name
+                                    med.name
                                 }
                             </option>
                         })
@@ -43,7 +53,7 @@ function ChooseMedication() {
                     Medikament hinzufügen
                 </button>
             </div>
-            <button>
+            <button onClick={nextPage}>
                 Weiter
             </button>
         </div>

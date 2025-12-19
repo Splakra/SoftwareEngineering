@@ -4,9 +4,18 @@ import './ChooseProfile.css';
 import NavigationButtons from "./NavigationButtons";
 import db from "../../database/DexieDatabase";
 import {useEffect, useState} from "react";
+import {useNavigate} from "react-router";
+import {useGlobal} from "./GlobalContext";
 
 
 function ChooseProfile() {
+    const navigate = useNavigate();
+    const {profile, setProfile} = useGlobal();
+
+    async function nextPage() {
+        navigate("/addTherapy/medication")
+    }
+
     const [patients, setPatients] = useState([])
     useEffect(() => {
         async function loadPatients() {
@@ -18,14 +27,14 @@ function ChooseProfile() {
     }, [])
 
     return (
-        <div>
+        <div className="chooseProfile">
             <NavigationButtons title="Einnahme hinzufügen"/>
-            <div className={"choose-profile_heading"}>
+            <div className={"chooseProfile__content"}>
                 Für wen soll eine neue Einnahme angelegt werden?
             </div>
             <div className={"choose-profile_existing-Patient"}>
                 <div>Patient*in auswählen</div>
-                <select>
+                <select onChange={e => setProfile(e.target.value)} value={profile}>
                     {
                         patients.map(profile => {
                             return <option>
@@ -43,7 +52,7 @@ function ChooseProfile() {
                     Patient*in hinzufügen
                 </button>
             </div>
-            <button>
+            <button onClick={nextPage}>
                 Weiter
             </button>
         </div>

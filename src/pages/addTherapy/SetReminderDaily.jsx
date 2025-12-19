@@ -1,7 +1,9 @@
 import {useState} from "react";
+import {useGlobal} from "./GlobalContext";
 
 export default function SetReminderDaily() {
     const [times, setTimes] = useState([]);
+    const {time, setTime, startDate, setStartDate, endDate, setEndDate,} = useGlobal();
 
     function addTime() {
         setTimes([...times, null]);
@@ -14,11 +16,13 @@ export default function SetReminderDaily() {
     return <div>
         <div>
             <div>Startdatum</div>
-            <input type="date"/> {/*pop up lässt sich möglicherweise nicht sytlen*/}
+            <input type="date" value={startDate}
+                   onChange={e => setStartDate(e.target.value)}/> {/*pop up lässt sich möglicherweise nicht sytlen*/}
         </div>
         <div>
             <div>Enddatum</div>
-            <input type="date"/> {/*pop up lässt sich möglicherweise nicht sytlen*/}
+            <input type="date" value={endDate}
+                   onChange={e => setEndDate(e.target.value)}/> {/*pop up lässt sich möglicherweise nicht sytlen*/}
         </div>
         <div>
             <div>Uhrzeit hinzufügen</div>

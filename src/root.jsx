@@ -5,6 +5,7 @@ import {
     Scripts,
     ScrollRestoration,
 } from "react-router";
+import {GlobalProvider} from "./pages/addTherapy/GlobalContext";
 
 export function Layout({children}) {
     return (
@@ -26,7 +27,9 @@ export function Layout({children}) {
             <Links/>
         </head>
         <body>
-        {children}
+        <GlobalProvider>
+            {children}
+        </GlobalProvider>
         {/* navigation component if global */}
         <ScrollRestoration/>
         <Scripts/>

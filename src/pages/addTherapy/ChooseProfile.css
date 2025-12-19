@@ -1,0 +1,18 @@
+.chooseProfile {
+    padding: calc(2 * var(--padding-block-base)) var(--padding-inline-base) calc(2 * var(--padding-block-base) + var(--border-radius-large)) var(--padding-inline-base);
+    background: var(--tangerine-dream); /* fallback if gradients fail */
+    background-image: radial-gradient(
+            circle at 15% 25%,
+            var(--tangerine-dream) 30%,
+            var(--tomato) 100%
+    );
+    color: var(--snow);
+}
+
+.chooseProfile__content {
+    display: flex;
+    flex-direction: column; /* vertical stacking */
+    margin: -3rem 0 0 0;
+    padding: var(--border-radius-large) var(--padding-inline-base);
+
+}

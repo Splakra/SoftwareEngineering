@@ -6,12 +6,18 @@ import {useEffect, useState} from "react";
 import SetReminderInterval from "./SetReminderInterval";
 import SetReminderWeekdays from "./SetReminderWeeksdays";
 import SetReminderDaily from "./SetReminderDaily";
+import {useNavigate} from "react-router";
+import {useGlobal} from "./GlobalContext";
 
 
 function SetReminder() {
+    const navigate = useNavigate();
+    const {rhythm, setRhythm} = useGlobal();
 
-    const [rhythm, setRhythm] = useState("")
 
+    async function nextPage() {
+        navigate("/addTherapy/review");
+    }
 
     return (
         <div>
@@ -46,7 +52,7 @@ function SetReminder() {
                 })()
                 } </div>
             </div>
-            <button>
+            <button onClick={nextPage}>
                 Weiter
             </button>
         </div>
