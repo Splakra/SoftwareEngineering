@@ -1,8 +1,8 @@
 .task-item {
     --infos-border-left-width: 0.8rem; /* custom variable: width of the colored left border */
     display: flex; /* places child elements next to each other */
-    gap: 1.25rem; /* space between the children */
-    margin-bottom: 1.75rem;
+    gap: var(--gap-base); /* space between the children */
+    margin-bottom: var(--margin-bottom-base);
 }
 
 .task-item__time {
@@ -21,7 +21,7 @@
     all: unset; /* removes default button styles */
     position: relative; /* allows absolutely positioned checkmark inside */
     flex: 1; /* makes the button take up remaining space */
-    border-radius: var(--border-radius-big);
+    border-radius: var(--border-radius-base);
     overflow: hidden;
     background-color: white;
     /* solid orange gradient that will “wipe” from left to right when checked */
@@ -62,9 +62,10 @@
 
 .task-item__profile {
     display: inline-flex;
-    gap: 0.3rem;
-    margin-bottom: 0.5rem;
-    padding: 0.3rem 0.7rem;
+    align-items: center;
+    gap: var(--gap-small);
+    margin-bottom: var(--margin-bottom-small);
+    padding: var(--padding-block-small) var(--padding-inline-small);
     background: var(--tangerine-dream);
     color: white;
     border-radius: var(--border-radius-small);
@@ -72,8 +73,15 @@
     font-weight: bold;
 }
 
-.task-item__person {
-    width: 1.5rem;
+
+.task-item__icon {
+    width: 0.8rem;
+    height: 0.8rem;
+    padding: 0.2rem;
+    overflow: visible;
+
+    background: var(--snow);
+    border-radius: 50%;
 }
 
 .task-item__medication {

@@ -1,7 +1,7 @@
 .medicine-page__backdrop {
     display: flex;
     flex-wrap: wrap;
-    border-radius: var(--border-radius-big);
+    border-radius: var(--border-radius-base);
     overflow: hidden;
     background-color: white;
     /* solid orange gradient that will “wipe” from left to right when checked */

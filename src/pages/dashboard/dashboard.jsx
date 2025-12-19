@@ -1,62 +1,110 @@
 import './dashboard.css';
 import db from '../../database/DexieDatabase.js';
+import {useEffect, useState} from "react";
+import TaskItem from "../../components/TaskItem/TaskItem";
+import PlusIcon from "../../assets/plus-icon.svg";
+import {useNavigate, useRevalidator} from "react-router";
 
-// for later:
-// export async function clientLoader() {
-//     // you can now fetch data here
-//     return {
-//         title: "Dashboard",
-//     };
-// }
+export async function clientLoader() {
+    const reminders = await db.reminders.orderBy("time").toArray(); // get all reminders
+    await Promise.all( // wait until all async functions inside the parenthesis are done
+        reminders.map(async (reminder) => {
+            [reminder.medication, reminder.patient] = await Promise.all(
+                [
+                    db.medications.where({id: reminder.medicationId}).first(), // .first(): get first as object, not as array like in .limit(1)
+                    db.profiles.where({id: reminder.profileId}).first()
+                ]
+            )
+        })
+    )
+    return {
+        reminders
+    };
+}
 
 function Dashboard({loaderData}) {
-    const weekly = [-3, -2, -1, 0, 1, 2, 3].map(value => {
+    const {reminders} = loaderData;
+    const revalidator = useRevalidator(); // only for now
+
+    const weekly = [-2, -1, 0, 1, 2].map(value => {
         const today = new Date();
         today.setDate(today.getDate() + value);
         return today;
     })
     const currentDate = new Date();
 
+    // dummy profile & medication
     db.profiles.add({name: 'Sunny'})
-    db.medication.add({name: 'Melosus', type: 'fluid', amount: 3.5, reminderBuyNew: 10})
+    db.medications.add({
+        name: 'Melosus',
+        type: 'fluid',
+        amount: 3.5,
+        reminderBuyNew: 10
+    })
 
+    // dummy reminder
     async function addIntake() {
-        const medication = await db.medication.limit(1).toArray();
+        const medication = await db.medications.limit(1).toArray();
         const patient = await db.profiles.limit(1).toArray();
-        db.intakeMeds.add({
-            medication: medication[0].id,
-            patient: patient[0].id,
+        db.reminders.add({
+            medicationId: medication[0].id,
+            profileId: patient[0].id,
             rhythm: 'daily',
-            startDate: currentDate
+            startDate: currentDate,
+            time: '08:00'
         })
+        await revalidator.revalidate();
+    }
+
+    const [activeDay, setActiveDay] = useState(() => {
+        return currentDate.getDate(); // default: today
+    });
+
+    function handleDayClick(day) {
+        setActiveDay(day.getDate());
     }
 
     return (
-        <div>
-            <div className="Calendar">
-                <div className="Date">
-                    {currentDate.toLocaleDateString("de-DE", {weekday: "long", month: "long", day: "numeric"})}
-                </div>
-                <div className="Week">
-                    {
-                        weekly.map(day => (
-                            <div className="Weekday">
-                                <div className="Days">
-                                    {day.toLocaleDateString("de-DE", {weekday: "short"})}
-                                </div>
-                                <div className="Number">
-                                    {day.getDate()}
-                                </div>
+        <div className={"dashboard"}>
+            <section className={"calendar"}>
+                <h2 className={"calendar__date"}>
+                    {currentDate.toLocaleDateString("de-DE", {
+                        weekday: "long",
+                        month: "long",
+                        day: "numeric",
+                    })}
+                </h2>
+                <div className={"calendar__week"}>
+                    {weekly.map(day => (
+                        <div key={day.toISOString()}
+                             className={"calendar__weekday"}
+                             onClick={() => handleDayClick(day)}>
+                            <div className={"calendar__weekday-name"}>
+                                {day.toLocaleDateString("de-DE", {weekday: "short"})}
                             </div>
-                        ))
-                    }
+                            <div
+                                className={`calendar__weekday-number ${
+                                    activeDay === day.getDate() ? "calendar__weekday-number--active" : ""}`}>
+                                {day.getDate()}
+                            </div>
+                        </div>
+                    ))}
                 </div>
+            </section>
+            <div className="dashboard__content">
+                {reminders.map((reminder, index) => {
+                    reminder.showTime = true;
+                    if (index > 0) {
+                        reminder.showTime = reminder.time === reminders[index - 1].time ? null : reminder.time;
+                    }
+                    return (<TaskItem key={reminder.id} {...reminder} />)
+                })
+                }
+                <button className={"dashboard__add-button"} onClick={addIntake}>
+                    <img alt="" className={"dashboard__plus-icon"} src={PlusIcon}/>
+                    Hinzufügen
+                </button>
             </div>
-            <button onClick={addIntake}>
-                Einnahme hinzufügen
-            </button>
-
-
         </div>
     );
 }
