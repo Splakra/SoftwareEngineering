@@ -12,11 +12,25 @@ import {useGlobal} from "./GlobalContext";
 
 function SetReminder() {
     const navigate = useNavigate();
-    const {rhythm, setRhythm} = useGlobal();
+    const {rhythm, setRhythm, time, intervalValue, weekday, startDate, setStartDate, endDate, setEndDate} = useGlobal();
 
 
     async function nextPage() {
         navigate("/addTherapy/review");
+    }
+
+    function isButtonDisabled() {
+        switch (rhythm) {
+            case"daily":
+                return !time.every(value => value);
+
+            case"weekdays":
+                return !weekday.some(value => value);
+
+            case"interval":
+                return !intervalValue;
+
+        }
     }
 
     return (
@@ -38,6 +52,16 @@ function SetReminder() {
                         Intervall
                     </option>
                 </select>
+                <div>
+                    <div>Startdatum</div>
+                    <input type="date" value={startDate}
+                           onChange={e => setStartDate(e.target.value)}/> {/*pop up lässt sich möglicherweise nicht sytlen*/}
+                </div>
+                <div>
+                    <div>Enddatum</div>
+                    <input type="date" value={endDate}
+                           onChange={e => setEndDate(e.target.value)}/> {/*pop up lässt sich möglicherweise nicht sytlen*/}
+                </div>
                 <div>{(() => {
                     switch (rhythm) {
                         case"daily":
@@ -52,7 +76,7 @@ function SetReminder() {
                 })()
                 } </div>
             </div>
-            <button onClick={nextPage}>
+            <button onClick={nextPage} disabled={isButtonDisabled()}>
                 Weiter
             </button>
         </div>

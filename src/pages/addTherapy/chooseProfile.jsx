@@ -35,9 +35,10 @@ function ChooseProfile() {
             <div className={"choose-profile_existing-Patient"}>
                 <div>Patient*in auswählen</div>
                 <select onChange={e => setProfile(e.target.value)} value={profile}>
+                    <option selected></option>
                     {
                         patients.map(profile => {
-                            return <option>
+                            return <option value={JSON.stringify(profile)}>
                                 {
                                     profile.name
                                 }
@@ -52,7 +53,7 @@ function ChooseProfile() {
                     Patient*in hinzufügen
                 </button>
             </div>
-            <button onClick={nextPage}>
+            <button onClick={nextPage} disabled={!profile}>
                 Weiter
             </button>
         </div>

@@ -7,16 +7,23 @@ export default function SetReminderWeekdays() {
     const {weekday, setWeekday} = useGlobal();
 
 
+    function updateWeekday(value, index) {
+        const updated = [...weekday];
+        updated[index] = value;
+        setWeekday(updated);
+    }
+
     return <div>
         <div>Bestimmte Tage wählen</div>
         <div>
             {
                 weekdays.map(
-                    weekday => {
+                    (day, index) => {
                         return <label className="weekdays">
-                            <input type="checkbox" value={weekday} onChange={e => setWeekday(e.target.value)}/>
+                            <input type="checkbox" checked={weekday[index]}
+                                   onChange={e => updateWeekday(e.target.checked, index)}/>
                             <span className="weekdays_span">
-                                {weekday}
+                                {day}
                             </span>
                         </label>
                     }

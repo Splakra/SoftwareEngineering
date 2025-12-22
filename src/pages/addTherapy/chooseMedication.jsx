@@ -36,9 +36,11 @@ function ChooseMedication() {
             <div className={"choose-medication_existing-medication"}>
                 <div>Vorhandenes Medikament auswählen</div>
                 <select onChange={e => setMedication(e.target.value)} value={medication}>
+                    <option selected></option>
+
                     {
                         medications.map(med => {
-                            return <option>
+                            return <option value={JSON.stringify(med)}>
                                 {
                                     med.name
                                 }
@@ -53,7 +55,7 @@ function ChooseMedication() {
                     Medikament hinzufügen
                 </button>
             </div>
-            <button onClick={nextPage}>
+            <button onClick={nextPage} disabled={!medication}>
                 Weiter
             </button>
         </div>

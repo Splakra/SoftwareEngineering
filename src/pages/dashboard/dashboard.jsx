@@ -9,6 +9,7 @@ export async function clientLoader() {
     const reminders = await db.reminders.orderBy("time").toArray(); // get all reminders
     await Promise.all( // wait until all async functions inside the parenthesis are done
         reminders.map(async (reminder) => {
+            console.log(reminder);
             [reminder.medication, reminder.patient] = await Promise.all(
                 [
                     db.medications.where({id: reminder.medicationId}).first(), // .first(): get first as object, not as array like in .limit(1)
@@ -24,7 +25,7 @@ export async function clientLoader() {
 
 function Dashboard({loaderData}) {
     //const {reminders} = loaderData();
-    const reminders = [];
+    const [reminders, setReminders] = useState([]);
     const revalidator = useRevalidator(); // only for now
 
     const weekly = [-2, -1, 0, 1, 2].map(value => {

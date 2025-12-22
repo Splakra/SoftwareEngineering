@@ -6,15 +6,14 @@ import {useEffect, useState} from "react";
 import {useNavigate} from "react-router";
 import {useGlobal} from "./GlobalContext";
 
+
 function ChooseDose() {
     const navigate = useNavigate();
-    const {dose, setDose} = useGlobal();
+    const {medication, dose, setDose} = useGlobal();
 
     async function nextPage() {
         navigate("/addTherapy/reminder")
     }
-
-    const [dosageForm, setDosageForm] = useState("fluid")
 
     return <div>
         <NavigationButtons title="Einnahme hinzufügen"/>
@@ -23,8 +22,9 @@ function ChooseDose() {
         </div>
         <div className="input-line">
             <input type="number" onChange={e => setDose(e.target.value)} value={dose}/>
+
             <div>{(() => {
-                switch (dosageForm) {
+                switch (JSON.parse(medication).type) {
                     case"pills":
                         return "Tabletten"
 
@@ -41,7 +41,7 @@ function ChooseDose() {
             } </div>
         </div>
 
-        <button onClick={nextPage}>
+        <button onClick={nextPage} disabled={!dose}>
             Weiter
         </button>
 

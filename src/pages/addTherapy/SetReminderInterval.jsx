@@ -22,6 +22,7 @@ export default function SetReminderInterval() {
             <option value={"months"}>
                 Monate
             </option>
+
         </select>
 
     </div>
