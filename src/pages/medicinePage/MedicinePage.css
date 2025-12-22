@@ -1,11 +1,31 @@
-.medicine-page__backdrop {
+.medicine-page {
+    padding: calc(2 * var(--padding-block-base)) var(--padding-inline-base) var(--padding-block-base) var(--padding-inline-base);
+}
+
+.medicine-page__title {
+    all: unset;
+    display: block;
+    margin-bottom: var(--margin-bottom-base);
+    font-size: var(--font-size-xxl);
+    font-weight: bold;
+}
+
+.medicine-page__content {
     display: flex;
-    flex-wrap: wrap;
-    border-radius: var(--border-radius-base);
-    overflow: hidden;
-    background-color: white;
-    /* solid orange gradient that will “wipe” from left to right when checked */
-    background-size: 0 100%; /* start with gradient width = 0 (hidden), then to 100% (animates from left to right)  */
-    background-repeat: no-repeat;
-    box-shadow: 0.1rem 0.4rem 1.5rem color-mix(in oklab, var(--tangerine-dream) 30%, transparent);
+    flex-direction: column;
+    gap: var(--gap-base);
+}
+
+.medicine-shelf__items {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--gap-base);
+    margin-bottom: var(--gap-base);
+}
+
+.medicine-shelf__board {
+    height: 0.8rem;
+    background: white;
+    border-radius: 0 0 var(--border-radius-large) var(--border-radius-large);
+    box-shadow: 0.3rem 0.3rem 0.8em 0.1rem color-mix(in oklab, var(--tangerine-dream) 40%, transparent);
 }

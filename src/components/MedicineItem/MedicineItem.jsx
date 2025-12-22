@@ -11,32 +11,24 @@ export default function MedicineItem({name, medicineType, storage, storageThresh
     const status = `${expired ? "Abgelaufen seit:" : "Läuft ab am:"} ${expDate.toLocaleDateString(navigator.language)}`;
     const storageText = `${storage} ${medicineType} übrig`;
     const medicineTypeIcon = medicineType === "ml" ? BottleIcon : medicineType === "Tropfen" ? DropIcon : PillIcon;
-    const longName = getTextWidth(name, "bold 25px Ysabeau Office") > window.document.body.offsetWidth - 200
-
-    function getTextWidth(text, font) {
-        const canvas = getTextWidth.canvas || (getTextWidth.canvas = document.createElement("canvas"));
-        const context = canvas.getContext("2d");
-        context.font = font;
-        const metrics = context.measureText(text);
-        return metrics.width;
-    }
+    // better object with key, value
 
     return (
-        <div className={`medicine-item ${expired || empty ? "medicine-item--allert" : ""}`}>
-            <button className={"medicine-item__button"}>
-                <div className={"medicine-item__infos"}>
-                    <div className={`medicine-item__name ${longName ? "sideScrollAnim" : ""}`}>
-                        <img alt="" className={"medicine-item__pill"} src={medicineTypeIcon}/>
-                        <div>{name}</div>
-                    </div>
-                    <div className={"medicine-item__storage"}>
-                        {storageText}
-                    </div>
-                    <div className={"medicine-item__status"}>
-                        {status}
-                    </div>
+        <div className={"medicine-item"}>
+            <div className={"medicine-item__infos"}>
+                <div className={"medicine-item__name"}>
+                    {name}
                 </div>
-            </button>
+            </div>
+            <div className={"medicine-item__details"}>
+                <div className={`medicine-item__storage ${empty ? "medicine-item__storage--empty" : ""}`}>
+                    <img alt="" className={"medicine-item__type"} src={medicineTypeIcon}/>
+                    {storageText}
+                </div>
+                <div className={`medicine-item__status ${expired ? "medicine-item__status--expired" : ""}`}>
+                    {status}
+                </div>
+            </div>
         </div>
     )
 }
