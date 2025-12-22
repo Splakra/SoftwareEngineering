@@ -1,4 +1,4 @@
-import MedicinePage from './medicinePage';
+import MedicinePage from './MedicinePage';
 
 function MedsTester() {
     const meds = [
