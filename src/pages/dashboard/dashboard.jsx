@@ -9,6 +9,7 @@ export async function clientLoader() {
     const reminders = await db.reminders.orderBy("time").toArray(); // get all reminders
     await Promise.all( // wait until all async functions inside the parenthesis are done
         reminders.map(async (reminder) => {
+            console.log(reminder);
             [reminder.medication, reminder.patient] = await Promise.all(
                 [
                     db.medications.where({id: reminder.medicationId}).first(), // .first(): get first as object, not as array like in .limit(1)
@@ -32,6 +33,7 @@ function Dashboard({loaderData}) {
         return today;
     })
     const currentDate = new Date();
+    const navigate = useNavigate();
 
     // dummy profile & medication
     db.profiles.add({name: 'Sunny'})
@@ -42,20 +44,11 @@ function Dashboard({loaderData}) {
         reminderBuyNew: 10
     })
 
-    // dummy reminder
+    //Einnahme hinzufügen
     async function addIntake() {
-        const medication = await db.medications.limit(1).toArray();
-        const patient = await db.profiles.limit(1).toArray();
-        db.reminders.add({
-            medicationId: medication[0].id,
-            profileId: patient[0].id,
-            rhythm: 'daily',
-            startDate: currentDate,
-            time: '08:00',
-        })
-        await revalidator.revalidate();
+        navigate("/addTherapy/profile")
     }
-    
+
     const [activeDay, setActiveDay] = useState(() => {
         return currentDate.getDate(); // default: today
     });
@@ -83,8 +76,7 @@ function Dashboard({loaderData}) {
                                 {day.toLocaleDateString("de-DE", {weekday: "short"})}
                             </div>
                             <div
-                                className={`calendar__weekday-number ${
-                                    activeDay === day.getDate() ? "calendar__weekday-number--active" : ""}`}>
+                                className={`calendar__weekday-number ${activeDay === day.getDate() ? "calendar__weekday-number--active" : ""}`}>
                                 {day.getDate()}
                             </div>
                         </div>
