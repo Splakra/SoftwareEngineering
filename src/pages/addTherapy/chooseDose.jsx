@@ -1,10 +1,10 @@
 //back & quit auslagern für alle verfügbar
-import './ChooseDose.css';
-import NavigationButtons from "./NavigationButtons";
+import './chooseDose.css';
+import NavigationButtons from "./navigationButtons";
 import db from "../../database/DexieDatabase";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router";
-import {useGlobal} from "./GlobalContext";
+import {useGlobal} from "./globalContext";
 
 
 function ChooseDose() {

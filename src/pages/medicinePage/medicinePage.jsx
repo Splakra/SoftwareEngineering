@@ -1,5 +1,5 @@
 import MedicineItem from '../../components/MedicineItem/MedicineItem';
-import './MedicinePage.css';
+import './medicinePage.css';
 
 function chunkArray(array, size) {
     const result = [];

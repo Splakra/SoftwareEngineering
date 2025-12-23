@@ -1,13 +1,13 @@
 //back & quit auslagern für alle verfügbar
-import './Review.css';
-import NavigationButtons from "./NavigationButtons";
+import './review.css';
+import NavigationButtons from "./navigationButtons";
 import db from "../../database/DexieDatabase";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router";
-import {useGlobal} from "./GlobalContext";
-import SetReminderDaily from "./SetReminderDaily";
-import SetReminderWeekdays from "./SetReminderWeeksdays";
-import SetReminderInterval from "./SetReminderInterval";
+import {useGlobal} from "./globalContext";
+import SetReminderDaily from "./setReminderDaily";
+import SetReminderWeekdays from "./setReminderWeeksdays";
+import SetReminderInterval from "./setReminderInterval";
 
 
 function Review() {

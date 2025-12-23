@@ -5,7 +5,7 @@ import {
     Scripts,
     ScrollRestoration,
 } from "react-router";
-import {GlobalProvider} from "./pages/addTherapy/GlobalContext";
+import {GlobalProvider} from "./pages/addTherapy/globalContext";
 
 export function Layout({children}) {
     return (

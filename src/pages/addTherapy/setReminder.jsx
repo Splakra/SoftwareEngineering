@@ -1,13 +1,13 @@
 //back & quit auslagern für alle verfügbar
-import './SetReminder.css';
-import NavigationButtons from "./NavigationButtons";
+import './setReminder.css';
+import NavigationButtons from "./navigationButtons";
 import db from "../../database/DexieDatabase";
 import {useEffect, useState} from "react";
-import SetReminderInterval from "./SetReminderInterval";
-import SetReminderWeekdays from "./SetReminderWeeksdays";
-import SetReminderDaily from "./SetReminderDaily";
+import SetReminderInterval from "./setReminderInterval";
+import SetReminderWeekdays from "./setReminderWeeksdays";
+import SetReminderDaily from "./setReminderDaily";
 import {useNavigate} from "react-router";
-import {useGlobal} from "./GlobalContext";
+import {useGlobal} from "./globalContext";
 
 
 function SetReminder() {

@@ -9,7 +9,6 @@ export async function clientLoader() {
     const reminders = await db.reminders.orderBy("time").toArray(); // get all reminders
     await Promise.all( // wait until all async functions inside the parenthesis are done
         reminders.map(async (reminder) => {
-            console.log(reminder);
             [reminder.medication, reminder.patient] = await Promise.all(
                 [
                     db.medications.where({id: reminder.medicationId}).first(), // .first(): get first as object, not as array like in .limit(1)
@@ -24,8 +23,7 @@ export async function clientLoader() {
 }
 
 function Dashboard({loaderData}) {
-    //const {reminders} = loaderData();
-    const [reminders, setReminders] = useState([]);
+    const {reminders} = loaderData;
     const revalidator = useRevalidator(); // only for now
 
     const weekly = [-2, -1, 0, 1, 2].map(value => {
@@ -34,7 +32,6 @@ function Dashboard({loaderData}) {
         return today;
     })
     const currentDate = new Date();
-    const navigate = useNavigate();
 
     // dummy profile & medication
     db.profiles.add({name: 'Sunny'})
@@ -47,9 +44,18 @@ function Dashboard({loaderData}) {
 
     // dummy reminder
     async function addIntake() {
-        navigate("/addTherapy/profile")
+        const medication = await db.medications.limit(1).toArray();
+        const patient = await db.profiles.limit(1).toArray();
+        db.reminders.add({
+            medicationId: medication[0].id,
+            profileId: patient[0].id,
+            rhythm: 'daily',
+            startDate: currentDate,
+            time: '08:00',
+        })
+        await revalidator.revalidate();
     }
-
+    
     const [activeDay, setActiveDay] = useState(() => {
         return currentDate.getDate(); // default: today
     });

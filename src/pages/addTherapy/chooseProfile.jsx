@@ -1,11 +1,11 @@
 //back & quit auslagern für alle verfügbar
 
-import './ChooseProfile.css';
-import NavigationButtons from "./NavigationButtons";
+import './chooseProfile.css';
+import NavigationButtons from "./navigationButtons";
 import db from "../../database/DexieDatabase";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router";
-import {useGlobal} from "./GlobalContext";
+import {useGlobal} from "./globalContext";
 
 
 function ChooseProfile() {
