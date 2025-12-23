@@ -10,7 +10,7 @@ function MedsTester() {
             expiration: new Date().setDate(new Date().getDate() + 100)
         },
         {
-            name: "Augentropfen12345",
+            name: "Augentropfen1234",
             medicineType: "Tropfen",
             storage: 300,
             storageThreshold: 20,
@@ -24,7 +24,7 @@ function MedsTester() {
             expiration: new Date().setDate(new Date().getDate() + 100)
         },
         {
-            name: "Nasenspray",
+            name: "Nasenspray mit Regenbogenglitzer",
             medicineType: "ml",
             storage: 15,
             storageThreshold: 5,
@@ -41,7 +41,7 @@ function MedsTester() {
     ]
     return (
         <div className="App">
-            {MedicinePage(meds)}
+            <MedicinePage meds={meds}/>
         </div>
     );
 }

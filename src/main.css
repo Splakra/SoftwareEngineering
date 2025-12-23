@@ -6,6 +6,7 @@
     --tangerine-dream: #fe8c46ff;
     --sunflower-gold: #fec34bff;
     --tea-green: #c5edacff;
+    --charcoal-blue: #0E4257; /* new color test */
 
     /* general colors */
     --color-text: var(--rich-mahogany);
@@ -35,7 +36,7 @@
     --padding-block-small: 0.3rem;
     --padding-block-base: 1.25rem;
     --padding-inline-small: 0.7rem;
-    --padding-inline-base: 2.5rem;
+    --padding-inline-base: 1.75rem;
 
     /* gap */
     --gap-small: 0.4rem;
