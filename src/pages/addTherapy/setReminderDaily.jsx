@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {useGlobal} from "./globalContext";
+import {useGlobal} from "../globalContext";
 
 export default function SetReminderDaily() {
     const {time, setTime, startDate, setStartDate, endDate, setEndDate,} = useGlobal();

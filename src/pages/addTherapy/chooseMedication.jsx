@@ -1,11 +1,12 @@
 //back & quit auslagern für alle verfügbar
 
 import './chooseMedication.css';
-import NavigationButtons from "./navigationButtons";
+import NavigationButtons from "../../components/NavigationButtons/navigationButtons";
 import db from "../../database/DexieDatabase";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router";
-import {useGlobal} from "./globalContext";
+import {useGlobal} from "../globalContext";
+import {add} from "dexie";
 
 
 function ChooseMedication() {
@@ -15,6 +16,11 @@ function ChooseMedication() {
     async function nextPage() {
         navigate("/addTherapy/dose")
     }
+
+    async function addMedication() {
+        navigate("/addMedication/name")
+    }
+
 
     const [medications, setMedications] =
         useState([])
@@ -51,7 +57,7 @@ function ChooseMedication() {
             </div>
             <div className={"choose-medication_new-medication"}>
                 oder
-                <button>
+                <button onClick={addMedication}>
                     Medikament hinzufügen
                 </button>
             </div>

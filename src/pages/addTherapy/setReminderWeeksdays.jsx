@@ -1,5 +1,5 @@
 import './setReminderWeekdays.css'
-import {useGlobal} from "./globalContext";
+import {useGlobal} from "../globalContext";
 
 export default function SetReminderWeekdays() {
 

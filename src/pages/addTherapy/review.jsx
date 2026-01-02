@@ -1,13 +1,14 @@
 //back & quit auslagern für alle verfügbar
 import './review.css';
-import NavigationButtons from "./navigationButtons";
+import NavigationButtons from "../../components/NavigationButtons/navigationButtons";
 import db from "../../database/DexieDatabase";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router";
-import {useGlobal} from "./globalContext";
+import {useGlobal} from "../globalContext";
 import SetReminderDaily from "./setReminderDaily";
 import SetReminderWeekdays from "./setReminderWeeksdays";
 import SetReminderInterval from "./setReminderInterval";
+import {formatDate} from "../dateFormat";
 
 
 function Review() {
@@ -16,7 +17,7 @@ function Review() {
     const displayedWeekdays = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
 
     const {
-        profile, medication, dose, rhythm, startDate, endDate, time, weekday, intervalType, intervalValue, reset
+        profile, medication, dose, rhythm, startDate, endDate, time, weekday, intervalType, intervalValue, resetTherapy
     } = useGlobal();
 
 
@@ -34,7 +35,7 @@ function Review() {
             intervalType: intervalType,
             intervalValue: intervalValue
         })
-        reset();
+        resetTherapy();
         navigate("/")
     }
 
@@ -64,8 +65,8 @@ function Review() {
                     }
                 })()
                 } </div>
-                <div>Startdatum: {startDate}</div>
-                <div>Enddatum: {endDate ? endDate : "kein Enddatum festgelegt"}</div>
+                <div>Startdatum: {formatDate(startDate)}</div>
+                <div>Enddatum: {endDate ? formatDate(endDate) : "kein Enddatum festgelegt"}</div>
                 <div>Rhytmus: {(() => {
                     switch (rhythm) {
                         case"daily":

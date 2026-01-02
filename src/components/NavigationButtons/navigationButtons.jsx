@@ -1,11 +1,11 @@
 import {useNavigate} from "react-router";
 import "./navigationButtons.css"
 
-function NavigationButtons({title}) {
+function NavigationButtons({title, quitPath}) {
     const navigate = useNavigate();
 
     function quit() {
-        navigate("/");
+        navigate(quitPath ? quitPath : "/");
     }
 
     function back() {

@@ -1,4 +1,4 @@
-import {useGlobal} from "./globalContext";
+import {useGlobal} from "../globalContext";
 
 export default function SetReminderInterval() {
     const {intervalType, setIntervalType} = useGlobal();

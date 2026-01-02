@@ -3,6 +3,7 @@ import {createContext, useContext, useState} from "react";
 const GlobalContext = createContext({});
 
 export function GlobalProvider({children}) {
+    //addTherapy
     const [profile, setProfile] = useState();
     const [medication, setMedication] = useState();
     const [dose, setDose] = useState();
@@ -14,7 +15,17 @@ export function GlobalProvider({children}) {
     const [intervalType, setIntervalType] = useState("hours");
     const [intervalValue, setIntervalValue] = useState();
 
-    function reset() {
+    //addMedication
+    const [medicationName, setMedicationName] = useState();
+    const [medicationType, setMedicationType] = useState();
+    const [medicationStock, setMedicationStock] = useState();
+    const [medicationBuyNew, setMedicationBuyNew] = useState();
+    const [medicationExpDate, setMedicationExpDate] = useState();
+    const [medicationExpiresValue, setMedicationExpiresValue] = useState();
+    const [medicationExpiresType, setMedicationExpiresType] = useState("days");
+
+
+    function resetTherapy() {
         setProfile(null);
         setMedication(null);
         setDose(null);
@@ -25,7 +36,16 @@ export function GlobalProvider({children}) {
         setWeekday([false, false, false, false, false, false, false]);
         setIntervalType("hours");
         setIntervalValue(null);
+    }
 
+    function resetMedication() {
+        setMedicationName(null);
+        setMedicationType(null);
+        setMedicationStock(null);
+        setMedicationBuyNew(null);
+        setMedicationExpDate(null);
+        setMedicationExpiresValue(null);
+        setMedicationExpiresType("days");
     }
 
     return (
@@ -50,7 +70,24 @@ export function GlobalProvider({children}) {
             setIntervalType,
             intervalValue,
             setIntervalValue,
-            reset
+
+            medicationName,
+            setMedicationName,
+            medicationType,
+            setMedicationType,
+            medicationStock,
+            setMedicationStock,
+            medicationBuyNew,
+            setMedicationBuyNew,
+            medicationExpDate,
+            setMedicationExpDate,
+            medicationExpiresValue,
+            setMedicationExpiresValue,
+            medicationExpiresType,
+            setMedicationExpiresType,
+
+            resetTherapy,
+            resetMedication
         }}>
             {
                 children
