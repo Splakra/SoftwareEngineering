@@ -1,0 +1,13 @@
+.navigationbar {
+    display: flex;
+    flex-direction: row;
+    background-color: #FFE6D6;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.navigationbar div {
+    flex-grow: 1;
+    text-align: center;
+}

@@ -1,5 +1,5 @@
 import './review.css';
-import NavigationButtons from "../../components/NavigationButtons/navigationButtons";
+import NavigationButtons from "../../components/NavigationButtons/NavigationButtons";
 import db from "../../database/DexieDatabase";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router";

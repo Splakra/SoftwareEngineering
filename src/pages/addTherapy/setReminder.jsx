@@ -1,6 +1,6 @@
 //back & quit auslagern für alle verfügbar
 import './setReminder.css';
-import NavigationButtons from "../../components/NavigationButtons/navigationButtons";
+import NavigationButtons from "../../components/NavigationButtons/NavigationButtons";
 import db from "../../database/DexieDatabase";
 import {useEffect, useState} from "react";
 import SetReminderInterval from "./setReminderInterval";

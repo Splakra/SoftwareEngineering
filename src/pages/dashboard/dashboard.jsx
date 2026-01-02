@@ -4,6 +4,7 @@ import {useEffect, useState} from "react";
 import TaskItem from "../../components/TaskItem/TaskItem";
 import PlusIcon from "../../assets/plus-icon.svg";
 import {useNavigate, useRevalidator} from "react-router";
+import {NavigationBar} from "../../components/NavigationBar/NavigationBar";
 
 export async function clientLoader() {
     const reminders = await db.reminders.orderBy("time").toArray(); // get all reminders
@@ -96,7 +97,10 @@ function Dashboard({loaderData}) {
                     <img alt="" className={"dashboard__plus-icon"} src={PlusIcon}/>
                     Hinzufügen
                 </button>
+
+
             </div>
+            <NavigationBar/>
         </div>
     );
 }
