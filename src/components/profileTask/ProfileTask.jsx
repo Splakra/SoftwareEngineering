@@ -1,7 +1,7 @@
 import db from "../../database/DexieDatabase";
 import {useEffect, useState} from "react";
 
-export default function profileTask (id){
+export default function profileTask ({id, start, end, dosis, rhythm, medication}){
 
     const [patients, setPatients] = useState([])
     useEffect(() => {
@@ -13,18 +13,25 @@ export default function profileTask (id){
         loadPatients();
     }, [])
 
-    const activePatient = db.profiles.id(id)
+
+
+   // const filteredReminders = reminders.filter(reminder => {reminder.id = id}); muss in profiles
+
 
     return (
         <div className={"profilTask__item"}>
             <div className={"profilTask__med"}>
+                {medication}
                 <div className={"profilTask__start"}>
+                    {start}
                     <div className={"profilTask__end"}>
-                        <div className={"profilTask__dosis"}>
-                            <div className={"profilTask__rhythm"}>
-
-                            </div>
-                        </div>
+                        {end}
+                    </div>
+                    <div className={"profilTask__dosis"}>
+                        {dosis}
+                    </div>
+                    <div className={"profilTask__rhythm"}>
+                        {rhythm}
                     </div>
                 </div>
             </div>
