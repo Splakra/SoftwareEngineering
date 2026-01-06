@@ -4,6 +4,7 @@ import Checkmark from "../../assets/checkmark.svg";
 import "./TaskItem.css";
 
 export default function TaskItem({patient, medication, time, showTime}) {
+    console.log({patient, medication, time, showTime});
     const [checked, setChecked] = useState(false);
     const [checkedDate, setCheckedDate] = useState(null);
     const handleChecked = () => {
