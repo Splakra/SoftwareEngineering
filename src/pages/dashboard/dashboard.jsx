@@ -38,12 +38,7 @@ function Dashboard({loaderData}) {
 
     // dummy profile & medication
     db.profiles.add({name: 'Sunny'})
-    db.medications.add({
-        name: 'Melosus',
-        type: 'fluid',
-        amount: 3.5,
-        reminderBuyNew: 10
-    })
+    
 
     //Einnahme hinzufügen
     async function addIntake() {

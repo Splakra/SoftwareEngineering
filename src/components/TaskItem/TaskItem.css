@@ -88,6 +88,10 @@
     font-weight: bold;
 }
 
+.task-item__dose {
+    font-weight: bold;
+}
+
 .task-item__status {
     font-size: var(--font-size-s);
 }

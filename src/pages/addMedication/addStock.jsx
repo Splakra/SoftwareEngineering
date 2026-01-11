@@ -8,7 +8,7 @@ import {useGlobal} from "../globalContext";
 
 function addStock() {
     const navigate = useNavigate();
-    const {medicationStock, setMedicationStock, medicationBuyNew, setMedicationBuyNew} = useGlobal();
+    const {medicationStock, setMedicationStock, medicationBuyNew, setMedicationBuyNew, medicationType} = useGlobal();
 
 
     async function nextPage() {
@@ -24,6 +24,18 @@ function addStock() {
             <div>
                 <div>Aktueller Vorrat</div>
                 <input type="number" value={medicationStock} onChange={e => setMedicationStock(e.target.value)}/>
+                <div>{(() => {
+                    switch (medicationType) {
+                        case"pills":
+                            return "Tabletten"
+
+                        case"fluid":
+                            return "ml"
+
+                        case"drops":
+                            return "ml"
+                    }
+                })()}</div>
             </div>
             <div className={"addStock__content"}>
                 Möchten Sie rechtzeitig an die nächste Packung erinnert werden? (optional)
@@ -31,6 +43,18 @@ function addStock() {
             <div>
                 <div>Erinnerung ab</div>
                 <input type="number" value={medicationBuyNew} onChange={e => setMedicationBuyNew(e.target.value)}/>
+                <div>{(() => {
+                    switch (medicationType) {
+                        case"pills":
+                            return "Tabletten"
+
+                        case"fluid":
+                            return "ml"
+
+                        case"drops":
+                            return "ml"
+                    }
+                })()}</div>
             </div>
             <button onClick={nextPage} disabled={!medicationStock}>
                 Weiter

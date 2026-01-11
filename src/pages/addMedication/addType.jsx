@@ -14,7 +14,7 @@ function addType() {
     async function nextPage() {
         navigate("/addMedication/stock")
     }
-
+    
 
     return (
         <div className="addType">

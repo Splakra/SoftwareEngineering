@@ -11,13 +11,14 @@ import {add} from "dexie";
 
 function ChooseMedication() {
     const navigate = useNavigate();
-    const {medication, setMedication} = useGlobal();
+    const {medication, setMedication, setRouteBackToChooseMedication} = useGlobal();
 
     async function nextPage() {
         navigate("/addTherapy/dose")
     }
 
     async function addMedication() {
+        setRouteBackToChooseMedication(true);
         navigate("/addMedication/name")
     }
 

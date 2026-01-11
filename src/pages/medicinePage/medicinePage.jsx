@@ -1,5 +1,12 @@
 import MedicineItem from '../../components/MedicineItem/MedicineItem';
 import './medicinePage.css';
+import {useEffect, useState} from "react";
+import db from "../../database/DexieDatabase";
+import {NavigationBar} from "../../components/NavigationBar/NavigationBar";
+import PlusIcon from "../../assets/plus-icon.svg";
+import {useNavigate, useRevalidator} from "react-router";
+import ToggleMenu from "../../components/ToggleMenu/ToggleMenu";
+
 
 function chunkArray(array, size) {
     const result = [];
@@ -9,8 +16,25 @@ function chunkArray(array, size) {
     return result;
 }
 
-export default function MedicinePage({meds}) {
+
+export default function MedicinePage({meds = []}) {
     const shelves = chunkArray(meds, 2);
+    const navigate = useNavigate();
+
+    const [medication, setMedication] = useState([])
+    useEffect(() => {
+        async function loadMedication() {
+            const loadedMedication = await db.medications.toArray();
+            setMedication(chunkArray(loadedMedication, 2));
+        }
+
+        loadMedication();
+    }, [])
+
+    async function addMed() {
+        navigate("/addMedication/name");
+    }
+
 
     return (
         <div className="medicine-page">
@@ -18,7 +42,7 @@ export default function MedicinePage({meds}) {
                 Medikamenten-Schrank
             </h2>
             <div className="medicine-page__content">
-                {shelves.map((shelf, index) => (
+                {medication.map((shelf, index) => (
                     <div className="medicine-shelf" key={index}>
                         <div className="medicine-shelf__items">
                             {shelf.map(medicine => (
@@ -31,7 +55,13 @@ export default function MedicinePage({meds}) {
                         <div className="medicine-shelf__board"/>
                     </div>
                 ))}
+                <button className={"medicine-page__add-button"} onClick={addMed}>
+                    <img alt="" className={"medicine-page__plus-icon"} src={PlusIcon}/>
+                    Hinzufügen
+                </button>
             </div>
+
+            <NavigationBar/>
         </div>
     );
 }

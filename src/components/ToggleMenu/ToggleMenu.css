@@ -1,0 +1,35 @@
+
+.toggle-menu {
+    position: relative;
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+.toggle-menu__button {
+    background: none;
+    border: none;
+}
+
+
+.toggle-menu__dots {
+    width: 1rem;
+    height: 1rem;
+    padding: 0.2rem;
+    overflow: visible;
+
+    background: var(--snow);
+    border-radius: 50%;
+}
+
+.toggle-menu__item {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    z-index: 999;
+}
+
+.toggle-menu__item-button {
+    display: block;
+    width: 100%;
+}

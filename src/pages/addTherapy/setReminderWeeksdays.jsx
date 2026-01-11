@@ -4,7 +4,7 @@ import {useGlobal} from "../globalContext";
 export default function SetReminderWeekdays() {
 
     const weekdays = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
-    const {weekday, setWeekday} = useGlobal();
+    const {weekday, setWeekday, setTime, time} = useGlobal();
 
 
     function updateWeekday(value, index) {
@@ -12,6 +12,7 @@ export default function SetReminderWeekdays() {
         updated[index] = value;
         setWeekday(updated);
     }
+
 
     return <div>
         <div>Bestimmte Tage wählen</div>
@@ -30,5 +31,7 @@ export default function SetReminderWeekdays() {
                 )
             }
         </div>
+        <div>Uhrzeit hinzufügen</div>
+        <input type="time" value={time} onChange={e => setTime(e.target.value, index)}/>
     </div>
 }

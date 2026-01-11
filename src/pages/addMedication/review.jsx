@@ -17,7 +17,9 @@ function review() {
         medicationExpDate,
         medicationExpiresValue,
         medicationExpiresType,
-        resetMedication
+        resetMedication,
+        routeBackToChooseMedication,
+        setRouteBackToChooseMedication
     } = useGlobal();
 
     async function nextPage() {
@@ -32,8 +34,12 @@ function review() {
 
         })
         resetMedication();
-
-        navigate("/addMedication/name")
+        if (routeBackToChooseMedication) {
+            setRouteBackToChooseMedication(false)
+            navigate("/addTherapy/medication");
+        } else {
+            navigate("/medication");
+        }
     }
 
 
@@ -121,7 +127,7 @@ function review() {
                 </div>
             </div>
             <button onClick={nextPage}>
-                Speichern & Eingabe beenden
+                {routeBackToChooseMedication ? 'Speichern & zurück zu "Einnahme hinzufügen"' : 'Speichern & Eingabe beenden'}
             </button>
         </div>
     );

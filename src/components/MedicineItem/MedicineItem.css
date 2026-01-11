@@ -12,6 +12,16 @@
     box-shadow: 0.3rem 0.3rem color-mix(in oklab, var(--tangerine-dream) 70%, transparent);
 }
 
+.medicine-item__infos {
+    display: flex;
+    flex-direction: row;
+}
+
+.medicine-item__name {
+    flex-grow: 1;
+}
+
+
 .medicine-item__storage--empty {
     color: #F52D00;
 }
