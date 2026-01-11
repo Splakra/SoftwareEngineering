@@ -5,14 +5,28 @@ import BottleIcon from "../../assets/bottle.svg"
 import "./MedicineItem.css";
 import db from "../../database/DexieDatabase";
 import ToggleMenu from "../ToggleMenu/ToggleMenu";
+import {useNavigate, useRevalidator} from "react-router";
+import {useGlobal} from "../../pages/globalContext";
 
-export default function MedicineItem({name, type, amount, reminderBuyNew, expiration, id}) {
+
+export default function MedicineItem({
+                                         id,
+                                         name,
+                                         type,
+                                         amount,
+                                         reminderBuyNew,
+                                         expiration,
+                                         reminderExpirationValue,
+                                         reminderExpirationType
+                                     }) {
     const expDate = new Date(expiration);
     const expired = Date.now() > expDate.getTime();
     const empty = amount <= reminderBuyNew;
     const status = `${expired ? "Abgelaufen seit:" : "Läuft ab am:"} ${expiration ? expDate.toLocaleDateString(navigator.language) : ""}`;
     const storageText = `${amount} ${type == "fluid" ? "ml" : type == "drops" ? "ml" : type == "pills" ? "Tabletten" : ""} übrig`;
     const medicineTypeIcon = type === "fluid" ? BottleIcon : type === "drops" ? DropIcon : PillIcon;
+    const navigate = useNavigate();
+    const {setMedicationEdit} = useGlobal();
 
     // better object with key, value
 
@@ -21,6 +35,20 @@ export default function MedicineItem({name, type, amount, reminderBuyNew, expira
         await db.reminders.where("medicationId").equals(id).delete();
         await db.medications.delete(id);
         window.location.reload();
+    }
+
+    function editMedication() {
+        setMedicationEdit({
+            id,
+            name,
+            type,
+            amount,
+            reminderBuyNew,
+            expiration,
+            reminderExpirationValue,
+            reminderExpirationType
+        });
+        navigate("/addMedication/name");
     }
 
     return (
@@ -33,6 +61,9 @@ export default function MedicineItem({name, type, amount, reminderBuyNew, expira
                     items={[{
                         label: "Dieses Medikament & alle zugehörigen Einnahmen löschen",
                         onClick: () => deleteMedication()
+                    }, {
+                        label: "Medikament bearbeiten",
+                        onClick: () => editMedication()
                     }]}/>
             </div>
             <div className={"medicine-item__details"}>

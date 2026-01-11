@@ -8,7 +8,14 @@ import {useGlobal} from "../globalContext";
 
 function addStock() {
     const navigate = useNavigate();
-    const {medicationStock, setMedicationStock, medicationBuyNew, setMedicationBuyNew, medicationType} = useGlobal();
+    const {
+        medicationStock,
+        setMedicationStock,
+        medicationBuyNew,
+        setMedicationBuyNew,
+        medicationType,
+        medicationId
+    } = useGlobal();
 
 
     async function nextPage() {
@@ -17,7 +24,8 @@ function addStock() {
 
     return (
         <div className="addStock">
-            <NavigationButtons title="Medikament hinzufügen" quitPath={"/medication"}/>
+            <NavigationButtons title={medicationId ? "Medikament bearbeiten" : "Medikament hinzufügen"}
+                               quitPath={"/medication"}/>
             <div className={"addStock__content"}>
                 Wie viel ist von dem Medikament vorrätig?
             </div>

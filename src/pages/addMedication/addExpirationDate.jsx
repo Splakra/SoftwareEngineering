@@ -14,7 +14,8 @@ function addExpirationDate() {
         medicationExpiresValue,
         setMedicationExpiresValue,
         medicationExpiresType,
-        setMedicationExpiresType
+        setMedicationExpiresType,
+        medicationId
     } = useGlobal();
 
     async function nextPage() {
@@ -24,7 +25,8 @@ function addExpirationDate() {
 
     return (
         <div className="addExpirationDate">
-            <NavigationButtons title="Medikament hinzufügen" quitPath={"/medication"}/>
+            <NavigationButtons title={medicationId ? "Medikament bearbeiten" : "Medikament hinzufügen"}
+                               quitPath={"/medication"}/>
             <div className={"addExpirationDate__content"}>
                 Wann läuft das Medikament ab? (optional)
             </div>

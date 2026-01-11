@@ -8,7 +8,7 @@ import {useGlobal} from "../globalContext";
 
 function addName() {
     const navigate = useNavigate();
-    const {medicationName, setMedicationName} = useGlobal();
+    const {medicationName, setMedicationName, medicationId} = useGlobal();
 
 
     async function nextPage() {
@@ -18,7 +18,8 @@ function addName() {
 
     return (
         <div className="addName">
-            <NavigationButtons title="Medikament hinzufügen" quitPath={"/medication"}/>
+            <NavigationButtons title={medicationId ? "Medikament bearbeiten" : "Medikament hinzufügen"}
+                               quitPath={"/medication"}/>
             <div className={"addName__content"}>
                 Füge ein neues Medikament hinzu!
             </div>

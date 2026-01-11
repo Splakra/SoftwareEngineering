@@ -19,20 +19,34 @@ function review() {
         medicationExpiresType,
         resetMedication,
         routeBackToChooseMedication,
-        setRouteBackToChooseMedication
+        setRouteBackToChooseMedication,
+        medicationId
     } = useGlobal();
 
     async function nextPage() {
-        await db.medications.add({
-            name: medicationName,
-            type: medicationType,
-            amount: medicationStock,
-            reminderBuyNew: medicationBuyNew,
-            expiration: medicationExpDate,
-            reminderExpirationValue: medicationExpiresValue,
-            reminderExpirationType: medicationExpiresType,
+        if (medicationId) {
+            await db.medications.put({
+                id: medicationId,
+                name: medicationName,
+                type: medicationType,
+                amount: medicationStock,
+                reminderBuyNew: medicationBuyNew,
+                expiration: medicationExpDate,
+                reminderExpirationValue: medicationExpiresValue,
+                reminderExpirationType: medicationExpiresType
+            })
+        } else {
+            await db.medications.add({
+                name: medicationName,
+                type: medicationType,
+                amount: medicationStock,
+                reminderBuyNew: medicationBuyNew,
+                expiration: medicationExpDate,
+                reminderExpirationValue: medicationExpiresValue,
+                reminderExpirationType: medicationExpiresType
 
-        })
+            })
+        }
         resetMedication();
         if (routeBackToChooseMedication) {
             setRouteBackToChooseMedication(false)
@@ -45,7 +59,8 @@ function review() {
 
     return (
         <div className="addName">
-            <NavigationButtons title="Medikament hinzufügen" quitPath={"/medication"}/>
+            <NavigationButtons title={medicationId ? "Medikament bearbeiten" : "Medikament hinzufügen"}
+                               quitPath={"/medication"}/>
             <div className={"addName__content"}>
                 Sind die Eingaben korrekt?
             </div>

@@ -18,6 +18,7 @@ export function GlobalProvider({children}) {
     const [routeBackToChooseMedication, setRouteBackToChooseMedication] = useState(false);
 
     //addMedication
+    const [medicationId, setMedicationId] = useState();
     const [medicationName, setMedicationName] = useState();
     const [medicationType, setMedicationType] = useState();
     const [medicationStock, setMedicationStock] = useState();
@@ -40,6 +41,17 @@ export function GlobalProvider({children}) {
         setIntervalValue(null);
     }
 
+    function setMedicationEdit(medication) {
+        setMedicationId(medication.id);
+        setMedicationName(medication.name);
+        setMedicationType(medication.type);
+        setMedicationStock(medication.amount);
+        setMedicationBuyNew(medication.reminderBuyNew);
+        setMedicationExpDate(medication.expiration);
+        setMedicationExpiresValue(medication.reminderExpirationValue);
+        setMedicationExpiresType(medication.reminderExpirationType);
+    }
+
     function resetMedication() {
         setMedicationName(null);
         setMedicationType(null);
@@ -48,6 +60,7 @@ export function GlobalProvider({children}) {
         setMedicationExpDate(null);
         setMedicationExpiresValue(null);
         setMedicationExpiresType("days");
+        setMedicationId(null);
     }
 
     return (
@@ -90,7 +103,10 @@ export function GlobalProvider({children}) {
             setMedicationExpiresValue,
             medicationExpiresType,
             setMedicationExpiresType,
+            medicationId,
+            setMedicationId,
 
+            setMedicationEdit,
             resetTherapy,
             resetMedication
         }}>
