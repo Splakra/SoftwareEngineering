@@ -16,6 +16,7 @@ export default [
     route("/addMedication/expirationDate", "./pages/addMedication/addExpirationDate.jsx"),
     route("/addMedication/review", "./pages/addMedication/review.jsx"),
     route("/medication", "./pages/medicinePage/medicinePage.jsx"),
+    route("/manualIntake/:id", "./pages/medicinePage/manualIntake.jsx"),
 
 
     // * matches all URLs, the ? makes it optional so it will match / as well

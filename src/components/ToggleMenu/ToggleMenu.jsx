@@ -6,12 +6,19 @@ import PawIcon from "../../assets/paw.svg";
 
 export default function ToggleMenu({items}) {
     const [open, setOpen] = useState(false);
+    const handleOptions = (e) => {
+        console.log("menu click");
+        e.stopPropagation();
+        setOpen(!open);
+    }
     return (
         <div className={"toggle-menu"}>
             <button className={"toggle-menu__button"} onClick={() => setOpen(!open)}>
                 <img alt="" className={"toggle-menu__dots"} src={OptionDots}/>
 
             </button>
+
+
             {open && (
                 <div className={"toggle-menu__item"}>
                     {items.map((item) => (

@@ -51,6 +51,10 @@ export default function MedicineItem({
         navigate("/addMedication/name");
     }
 
+    function addIntake() {
+        navigate("/manualIntake/" + id);
+    }
+
     return (
         <div className={"medicine-item"}>
             <div className={"medicine-item__infos"}>
@@ -64,6 +68,9 @@ export default function MedicineItem({
                     }, {
                         label: "Medikament bearbeiten",
                         onClick: () => editMedication()
+                    }, {
+                        label: "Einzelne Einnahme hinzufügen",
+                        onClick: () => addIntake()
                     }]}/>
             </div>
             <div className={"medicine-item__details"}>

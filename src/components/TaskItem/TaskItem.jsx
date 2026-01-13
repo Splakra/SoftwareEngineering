@@ -16,6 +16,7 @@ export default function TaskItem({patient, medication, time, showTime, dose, id}
         setCheckedDate(date);
     }
 
+
     async function deleteReminders() {
         await db.reminders.delete(id);
         window.location.reload();
