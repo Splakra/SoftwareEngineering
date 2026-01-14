@@ -57,6 +57,7 @@ export default function Profile() {
     }, [patients]);
 
     function handleDelete(id) {
+        db.reminders.where("profileId").equals(id).delete();
         db.profiles.delete(id); //löschen von db einträgen
         window.location.reload(); //neu laden der Seite
         return null;
