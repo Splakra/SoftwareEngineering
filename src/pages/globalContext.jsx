@@ -16,6 +16,7 @@ export function GlobalProvider({children}) {
     const [intervalValue, setIntervalValue] = useState();
 
     const [routeBackToChooseMedication, setRouteBackToChooseMedication] = useState(false);
+    const [routeBackToChooseProfile, setRouteBackToChooseProfile] = useState(false)
 
     //addMedication
     const [medicationId, setMedicationId] = useState();
@@ -88,6 +89,8 @@ export function GlobalProvider({children}) {
 
             routeBackToChooseMedication,
             setRouteBackToChooseMedication,
+            routeBackToChooseProfile,
+            setRouteBackToChooseProfile,
 
             medicationName,
             setMedicationName,

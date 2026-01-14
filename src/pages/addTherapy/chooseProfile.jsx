@@ -10,7 +10,7 @@ import ArrowIcon from "../../assets/triangle-down.svg";
 
 function ChooseProfile() {
     const navigate = useNavigate();
-    const {profile, setProfile} = useGlobal();
+    const {profile, setProfile, setRouteBackToChooseProfile} = useGlobal();
     const [patients, setPatients] = useState([])
 
     useEffect(() => {
@@ -21,6 +21,11 @@ function ChooseProfile() {
 
         loadPatients();
     }, [])
+
+    function addProfile() {
+        setRouteBackToChooseProfile(true);
+        navigate("/profile/add");
+    }
 
     function nextPage() {
         navigate("/addTherapy/medication")
@@ -67,7 +72,10 @@ function ChooseProfile() {
 
             <div>
                 <span>oder</span>
-                <button className="control-base button-base choose-profile__new">
+                <button
+                    className="control-base button-base choose-profile__new"
+                    onClick={addProfile}
+                >
                     Profil hinzufügen
                 </button>
             </div>
