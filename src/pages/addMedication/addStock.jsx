@@ -1,5 +1,5 @@
 import './addName.css';
-import NavigationButtons from "../../components/NavigationButtons/NavigationButtons";
+import PageHeader from "../../components/PageHeader/PageHeader";
 import db from "../../database/DexieDatabase";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router";
@@ -24,8 +24,8 @@ function addStock() {
 
     return (
         <div className="addStock">
-            <NavigationButtons title={medicationId ? "Medikament bearbeiten" : "Medikament hinzufügen"}
-                               quitPath={"/medication"}/>
+            <PageHeader title={medicationId ? "Medikament bearbeiten" : "Medikament hinzufügen"}
+                        quitPath={"/medication"}/>
             <div className={"addStock__content"}>
                 Wie viel ist von dem Medikament vorrätig?
             </div>

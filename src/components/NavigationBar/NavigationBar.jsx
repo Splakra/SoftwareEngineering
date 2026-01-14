@@ -6,7 +6,7 @@ export function NavigationBar() {
     return (
         <div className={"navigationbar"}>
             <div>
-                <button onClick={() => navigate("/")}>
+                <button onClick={() => navigate("/profile")}>
                     Profile
                 </button>
             </div>

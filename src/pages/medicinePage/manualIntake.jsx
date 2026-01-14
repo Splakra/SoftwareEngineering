@@ -1,4 +1,4 @@
-import NavigationButtons from "../../components/NavigationButtons/NavigationButtons";
+import PageHeader from "../../components/PageHeader/PageHeader";
 import {useNavigate, useParams} from "react-router";
 import {useEffect, useState} from "react";
 import db from "../../database/DexieDatabase";
@@ -28,8 +28,8 @@ export default function manualIntake() {
 
     return (
         <div className="addStock">
-            <NavigationButtons title={"Einzelgabe hinzufügen"}
-                               quitPath={"/medication"}/>
+            <PageHeader title={"Einzelgabe hinzufügen"}
+                        quitPath={"/medication"}/>
             <div className={"addStock__content"}>
                 Wie viel wurde verabreicht?
             </div>

@@ -5,6 +5,7 @@ import {useEffect, useState} from "react";
 import {useNavigate} from "react-router";
 import TaskItem from "../../components/TaskItem/TaskItem";
 import {deleteEntries} from "./delete";
+import {NavigationBar} from "../../components/NavigationBar/NavigationBar";
 
 
 export default function Profile() {
@@ -43,6 +44,7 @@ export default function Profile() {
             const loadedReminders = await db.reminders.toArray();
             setReminders(loadedReminders);
         }
+
         loadReminders();
     }, [])
 
@@ -70,32 +72,32 @@ export default function Profile() {
 
     return (
         <div className={"profile-item"}>
-                {
-                    patients.map(profile => {
-                        return <div className="profile-item" key={profile.id}>
-                            <img alt="" className={"task-item__person"} src={PersonIcon}/>
-                            {
-                                profile.name
-                            }
-                            <button onClick={() => handleDelete(profile.id)}>
-                                Profil löschen
-                            </button>
-                            <button onClick={()=> {
-                                setActiveProfile(profile);
+            {
+                patients.map(profile => {
+                    return <div className="profile-item" key={profile.id}>
+                        <img alt="" className={"task-item__person"} src={PersonIcon}/>
+                        {
+                            profile.name
+                        }
+                        <button onClick={() => handleDelete(profile.id)}>
+                            Profil löschen
+                        </button>
+                        <button onClick={() => {
+                            setActiveProfile(profile);
 
-                            }}>
-                                Pläne anzeigen
-                            </button>
-                            <div>
-                                {activeProfile?.id === profile.id &&
-                                    reminders
-                                        .filter(r => r.profileId === activeProfile.id)
-                                        .map(reminder => {
+                        }}>
+                            Pläne anzeigen
+                        </button>
+                        <div>
+                            {activeProfile?.id === profile.id &&
+                                reminders
+                                    .filter(r => r.profileId === activeProfile.id)
+                                    .map(reminder => {
 
-                                            const patient = patients.find(p => p.id === reminder.profileId);
-                                            console.log(medications?.find(m => m.id === reminder.medicationId));
-                                            const medication = medications?.find(m => m.id === reminder.medicationId);
-                                            if (!patient || !medication) return null;
+                                        const patient = patients.find(p => p.id === reminder.profileId);
+                                        console.log(medications?.find(m => m.id === reminder.medicationId));
+                                        const medication = medications?.find(m => m.id === reminder.medicationId);
+                                        if (!patient || !medication) return null;
 
                                         return <TaskItem
                                             key={reminder.id}
@@ -103,23 +105,14 @@ export default function Profile() {
                                             medication={medication}
                                             time={reminder.time}
                                             showTime={true}/>
-                                })}
-                            </div>
+                                    })}
                         </div>
-                    })
-                }
+                    </div>
+                })
+            }
 
-            <button onClick={handleClick}> Profil hinzufügen </button>
-            <button onClick={() => handleDeleteEntries(1, 6)}> lösche alle Medikamente aus Datenbank</button>
-            <button onClick={() => db.medications.add({
-                name: "test2",
-                amount: 10,
-                type: "drops"
-            })}> med hinzufügen </button>
-            <button onClick={() => db.reminders.add({
-                profileId: 75,
-                medicationId: medications[2].id,
-            })}> reminder </button>
+            <button onClick={handleClick}> Profil hinzufügen</button>
+            <NavigationBar/>
         </div>
     )
 }

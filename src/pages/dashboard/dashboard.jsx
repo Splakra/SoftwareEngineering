@@ -36,10 +36,6 @@ function Dashboard({loaderData}) {
     const currentDate = new Date();
     const navigate = useNavigate();
 
-    // dummy profile & medication
-    db.profiles.add({name: 'Sunny'})
-    
-
     //Einnahme hinzufügen
     async function addIntake() {
         navigate("/addTherapy/profile")

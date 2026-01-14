@@ -3,11 +3,11 @@ import "./PageHeader.css"
 import ArrowIcon from "../../assets/arrow-left.svg";
 import CrossIcon from "../../assets/cross.svg";
 
-function PageHeader({title}) {
+function PageHeader({title, quitPath}) {
     const navigate = useNavigate();
 
     function handleQuit() {
-        navigate("/");
+        navigate(quitPath ? quitPath : "/");
     }
 
     function handleBack() {

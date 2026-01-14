@@ -1,5 +1,5 @@
 import './review.css';
-import NavigationButtons from "../../components/NavigationButtons/NavigationButtons";
+import PageHeader from "../../components/PageHeader/PageHeader";
 import db from "../../database/DexieDatabase";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router";
@@ -59,8 +59,8 @@ function review() {
 
     return (
         <div className="addName">
-            <NavigationButtons title={medicationId ? "Medikament bearbeiten" : "Medikament hinzufügen"}
-                               quitPath={"/medication"}/>
+            <PageHeader title={medicationId ? "Medikament bearbeiten" : "Medikament hinzufügen"}
+                        quitPath={"/medication"}/>
             <div className={"addName__content"}>
                 Sind die Eingaben korrekt?
             </div>

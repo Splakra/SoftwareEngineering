@@ -18,7 +18,8 @@ export default [
     route("/addMedication/review", "./pages/addMedication/review.jsx"),
     route("/medication", "./pages/medicinePage/medicinePage.jsx"),
     route("/manualIntake/:id", "./pages/medicinePage/manualIntake.jsx"),
-    route("/profile/add" , "./pages/profiles/newProfile.jsx"),
+    route("/profile", "./pages/profiles/profiles.jsx"),
+    route("/profile/add", "./pages/profiles/newProfile.jsx"),
     // * matches all URLs, the ? makes it optional so it will match / as well
     route("*?", "catchall.jsx"),
 ];
