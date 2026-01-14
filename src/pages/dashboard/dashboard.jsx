@@ -89,7 +89,6 @@ function Dashboard({loaderData}) {
                     Hinzufügen
                 </button>
 
-
             </div>
             <NavigationBar/>
         </div>

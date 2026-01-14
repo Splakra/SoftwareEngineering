@@ -9,7 +9,7 @@ import db from "../../database/DexieDatabase";
 export default function TaskItem({patient, medication, time, showTime, dose, id}) {
     const [checked, setChecked] = useState(false);
     const [checkedDate, setCheckedDate] = useState(null);
-    const doseText = `${dose} ${medication.type == "fluid" ? "ml" : medication.type == "drops" ? "ml" : medication.type == "pills" ? "Tabletten" : ""} `;
+    const doseText = `${dose} ${medication.type === "fluid" ? "ml" : medication.type === "drops" ? "ml" : medication.type === "pills" ? "Tabletten" : ""} `;
     const handleChecked = () => {
         const date = new Date().toLocaleTimeString(navigator.language, {hour: '2-digit', minute: '2-digit'});
         setChecked(true);
