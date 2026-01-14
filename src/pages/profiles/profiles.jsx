@@ -4,7 +4,6 @@ import db from "../../database/DexieDatabase";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router";
 import TaskItem from "../../components/TaskItem/TaskItem";
-import {deleteEntries} from "./delete";
 import {NavigationBar} from "../../components/NavigationBar/NavigationBar";
 
 
@@ -61,7 +60,7 @@ export default function Profile() {
         window.location.reload(); //neu laden der Seite
         return null;
     }
-    
+
 
 
     return (
