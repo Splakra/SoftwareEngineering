@@ -2,7 +2,6 @@ import {useState} from "react";
 import PawIcon from "../../assets/paw.svg";
 import Checkmark from "../../assets/checkmark.svg";
 import "./TaskItem.css";
-import {NavigationBar} from "../NavigationBar/NavigationBar";
 import ToggleMenu from "../ToggleMenu/ToggleMenu";
 import db from "../../database/DexieDatabase";
 
