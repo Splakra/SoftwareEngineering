@@ -104,6 +104,7 @@ export default function Profile() {
                                             patient={patient}
                                             medication={medication}
                                             time={reminder.time}
+                                            dose={(reminder.dose)}
                                             showTime={true}/>
                                     })}
                         </div>
