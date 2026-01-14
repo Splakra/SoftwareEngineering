@@ -4,6 +4,7 @@ import db from "../../database/DexieDatabase";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router";
 import TaskItem from "../../components/TaskItem/TaskItem";
+import {deleteEntries} from "./delete";
 import {NavigationBar} from "../../components/NavigationBar/NavigationBar";
 
 
@@ -61,6 +62,12 @@ export default function Profile() {
         return null;
     }
 
+
+    const handleDeleteEntries = async () => {//schnelles entfernen von medikamenten
+        const keepIds = [1, 2]; // die 2 IDs, die bleiben sollen
+        await deleteEntries(keepIds);
+        alert('Gelöscht – nur die gewünschten Einträge bleiben.');
+    };
 
 
     return (
