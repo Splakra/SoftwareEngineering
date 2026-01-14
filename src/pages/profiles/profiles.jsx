@@ -71,18 +71,22 @@ export default function Profile() {
 
 
     return (
-        <div className={"profile-item"}>
+        <div className={"profile"}>
             {
                 patients.map(profile => {
-                    return <div className="profile-item" key={profile.id}>
+                    return <div className="profile" key={profile.id}>
                         <img alt="" className={"task-item__person"} src={PersonIcon}/>
                         {
                             profile.name
                         }
-                        <button onClick={() => handleDelete(profile.id)}>
+                        <button
+                            className={"control-base button-base profile__delete-button"}
+                            onClick={() => handleDelete(profile.id)}>
                             Profil löschen
                         </button>
-                        <button onClick={() => {
+                        <button
+                            className={"control-base button-base profile__active-button"}
+                            onClick={() => {
                             setActiveProfile(profile);
 
                         }}>
@@ -104,7 +108,7 @@ export default function Profile() {
                                             patient={patient}
                                             medication={medication}
                                             time={reminder.time}
-                                            dose={(reminder.dose)}
+                                            dose={reminder.dose}
                                             showTime={true}/>
                                     })}
                         </div>
@@ -112,7 +116,9 @@ export default function Profile() {
                 })
             }
 
-            <button onClick={handleClick}> Profil hinzufügen</button>
+            <button
+                className={"control-base button-base profile__add-button"}
+                onClick={handleClick}> Profil hinzufügen</button>
             <NavigationBar/>
         </div>
     )
