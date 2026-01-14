@@ -1,19 +1,20 @@
 //back & quit auslagern für alle verfügbar
 
 import './chooseMedication.css';
-import NavigationButtons from "../../components/NavigationButtons/NavigationButtons";
+import PageHeader from "../../components/PageHeader/PageHeader";
 import db from "../../database/DexieDatabase";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router";
 import {useGlobal} from "../globalContext";
 import {add} from "dexie";
+import ArrowIcon from "../../assets/triangle-down.svg";
 
 
 function ChooseMedication() {
     const navigate = useNavigate();
     const {medication, setMedication, setRouteBackToChooseMedication} = useGlobal();
 
-    async function nextPage() {
+    function nextPage() {
         navigate("/addTherapy/dose")
     }
 
@@ -35,36 +36,61 @@ function ChooseMedication() {
     }, [])
 
     return (
-        <div>
-            <NavigationButtons title="Einnahme hinzufügen"/>
-            <div className={"choose-medication_heading"}>
-                Füge eine neue Therapie hinzu!
-            </div>
-            <div className={"choose-medication_existing-medication"}>
-                <div>Vorhandenes Medikament auswählen</div>
-                <select onChange={e => setMedication(e.target.value)} value={medication}>
-                    <option selected></option>
+        <div className={"choose-medication"}>
+            <PageHeader title="einnahme hinzufügen"/>
 
-                    {
-                        medications.map(med => {
-                            return <option value={JSON.stringify(med)}>
-                                {
-                                    med.name
-                                }
+            <h2 className={"choose-medication__intro"}>
+                Welches Medikament soll verabreicht werden?
+            </h2>
+
+            <div className={"choose-medication__existing"}>
+                <label>
+                    Vorhandenes Medikament auswählen
+                    <div className="select-wrapper">
+                        <select
+                            className={`control-base select-base ${
+                                medication === "" || medication == null ? "is-placeholder" : ""
+                            }`}
+                            value={medication ?? ""}
+                            onChange={e => setMedication(e.target.value)}
+                        >
+                            <option value="" disabled hidden>
+                                Glitzerheilstaub
                             </option>
-                        })
-                    }
-                </select>
+                            {medications.map(med => (
+                                <option key={med.id} value={JSON.stringify(med)}>
+                                    {med.name}
+                                </option>
+                            ))}
+                        </select>
+
+                        <img
+                            src={ArrowIcon}
+                            alt=""
+                            aria-hidden="true"
+                            className="select-arrow"
+                        />
+                    </div>
+                </label>
             </div>
-            <div className={"choose-medication_new-medication"}>
-                oder
-                <button onClick={addMedication}>
+            <div>
+                <span>oder</span>
+                <button
+                    onClick={addMedication}
+                    className="control-base button-base choose-medication__new"
+                >
                     Medikament hinzufügen
                 </button>
             </div>
-            <button onClick={nextPage} disabled={!medication}>
+
+            <button
+                className="control-base button-base choose-medication__next"
+                onClick={nextPage}
+                disabled={!medication}
+            >
                 Weiter
             </button>
+
         </div>
     );
 }

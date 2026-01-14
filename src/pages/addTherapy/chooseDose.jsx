@@ -1,51 +1,76 @@
 //back & quit auslagern für alle verfügbar
 import './chooseDose.css';
-import NavigationButtons from "../../components/NavigationButtons/NavigationButtons";
+import PageHeader from "../../components/PageHeader/PageHeader";
 import db from "../../database/DexieDatabase";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router";
-import {useGlobal} from "../globalContext";
+import {useGlobal} from "./globalContext";
 
 
 function ChooseDose() {
     const navigate = useNavigate();
     const {medication, dose, setDose} = useGlobal();
 
-    async function nextPage() {
+    function nextPage() {
         navigate("/addTherapy/reminder")
     }
 
-    return <div>
-        <NavigationButtons title="Einnahme hinzufügen"/>
-        <div className={"choose-dose_heading"}>
-            In welcher Dosis soll das Medikament verabreicht werden?
+    function getDoseUnit() {
+        if (!medication) return "";
+
+        switch (JSON.parse(medication).type) {
+            case "pills":
+                return "Tabletten";
+            case "fluid":
+                return "ml";
+            case "drops":
+                return "Tropfen";
+            default:
+                return "";
+        }
+    }
+
+    return (
+        <div className="choose-dose">
+            <PageHeader title="einnahme hinzufügen"/>
+
+            <h2 className="choose-dose__intro">
+                In welcher Dosis soll das Medikament verabreicht werden?
+            </h2>
+
+            <div className="choose-dose__input-wrapper">
+                <label className="choose-dose__label" htmlFor="doseInput">
+                    Gewünschte Dosis eingeben
+                </label>
+
+                <div className="choose-dose__input-line">
+                    <input
+                        className="control-base choose-dose__input"
+                        id="doseInput"
+                        type="number"
+                        inputMode="numeric" // opens numeric keypad on phone
+                        min="0"
+                        step="any"
+                        placeholder="666"
+                        value={dose ?? ""}
+                        onChange={e => setDose(e.target.value)}
+                    />
+                    <span
+                        className="choose-dose__unit">
+                        {getDoseUnit()}
+                    </span>
+                </div>
+            </div>
+
+            <button
+                className="control-base button-base choose-dose__next"
+                disabled={dose == null || dose === ""}
+                onClick={nextPage}
+            >
+                Weiter
+            </button>
         </div>
-        <div className="input-line">
-            <input type="number" onChange={e => setDose(e.target.value)} value={dose}/>
-
-            <div>{(() => {
-                switch (JSON.parse(medication).type) {
-                    case"pills":
-                        return "Tabletten"
-
-                    case"fluid":
-                        return "ml"
-
-                    case"drops":
-                        return "Tropfen"
-
-                    default:
-                        return ""
-                }
-            })()
-            } </div>
-        </div>
-
-        <button onClick={nextPage} disabled={!dose}>
-            Weiter
-        </button>
-
-    </div>;
+    );
 }
 
 export default ChooseDose;

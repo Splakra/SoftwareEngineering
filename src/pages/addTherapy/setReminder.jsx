@@ -1,6 +1,6 @@
 //back & quit auslagern für alle verfügbar
 import './setReminder.css';
-import NavigationButtons from "../../components/NavigationButtons/NavigationButtons";
+import PageHeader from "../../components/PageHeader/PageHeader";
 import db from "../../database/DexieDatabase";
 import {useEffect, useState} from "react";
 import SetReminderInterval from "./setReminderInterval";
@@ -12,71 +12,96 @@ import {useGlobal} from "../globalContext";
 
 function SetReminder() {
     const navigate = useNavigate();
-    const {rhythm, setRhythm, time, intervalValue, weekday, startDate, setStartDate, endDate, setEndDate} = useGlobal();
+    const {
+        rhythm, setRhythm,
+        time, intervalValue,
+        weekday, startDate, setStartDate,
+        endDate, setEndDate
+    } = useGlobal();
 
-
-    async function nextPage() {
+    function nextPage() {
         navigate("/addTherapy/review");
     }
 
-    function isButtonDisabled() {
+    const isButtonDisabled = () => {
         switch (rhythm) {
-            case"daily":
-                return !time.every(value => value);
-
-            case"weekdays":
-                return !weekday.some(value => value);
-
-            case"interval":
+            case "daily":
+                return !time.every(t => t);
+            case "weekdays":
+                return !weekday.some(v => v);
+            case "interval":
                 return !intervalValue;
-
+            default:
+                return true;
         }
-    }
+    };
+
+    const renderRhythm = () => {
+        switch (rhythm) {
+            case "daily":
+                return <SetReminderDaily/>;
+            case "weekdays":
+                return <SetReminderWeekdays/>;
+            case "interval":
+                return <SetReminderInterval/>;
+        }
+    };
 
     return (
-        <div>
-            <NavigationButtons title="Einnahme hinzufügen"/>
-            <div className={"choose-dose_heading"}>
-                Wann möchtest Du erinnert werden?
-            </div>
-            <div className={"choose-rhythm"}>
-                <div>Rhythmus auswählen</div>
-                <select value={rhythm} onChange={e => setRhythm(e.target.value)}>
-                    <option value={"daily"}>
-                        Jeden Tag
-                    </option>
-                    <option value={"weekdays"}>
-                        Bestimmte Wochentage
-                    </option>
-                    <option value={"interval"}>
-                        Intervall
-                    </option>
-                </select>
-                <div>
-                    <div>Startdatum</div>
-                    <input type="date" value={startDate}
-                           onChange={e => setStartDate(e.target.value)}/> {/*pop up lässt sich möglicherweise nicht sytlen*/}
-                </div>
-                <div>
-                    <div>Enddatum</div>
-                    <input type="date" value={endDate}
-                           onChange={e => setEndDate(e.target.value)}/> {/*pop up lässt sich möglicherweise nicht sytlen*/}
-                </div>
-                <div>{(() => {
-                    switch (rhythm) {
-                        case"daily":
-                            return <SetReminderDaily/>
+        <div className="set-reminder">
+            <PageHeader title="Einnahme hinzufügen"/>
 
-                        case"weekdays":
-                            return <SetReminderWeekdays/>
+            <h2 className="set-reminder__title">
+                Wann möchtest du erinnert werden?
+            </h2>
 
-                        case"interval":
-                            return <SetReminderInterval/>
-                    }
-                })()
-                } </div>
-            </div>
-            <button onClick={nextPage} disabled={isButtonDisabled()}>
+            <section className="set-reminder__section">
+                <div className="set-reminder__rhythm">
+                    <label htmlFor="rhythmSelect">Rhythmus auswählen</label>
+                    <select
+                        id="rhythmSelect"
+                        className="control-base select-base set-reminder__select"
+                        value={rhythm}
+                        onChange={e => setRhythm(e.target.value)}
+                    >
+                        <option value="daily">Jeden Tag</option>
+                        <option value="weekdays">Bestimmte Wochentage</option>
+                        <option value="interval">Intervall</option>
+                    </select>
+                </div>
+
+                <div className="set-reminder__dates">
+                    <label>
+                        Startdatum
+                        <input
+                            type="date"
+                            className="control-base set-reminder__date"
+                            value={startDate}
+                            onChange={e => setStartDate(e.target.value)}
+                        />
+                    </label>
+
+                    <label>
+                        Enddatum
+                        <input
+                            type="date"
+                            className="control-base set-reminder__date"
+                            value={endDate ?? ""}
+                            onChange={e => setEndDate(e.target.value)}
+                        />
+                    </label>
+                </div>
+
+                <div className="set-reminder__details">
+                    {renderRhythm()}
+                </div>
+            </section>
+
+            <button
+                className="control-base button-base set-reminder__next"
+                disabled={isButtonDisabled()}
+                onClick={nextPage}
+            >
                 Weiter
             </button>
         </div>

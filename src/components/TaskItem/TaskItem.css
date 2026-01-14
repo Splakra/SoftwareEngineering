@@ -2,7 +2,7 @@
     --infos-border-left-width: 0.8rem; /* custom variable: width of the colored left border */
     display: flex; /* places child elements next to each other */
     gap: var(--gap-base); /* space between the children */
-    margin-bottom: var(--margin-bottom-base);
+    margin-bottom: var(--margin-base);
 }
 
 .task-item__time {
@@ -64,7 +64,7 @@
     display: inline-flex;
     align-items: center;
     gap: var(--gap-small);
-    margin-bottom: var(--margin-bottom-small);
+    margin-bottom: var(--margin-small);
     padding: var(--padding-block-small) var(--padding-inline-small);
     background: var(--tangerine-dream);
     color: white;

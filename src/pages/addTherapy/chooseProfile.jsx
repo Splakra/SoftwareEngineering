@@ -1,22 +1,18 @@
 //back & quit auslagern für alle verfügbar
 
 import './chooseProfile.css';
-import NavigationButtons from "../../components/NavigationButtons/NavigationButtons";
+import PageHeader from "../../components/PageHeader/PageHeader";
 import db from "../../database/DexieDatabase";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router";
 import {useGlobal} from "../globalContext";
-
+import ArrowIcon from "../../assets/triangle-down.svg";
 
 function ChooseProfile() {
     const navigate = useNavigate();
     const {profile, setProfile} = useGlobal();
-
-    async function nextPage() {
-        navigate("/addTherapy/medication")
-    }
-
     const [patients, setPatients] = useState([])
+
     useEffect(() => {
         async function loadPatients() {
             const loadedPatients = await db.profiles.toArray();
@@ -26,36 +22,64 @@ function ChooseProfile() {
         loadPatients();
     }, [])
 
+    function nextPage() {
+        navigate("/addTherapy/medication")
+    }
+
     return (
-        <div className="chooseProfile">
-            <NavigationButtons title="Einnahme hinzufügen"/>
-            <div className={"chooseProfile__content"}>
+        <div className="choose-profile">
+            <PageHeader title="einnahme hinzufügen"/>
+
+            <h2 className={"choose-profile__intro"}>
                 Für wen soll eine neue Einnahme angelegt werden?
-            </div>
-            <div className={"choose-profile_existing-Patient"}>
-                <div>Patient*in auswählen</div>
-                <select onChange={e => setProfile(e.target.value)} value={profile}>
-                    <option selected></option>
-                    {
-                        patients.map(profile => {
-                            return <option value={JSON.stringify(profile)}>
-                                {
-                                    profile.name
-                                }
+            </h2>
+
+            <div className={"choose-profile__existing"}>
+                <label>
+                    Profil auswählen
+                    <div className="select-wrapper">
+                        <select
+                            className={`control-base select-base ${
+                                profile === "" || profile == null ? "is-placeholder" : ""
+                            }`}
+                            value={profile ?? ""}
+                            onChange={e => setProfile(e.target.value)}
+                        >
+                            <option value="" disabled hidden>
+                                Schnurzipups
                             </option>
-                        })
-                    }
-                </select>
+                            {patients.map(profile => (
+                                <option key={profile.id} value={JSON.stringify(profile)}>
+                                    {profile.name}
+                                </option>
+                            ))}
+                        </select>
+
+                        <img
+                            src={ArrowIcon}
+                            alt=""
+                            aria-hidden="true"
+                            className="select-arrow"
+                        />
+                    </div>
+                </label>
             </div>
-            <div className={"choose-profile_new-patient"}>
-                oder
-                <button>
-                    Patient*in hinzufügen
+
+            <div>
+                <span>oder</span>
+                <button className="control-base button-base choose-profile__new">
+                    Profil hinzufügen
                 </button>
             </div>
-            <button onClick={nextPage} disabled={!profile}>
+
+            <button
+                className="control-base button-base choose-profile__next"
+                onClick={nextPage}
+                disabled={!profile}
+            >
                 Weiter
             </button>
+
         </div>
     );
 }
