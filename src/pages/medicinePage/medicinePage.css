@@ -5,7 +5,7 @@
 .medicine-page__title {
     all: unset;
     display: block;
-    margin-bottom: var(--margin-bottom-base);
+    margin-bottom: var(--margin-base);
     font-size: var(--font-size-xxl);
     font-weight: bold;
 }

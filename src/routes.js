@@ -5,6 +5,7 @@ import {
 
 export default [
     route("/", "./pages/dashboard/dashboard.jsx"),
+    // route("/", "./pages/medicinePage/medsTester.jsx"),
     route("/addTherapy/profile", "./pages/addTherapy/chooseProfile.jsx"),
     route("/addTherapy/medication", "./pages/addTherapy/chooseMedication.jsx"),
     route("/addTherapy/dose", "./pages/addTherapy/chooseDose.jsx"),

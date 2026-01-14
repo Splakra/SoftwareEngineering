@@ -16,7 +16,7 @@ export default function TaskItem({patient, medication, time, showTime}) {
         <div className={`task-item ${checked ? "task-item--checked" : ""}`}>
             <div className={"task-item__time"}>
                 {showTime && time}
-                {/*time wird nur ausgegeben, wenn showTime true ist*/}
+                {/* time will only be shown if showTime is true */}
             </div>
             <button onClick={handleChecked} className={"task-item__button"}>
                 <div className={"task-item__infos"}>

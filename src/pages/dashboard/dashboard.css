@@ -22,7 +22,7 @@
     all: unset;
     display: block;
     font-variant-numeric: tabular-nums; /* sets all numbers to same size */
-    margin-bottom: calc(2 * var(--margin-bottom-small));
+    margin-bottom: calc(2 * var(--margin-small));
     font-size: var(--font-size-xxl);
     font-weight: bold;
 }
@@ -38,7 +38,7 @@
 }
 
 .calendar__weekday-name {
-    margin-bottom: var(--margin-bottom-small);
+    margin-bottom: var(--margin-small);
     font-size: var(--font-size-l);
     font-weight: 500;
 }

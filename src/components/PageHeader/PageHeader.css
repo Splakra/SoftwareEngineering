@@ -1,0 +1,27 @@
+.page-header {
+    position: sticky;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--snow);
+    z-index: 10;
+}
+
+.page-header__title {
+    font-variant: small-caps;
+}
+
+.page-header__arrow {
+    width: 1rem;
+    height: 1rem;
+    transform: scale(1.1);
+}
+
+.page-header__title {
+    margin: 0;
+}
+
+.page-header__cross {
+    width: 1rem;
+    height: 1rem;
+}

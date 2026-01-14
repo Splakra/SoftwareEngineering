@@ -29,8 +29,8 @@
     --line-height-base: 1.4;
 
     /* margin */
-    --margin-bottom-small: 0.5rem;
-    --margin-bottom-base: 1.75rem;
+    --margin-small: 0.5rem;
+    --margin-base: 1.75rem;
 
     /* padding */
     --padding-block-small: 0.3rem;
@@ -78,4 +78,52 @@ img {
     display: block;
     max-width: 100%;
     height: auto;
+}
+
+/* control base */
+.control-base {
+    height: 3.5rem;
+    padding-inline: var(--padding-inline-base);
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border-radius: var(--border-radius-large);
+    font-weight: bold;
+    line-height: 1;
+}
+
+.control-base:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.control-base:focus-visible {
+    outline: 0.2rem solid var(--tangerine-dream);
+    outline-offset: 0.2rem;
+}
+
+/* button base */
+.button-base {
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+}
+
+/* select base */
+.select-base {
+    appearance: none;
+    -webkit-appearance: none;
+    border: none;
+}
+
+/* input */
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button { /* hide arrows in Chrome, Safari, Edge, Opera */
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] { /* hide arrows in Firefox */
+    -moz-appearance: textfield;
 }

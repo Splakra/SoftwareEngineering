@@ -1,0 +1,46 @@
+.choose-dose {
+    min-height: 100vh;
+    box-sizing: border-box;
+    padding: var(--padding-block-base) var(--padding-inline-base);
+    display: flex;
+    flex-direction: column;
+}
+
+.choose-dose__intro {
+    all: unset;
+    font-variant-numeric: tabular-nums; /* sets all numbers to same size */
+    margin-block: var(--margin-base);
+    font-size: var(--font-size-xxl);
+    font-weight: bold;
+}
+
+.choose-dose__input-line {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-base);
+}
+
+.choose-dose__input {
+    background-color: white;
+    margin-block: var(--margin-base);
+    border: none;
+    box-shadow: 0.1rem 0.4rem 1.5rem color-mix(in oklab, var(--tea-green) 30%, transparent);
+}
+
+.choose-dose__unit {
+    font-weight: bold;
+    font-size: var(--font-size-l);
+}
+
+.choose-dose__next {
+    margin-top: auto;
+    position: sticky;
+    bottom: var(--padding-block-base);
+    background-image: radial-gradient(
+            circle at 15% 25%,
+            var(--tangerine-dream) 10%,
+            var(--tomato) 100%
+    );
+    color: var(--snow);
+    font-size: var(--font-size-l);
+}

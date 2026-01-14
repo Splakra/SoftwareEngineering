@@ -1,6 +1,6 @@
 //back & quit auslagern für alle verfügbar
 import './review.css';
-import NavigationButtons from "./navigationButtons";
+import PageHeader from "../../components/PageHeader/PageHeader";
 import db from "../../database/DexieDatabase";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router";
@@ -40,7 +40,7 @@ function Review() {
 
     return (
         <div>
-            <NavigationButtons title="Einnahme hinzufügen"/>
+            <PageHeader title="Einnahme hinzufügen"/>
             <div className={"choose-dose_heading"}>
                 Sind die eingaben korrekt?
 
