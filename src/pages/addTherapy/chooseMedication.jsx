@@ -1,5 +1,3 @@
-//back & quit auslagern für alle verfügbar
-
 import './chooseMedication.css';
 import PageHeader from "../../components/PageHeader/PageHeader";
 import db from "../../database/DexieDatabase";
@@ -7,8 +5,6 @@ import {useEffect, useState} from "react";
 import {useNavigate} from "react-router";
 import {useGlobal} from "../globalContext";
 import {add} from "dexie";
-import ArrowIcon from "../../assets/triangle-down.svg";
-
 
 function ChooseMedication() {
     const navigate = useNavigate();
@@ -36,10 +32,10 @@ function ChooseMedication() {
     }, [])
 
     return (
-        <div className={"choose-medication"}>
+        <div className={"page"}>
             <PageHeader title="einnahme hinzufügen"/>
 
-            <h2 className={"choose-medication__intro"}>
+            <h2 className={"title"}>
                 Welches Medikament soll verabreicht werden?
             </h2>
 
@@ -48,7 +44,7 @@ function ChooseMedication() {
                     Vorhandenes Medikament auswählen
                     <div className="select-wrapper">
                         <select
-                            className={`control-base select-base ${
+                            className={`control select ${
                                 medication === "" || medication == null ? "is-placeholder" : ""
                             }`}
                             value={medication ?? ""}
@@ -63,13 +59,6 @@ function ChooseMedication() {
                                 </option>
                             ))}
                         </select>
-
-                        <img
-                            src={ArrowIcon}
-                            alt=""
-                            aria-hidden="true"
-                            className="select-arrow"
-                        />
                     </div>
                 </label>
             </div>
@@ -77,14 +66,14 @@ function ChooseMedication() {
                 <span>oder</span>
                 <button
                     onClick={addMedication}
-                    className="control-base button-base choose-medication__new"
+                    className="control button choose-medication__new"
                 >
                     Medikament hinzufügen
                 </button>
             </div>
 
             <button
-                className="control-base button-base choose-medication__next"
+                className="control button button-next"
                 onClick={nextPage}
                 disabled={!medication}
             >

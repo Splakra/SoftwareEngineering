@@ -79,7 +79,6 @@
     height: 0.8rem;
     padding: 0.2rem;
     overflow: visible;
-
     background: var(--snow);
     border-radius: 50%;
 }
@@ -88,12 +87,14 @@
     font-weight: bold;
 }
 
-.task-item__dose {
-    font-weight: bold;
+.task-item__details {
+    display: flex;
+    gap: var(--gap-small);
+    font-size: var(--font-size-s);
 }
 
 .task-item__status {
-    font-size: var(--font-size-s);
+    font-style: italic;
 }
 
 .task-item__checkmark-wrapper {
@@ -113,4 +114,3 @@
     width: 7rem;
     height: 7rem;
 }
-

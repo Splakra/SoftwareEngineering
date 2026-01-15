@@ -8,7 +8,8 @@
 }
 
 .page-header__title {
-    font-variant: small-caps;
+    text-transform: uppercase;
+    font-size: var(--font-size-s);
 }
 
 .page-header__arrow {

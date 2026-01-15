@@ -3,6 +3,7 @@
     --snow: #fbf3f4ff;
     --rich-mahogany: #291000ff;
     --tomato: #ff5733ff;
+    --warning-red: #F52D00;
     --tangerine-dream: #fe8c46ff;
     --sunflower-gold: #fec34bff;
     --tea-green: #c5edacff;
@@ -19,7 +20,6 @@
 
     /* fonts */
     --font-size-base: 1rem;
-
     --font-size-s: 0.75rem;
     --font-size-l: 1.125rem;
     --font-size-xl: 1.25rem;
@@ -80,8 +80,23 @@ img {
     height: auto;
 }
 
-/* control base */
-.control-base {
+/* base classes */
+
+.page {
+    min-height: 100vh; /* 100% of the height of the visible browser window */
+    box-sizing: border-box;
+    padding: var(--padding-block-base) var(--padding-inline-base);
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    margin-block: var(--margin-base);
+    font-size: var(--font-size-xxl);
+    font-weight: bold;
+}
+
+.control {
     height: 3.5rem;
     padding-inline: var(--padding-inline-base);
     display: flex;
@@ -92,28 +107,69 @@ img {
     line-height: 1;
 }
 
-.control-base:disabled {
+.control:disabled {
     opacity: 0.5;
     cursor: not-allowed;
 }
 
-.control-base:focus-visible {
+.date {
+    width: calc(100% - (2 * var(--padding-inline-base)));
+}
+
+.control:focus-visible {
     outline: 0.2rem solid var(--tangerine-dream);
     outline-offset: 0.2rem;
 }
 
-/* button base */
-.button-base {
+.button {
     justify-content: center;
     border: none;
     cursor: pointer;
 }
 
-/* select base */
-.select-base {
+.button-next {
+    margin-top: auto;
+    position: sticky;
+    bottom: var(--padding-block-base);
+    background-image: radial-gradient(
+            circle at 15% 25%,
+            var(--tangerine-dream) 10%,
+            var(--tomato) 100%
+    );
+    color: var(--snow);
+    font-size: var(--font-size-l);
+}
+
+.select {
     appearance: none;
     -webkit-appearance: none;
     border: none;
+    margin-block: var(--margin-base);
+    background-color: white;
+    box-shadow: 0.1rem 0.4rem 1.5rem color-mix(in oklab, var(--tea-green) 30%, transparent);
+}
+
+.select-wrapper {
+    position: relative;
+}
+
+.select-wrapper::after {
+    content: "";
+    background-image: url("./assets/triangle-down.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    pointer-events: none;
+    position: absolute;
+    transform: translateY(-50%);
+    width: 1rem;
+    height: 1rem;
+    top: 50%;
+    right: 1.5rem;
+}
+
+select.is-placeholder {
+    color: grey;
+    font-style: italic;
 }
 
 /* input */

@@ -36,8 +36,7 @@ function Dashboard({loaderData}) {
     const currentDate = new Date();
     const navigate = useNavigate();
 
-    //Einnahme hinzufügen
-    async function addIntake() {
+    function addIntake() {
         navigate("/addTherapy/profile")
     }
 
