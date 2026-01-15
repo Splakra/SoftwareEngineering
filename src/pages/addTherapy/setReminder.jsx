@@ -1,14 +1,10 @@
-//back & quit auslagern für alle verfügbar
 import './setReminder.css';
 import PageHeader from "../../components/PageHeader/PageHeader";
-import db from "../../database/DexieDatabase";
-import {useEffect, useState} from "react";
 import SetReminderInterval from "./setReminderInterval";
 import SetReminderWeekdays from "./setReminderWeeksdays";
 import SetReminderDaily from "./setReminderDaily";
 import {useNavigate} from "react-router";
 import {useGlobal} from "../globalContext";
-
 
 function SetReminder() {
     const navigate = useNavigate();
@@ -48,26 +44,35 @@ function SetReminder() {
     };
 
     return (
-        <div className="set-reminder">
+        <div className="page">
             <PageHeader title="Einnahme hinzufügen"/>
 
-            <h2 className="set-reminder__title">
+            <h2 className="title">
                 Wann möchtest du erinnert werden?
             </h2>
 
             <section className="set-reminder__section">
                 <div className="set-reminder__rhythm">
-                    <label htmlFor="rhythmSelect">Rhythmus auswählen</label>
-                    <select
-                        id="rhythmSelect"
-                        className="control-base select-base set-reminder__select"
-                        value={rhythm}
-                        onChange={e => setRhythm(e.target.value)}
-                    >
-                        <option value="daily">Jeden Tag</option>
-                        <option value="weekdays">Bestimmte Wochentage</option>
-                        <option value="interval">Intervall</option>
-                    </select>
+                    <label htmlFor="rhythmSelect">
+                        Rhythmus auswählen
+                    </label>
+                    <div className="select-wrapper">
+                        <select
+                            className={`control select ${
+                                rhythm === "" || rhythm == null ? "is-placeholder" : ""
+                            }`}
+                            id="rhythmSelect"
+                            value={rhythm ?? ""}
+                            onChange={e => setRhythm(e.target.value)}
+                        >
+                            <option value="" disabled hidden>
+                                Glitzerheilstaub
+                            </option>
+                            <option value="daily">Jeden Tag</option>
+                            <option value="weekdays">Bestimmte Wochentage</option>
+                            <option value="interval">Intervall</option>
+                        </select>
+                    </div>
                 </div>
 
                 <div className="set-reminder__dates">
@@ -75,7 +80,7 @@ function SetReminder() {
                         Startdatum
                         <input
                             type="date"
-                            className="control-base set-reminder__date"
+                            className="control select date"
                             value={startDate}
                             onChange={e => setStartDate(e.target.value)}
                         />
@@ -85,7 +90,7 @@ function SetReminder() {
                         Enddatum
                         <input
                             type="date"
-                            className="control-base set-reminder__date"
+                            className="control select date"
                             value={endDate ?? ""}
                             onChange={e => setEndDate(e.target.value)}
                         />
@@ -98,7 +103,7 @@ function SetReminder() {
             </section>
 
             <button
-                className="control-base button-base set-reminder__next"
+                className="control button button-next"
                 disabled={isButtonDisabled()}
                 onClick={nextPage}
             >

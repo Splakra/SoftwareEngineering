@@ -80,16 +80,16 @@ export default function Profile() {
                             profile.name
                         }
                         <button
-                            className={"control-base button-base profile__delete-button"}
+                            className={"control button profile__delete-button"}
                             onClick={() => handleDelete(profile.id)}>
                             Profil löschen
                         </button>
                         <button
-                            className={"control-base button-base profile__active-button"}
+                            className={"control button profile__active-button"}
                             onClick={() => {
-                            setActiveProfile(profile);
+                                setActiveProfile(profile);
 
-                        }}>
+                            }}>
                             Pläne anzeigen
                         </button>
                         <div>
@@ -117,8 +117,9 @@ export default function Profile() {
             }
 
             <button
-                className={"control-base button-base profile__add-button"}
-                onClick={handleClick}> Profil hinzufügen</button>
+                className={"control button profile__add-button"}
+                onClick={handleClick}> Profil hinzufügen
+            </button>
             <NavigationBar/>
         </div>
     )

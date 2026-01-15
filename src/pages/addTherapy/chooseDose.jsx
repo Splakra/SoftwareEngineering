@@ -1,4 +1,3 @@
-//back & quit auslagern für alle verfügbar
 import './chooseDose.css';
 import PageHeader from "../../components/PageHeader/PageHeader";
 import db from "../../database/DexieDatabase";
@@ -31,10 +30,10 @@ function ChooseDose() {
     }
 
     return (
-        <div className="choose-dose">
+        <div className="page">
             <PageHeader title="einnahme hinzufügen"/>
 
-            <h2 className="choose-dose__intro">
+            <h2 className="title">
                 In welcher Dosis soll das Medikament verabreicht werden?
             </h2>
 
@@ -45,7 +44,7 @@ function ChooseDose() {
 
                 <div className="choose-dose__input-line">
                     <input
-                        className="control-base choose-dose__input"
+                        className="control choose-dose__input"
                         id="doseInput"
                         type="number"
                         inputMode="numeric" // opens numeric keypad on phone
@@ -63,7 +62,7 @@ function ChooseDose() {
             </div>
 
             <button
-                className="control-base button-base choose-dose__next"
+                className="control button button-next"
                 disabled={dose == null || dose === ""}
                 onClick={nextPage}
             >

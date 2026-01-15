@@ -1,12 +1,9 @@
-//back & quit auslagern für alle verfügbar
-
 import './chooseProfile.css';
 import PageHeader from "../../components/PageHeader/PageHeader";
 import db from "../../database/DexieDatabase";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router";
 import {useGlobal} from "../globalContext";
-import ArrowIcon from "../../assets/triangle-down.svg";
 
 function ChooseProfile() {
     const navigate = useNavigate();
@@ -32,10 +29,10 @@ function ChooseProfile() {
     }
 
     return (
-        <div className="choose-profile">
+        <div className="page">
             <PageHeader title="einnahme hinzufügen"/>
 
-            <h2 className={"choose-profile__intro"}>
+            <h2 className={"title"}>
                 Für wen soll eine neue Einnahme angelegt werden?
             </h2>
 
@@ -44,7 +41,7 @@ function ChooseProfile() {
                     Profil auswählen
                     <div className="select-wrapper">
                         <select
-                            className={`control-base select-base ${
+                            className={`control select ${
                                 profile === "" || profile == null ? "is-placeholder" : ""
                             }`}
                             value={profile ?? ""}
@@ -59,13 +56,6 @@ function ChooseProfile() {
                                 </option>
                             ))}
                         </select>
-
-                        <img
-                            src={ArrowIcon}
-                            alt=""
-                            aria-hidden="true"
-                            className="select-arrow"
-                        />
                     </div>
                 </label>
             </div>
@@ -73,7 +63,7 @@ function ChooseProfile() {
             <div>
                 <span>oder</span>
                 <button
-                    className="control-base button-base choose-profile__new"
+                    className="control button choose-profile__new"
                     onClick={addProfile}
                 >
                     Profil hinzufügen
@@ -81,7 +71,7 @@ function ChooseProfile() {
             </div>
 
             <button
-                className="control-base button-base choose-profile__next"
+                className="control button button-next"
                 onClick={nextPage}
                 disabled={!profile}
             >
