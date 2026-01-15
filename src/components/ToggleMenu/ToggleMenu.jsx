@@ -1,36 +1,54 @@
 import {useState} from "react";
 import "./ToggleMenu.css";
-import OptionDots from '../../assets/option-dots.svg'
-import PawIcon from "../../assets/paw.svg";
+import ThreeDotsIcon from "../icons/ThreeDotsIcon";
 
-
-export default function ToggleMenu({items}) {
+export default function ToggleMenu({items, className = ""}) {
     const [open, setOpen] = useState(false);
-    const handleOptions = (e) => {
-        console.log("menu click");
-        e.stopPropagation();
-        setOpen(!open);
-    }
-    return (
-        <div className={"toggle-menu"}>
-            <button className={"toggle-menu__button"} onClick={() => setOpen(!open)}>
-                <img alt="" className={"toggle-menu__dots"} src={OptionDots}/>
 
+    const handleToggle = (e) => {
+        e.stopPropagation(); // Prevents clicking on the button from triggering other actions.
+        setOpen(!open);
+    };
+
+    const handleClose = (e) => {
+        e?.stopPropagation();
+        setOpen(false);
+    }
+
+    return (
+        <div className={`toggle-menu ${className}`}>
+            <button className="toggle-menu__button" onClick={handleToggle}>
+                <ThreeDotsIcon className="toggle-menu__dots"/>
             </button>
 
-
             {open && (
-                <div className={"toggle-menu__item"}>
-                    {items.map((item) => (
-                        <button className={"toggle-menu__item-button"} onClick={() => {
-                            item.onClick();
-                            setOpen(false);
-                        }}>
-                            {item.label}
-                        </button>
-                    ))}
-                </div>
+                <>
+                    {/* Dark background */}
+                    <div className="toggle-menu__backdrop" onClick={handleClose}></div>
+
+                    {/* Bottom Sheet */}
+                    <div className="toggle-menu__sheet" onClick={(e) => e.stopPropagation()}>
+                        <div className="toggle-menu__sheet-content">
+                            {items.map((item, i) => (
+                                <button
+                                    key={i}
+                                    className="toggle-menu__sheet-item"
+                                    onClick={() => {
+                                        item.onClick();
+                                        handleClose();
+                                    }}
+                                >
+                                    {item.label}
+                                </button>
+                            ))}
+
+                            <button className="toggle-menu__sheet-cancel" onClick={handleClose}>
+                                Abbrechen
+                            </button>
+                        </div>
+                    </div>
+                </>
             )}
         </div>
-    )
+    );
 }

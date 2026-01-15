@@ -5,8 +5,6 @@ import db from "../../database/DexieDatabase";
 import {NavigationBar} from "../../components/NavigationBar/NavigationBar";
 import PlusIcon from "../../assets/plus-icon.svg";
 import {useNavigate, useRevalidator} from "react-router";
-import ToggleMenu from "../../components/ToggleMenu/ToggleMenu";
-
 
 function chunkArray(array, size) {
     const result = [];
@@ -15,7 +13,6 @@ function chunkArray(array, size) {
     }
     return result;
 }
-
 
 export default function MedicinePage({meds = []}) {
     const shelves = chunkArray(meds, 2);
