@@ -28,12 +28,6 @@ export function GlobalProvider({children}) {
     const [medicationExpiresValue, setMedicationExpiresValue] = useState();
     const [medicationExpiresType, setMedicationExpiresType] = useState("days");
 
-    //profiles
-    const [profilePatients, setProfilePatients] = useState([])
-    const [profileMedications, setProfileMedications] = useState([])
-    const [profileReminders, setProfileReminders] = useState([])
-    const [profileActiveProfile, setProfileActiveProfile] = useState(null);
-
 
     function resetTherapy() {
         setTherapyProfile(null);
@@ -115,15 +109,6 @@ export function GlobalProvider({children}) {
             medicationId,
             setMedicationId,
 
-            profilePatients,
-            setProfilePatients,
-            profileMedications,
-            setProfileMedications,
-            profileReminders,
-            setProfileReminders,
-            profileActiveProfile,
-            setProfileActiveProfile,
-            
             setMedicationEdit,
             resetTherapy,
             resetMedication
