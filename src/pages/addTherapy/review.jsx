@@ -98,7 +98,7 @@ function Review() {
 
                         case"weekdays":
                             return <div>Wochentage: {therapyWeekday.map((day, index) =>
-                                <div>{day ? displayedWeekdays[index] : null}</div>)}</div>
+                                <div>{day ? displayedWeekdays[index] : null} </div>)} {therapyTime ?? therapyTime}</div>
 
                         case"interval":
                             return <div>Intervall: alle {therapyIntervalValue}{(() => {

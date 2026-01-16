@@ -115,9 +115,9 @@ export default function TaskItem({disableActions, patient, medication, time, sho
                     </div>
                     <div className={"task-item__details"}>
                         {doseText}
-                        <div className={"task-item__status"}>
+                        {!disableActions ?? <div className={"task-item__status"}>
                             {status}
-                        </div>
+                        </div>}
                     </div>
                 </div>
                 <div className="task-item__checkmark-wrapper">

@@ -6,7 +6,9 @@ import TaskItem from "../TaskItem/TaskItem";
 
 export default function ProfileItems({activeProfile}) {
     const [medications, setMedications] = useState([])
-    const [reminders, setReminders] = useState([])
+    const [dailyReminder, setDailyReminder] = useState([]);
+    const [intervalReminder, setIntervalReminder] = useState([]);
+    const [weekdayReminder, setWeekdayReminder] = useState([]);
     useEffect(() => {
         async function loadMedications() {
             const loadedMedications = await db.medications.toArray();
@@ -15,7 +17,11 @@ export default function ProfileItems({activeProfile}) {
 
         async function loadReminders() {
             const loadedReminders = await db.reminders.toArray();
-            setReminders(loadedReminders);
+            const filteredReminders = loadedReminders.filter(r => r.profileId === activeProfile.id)
+            console.log(filteredReminders)
+            setDailyReminder(filteredReminders.filter(r => r.rhythm === "daily"));
+            setIntervalReminder(filteredReminders.filter(r => r.rhythm === "interval"));
+            setWeekdayReminder(filteredReminders.filter(r => r.rhythm === "weekdays"));
         }
 
         loadMedications();
@@ -25,20 +31,34 @@ export default function ProfileItems({activeProfile}) {
 
     return (
         <div className={"profile-page__active-profile"}>
-            {reminders.filter(r => r.profileId === activeProfile.id).map(reminder => {
+            {[
+                ["Täglich", dailyReminder],
+                ["Intervall", intervalReminder],
+                ["Bestimmte Wochentage", weekdayReminder]
+            ].map(([reminderLabel, reminders]) => {
+                return (
+                    <div>
+                        <div>{reminderLabel}</div>
+                        <div>
+                            {reminders.filter(r => r.profileId === activeProfile.id).map(reminder => {
 
-                const medication = medications?.find(m => m.id === reminder.medicationId);
-                if (!activeProfile || !medication) return null;
+                                const medication = medications?.find(m => m.id === reminder.medicationId);
+                                if (!activeProfile || !medication) return null;
 
-                return <TaskItem
-                    disableActions={true}
-                    key={reminder.id}
-                    patient={activeProfile}
-                    medication={medication}
-                    time={reminder.time}
-                    dose={reminder.dose}
-                    showTime={true}/>
+                                return <TaskItem
+                                    disableActions={true}
+                                    key={reminder.id}
+                                    patient={activeProfile}
+                                    medication={medication}
+                                    time={reminder.time}
+                                    dose={reminder.dose}
+                                    showTime={true}/>
+                            })}
+                        </div>
+                    </div>
+                )
             })}
+
         </div>
     )
 }

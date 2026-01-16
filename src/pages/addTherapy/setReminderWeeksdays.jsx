@@ -32,6 +32,6 @@ export default function SetReminderWeekdays() {
             }
         </div>
         <div>Uhrzeit hinzufügen</div>
-        <input type="time" value={therapyTime} onChange={e => setTherapyTime(e.target.value, index)}/>
+        <input type="time" value={therapyTime} onChange={e => setTherapyTime(e.target.value)}/>
     </div>
 }
