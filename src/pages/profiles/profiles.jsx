@@ -53,7 +53,7 @@ export default function Profile() {
     };
 
     return (
-        <div className={"therapyProfile"}>
+        <div className={""}>
             <div className={"profile-page__profiles"}>
                 {
                     patients.map(therapyProfile => {
