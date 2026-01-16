@@ -3,11 +3,15 @@ import "./Profiles.css"
 import db from "../../database/DexieDatabase";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router";
-import TaskItem from "../../components/TaskItem/TaskItem";
 import {deleteEntries} from "./delete";
 import {NavigationBar} from "../../components/NavigationBar/NavigationBar";
 import {useGlobal} from "../globalContext";
 import ProfileItems from "../../components/ProfileItems/ProfileItems";
+import ToggleMenu from "../../components/ToggleMenu/ToggleMenu";
+
+import TrashIcon from "../../assets/trash.svg"
+import PlusIconWhite from "../../assets/plus-icon-white.svg"
+import PencilIcon from "../../assets/pencil.svg"
 
 
 export default function Profile() {
@@ -38,6 +42,10 @@ export default function Profile() {
         return null;
     }
 
+    function editProfile() {
+        return null;
+    }
+
     const handleDeleteEntries = async () => {//schnelles entfernen von medikamenten
         const keepIds = [1, 2]; // die 2 IDs, die bleiben sollen
         await deleteEntries(keepIds);
@@ -56,11 +64,17 @@ export default function Profile() {
                             {
                                 therapyProfile.name
                             }
-                            <button
-                                className={"control button profile__delete-button"}
-                                onClick={() => handleDelete(therapyProfile.id)}>
-                                Profil löschen
-                            </button>
+                            <ToggleMenu items={[
+                                {
+                                    label: "Profil löschen",
+                                    icon: TrashIcon,
+                                    onClick: () => handleDelete(therapyProfile.id)
+                                }, {
+                                    label: "Profil bearbeiten",
+                                    icon: PencilIcon,
+                                    onClick: () => editProfile()
+                                }
+                            ]}/>
                         </div>
                     })
                 }

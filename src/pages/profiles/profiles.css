@@ -7,3 +7,7 @@
     scrollbar-width: none; /* Firefox, Safari 18.2+, Chromium 121+ */
 
 }
+
+.therapyProfile {
+    position: relative;
+}
