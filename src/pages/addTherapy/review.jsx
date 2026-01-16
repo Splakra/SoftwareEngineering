@@ -57,10 +57,10 @@ function Review() {
 
             </div>
             <div>
-                <div>Profil: {JSON.parse(therapyProfile).name}</div>
-                <div>Medikament: {JSON.parse(therapyMedication).name}</div>
+                <div>Profil: {JSON.parse(therapyProfile)?.name}</div>
+                <div>Medikament: {JSON.parse(therapyMedication)?.name}</div>
                 <div>Dosis: {therapyDose} {(() => {
-                    switch (JSON.parse(therapyMedication).type) {
+                    switch (JSON.parse(therapyMedication)?.type) {
                         case"pills":
                             return "Tabletten"
 

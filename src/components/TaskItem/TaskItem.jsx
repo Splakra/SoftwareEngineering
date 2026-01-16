@@ -7,7 +7,7 @@ import "./TaskItem.css";
 import ToggleMenu from "../ToggleMenu/ToggleMenu";
 import db from "../../database/DexieDatabase";
 
-export default function TaskItem({patient, medication, time, showTime, dose, id}) {
+export default function TaskItem({disableActions, patient, medication, time, showTime, dose, id}) {
     const [checked, setChecked] = useState(false);
     const [checkedTime, setCheckedTime] = useState(null);
 
@@ -32,7 +32,7 @@ export default function TaskItem({patient, medication, time, showTime, dose, id}
 
     // check off and reduce inventory
     const handleChecked = async () => {
-        if (checked) return;
+        if (checked || disableActions) return;
 
         const now = new Date();
         const timeString = now.toLocaleTimeString(navigator.language, {hour: "2-digit", minute: "2-digit"});
