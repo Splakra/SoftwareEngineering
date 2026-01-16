@@ -13,7 +13,6 @@ export default function manualIntake() {
         async function loadMedication() {
             const loadedMedication = await db.medications.where("id").equals(Number.parseInt(id)).first();
             setMedication(loadedMedication);
-            console.log(loadedMedication);
         }
 
         loadMedication();

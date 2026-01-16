@@ -25,7 +25,6 @@ function ChooseProfile() {
     }
 
     function nextPage() {
-        console.log(therapyProfile);
         navigate("/addTherapy/medication")
     }
 

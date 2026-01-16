@@ -27,7 +27,6 @@ export default function ProfileItems({activeProfile}) {
         <div className={"profile-page__active-profile"}>
             {reminders.filter(r => r.profileId === activeProfile.id).map(reminder => {
 
-                console.log(medications?.find(m => m.id === reminder.medicationId));
                 const medication = medications?.find(m => m.id === reminder.medicationId);
                 if (!activeProfile || !medication) return null;
 
