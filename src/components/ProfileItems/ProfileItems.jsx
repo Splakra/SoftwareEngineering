@@ -18,7 +18,6 @@ export default function ProfileItems({activeProfile}) {
         async function loadReminders() {
             const loadedReminders = await db.reminders.toArray();
             const filteredReminders = loadedReminders.filter(r => r.profileId === activeProfile.id)
-            console.log(filteredReminders)
             setDailyReminder(filteredReminders.filter(r => r.rhythm === "daily"));
             setIntervalReminder(filteredReminders.filter(r => r.rhythm === "interval"));
             setWeekdayReminder(filteredReminders.filter(r => r.rhythm === "weekdays"));
