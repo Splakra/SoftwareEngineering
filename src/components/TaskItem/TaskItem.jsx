@@ -1,6 +1,8 @@
 import {useEffect, useState} from "react";
 import PawIcon from "../../assets/paw.svg";
 import Checkmark from "../../assets/checkmark.svg";
+import TrashIcon from "../../assets/trash.svg";
+import ReverseIcon from "../../assets/reverse.svg";
 import "./TaskItem.css";
 import ToggleMenu from "../ToggleMenu/ToggleMenu";
 import db from "../../database/DexieDatabase";
@@ -82,12 +84,14 @@ export default function TaskItem({patient, medication, time, showTime, dose, id}
     const items = [
         {
             label: "Diese und alle zukünftigen Einnahmen löschen",
+            icon: TrashIcon,
             onClick: () => deleteReminders()
         }
     ]
     if (checked) {
         items.unshift({
             label: "Abhaken zurücksetzen",
+            icon: ReverseIcon,
             onClick: () => resetChecked()
         })
     }
@@ -99,7 +103,8 @@ export default function TaskItem({patient, medication, time, showTime, dose, id}
                 {/* time will only be shown if showTime is true */}
             </div>
             <div onClick={handleChecked} className={"task-item__button"}>
-                <ToggleMenu {...{items}}/>
+                <ToggleMenu className="task-item-toggle"
+                            {...{items}}/>
                 <div className={"task-item__infos"}>
                     <div className={"task-item__profile"}>
                         <img alt="" className={"task-item__icon"} src={PawIcon}/>
