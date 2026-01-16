@@ -29,10 +29,9 @@ export function GlobalProvider({children}) {
     const [medicationExpiresType, setMedicationExpiresType] = useState("days");
 
     //profiles
-    const [profilePatients, setProfilePatients] = useState([])
-    const [profileMedications, setProfileMedications] = useState([])
-    const [profileReminders, setProfileReminders] = useState([])
-    const [profileActiveProfile, setProfileActiveProfile] = useState(null);
+    const [profileId, setProfileId] = useState();
+    const [profileName, setProfileName] = useState();
+    const [profileReminders, setProfileReminders] = useState();
 
 
     function resetTherapy() {
@@ -69,6 +68,17 @@ export function GlobalProvider({children}) {
         setMedicationExpiresType("days");
         setMedicationId(null);
     }
+
+    function setProfileEdit(profile) {
+        setProfileId(profile.id);
+        setProfileName(profile.name);
+    }
+
+
+    function resetProfile() {
+        setProfileName(null);
+    }
+
 
     return (
         <GlobalContext.Provider value={{
@@ -115,18 +125,18 @@ export function GlobalProvider({children}) {
             medicationId,
             setMedicationId,
 
-            profilePatients,
-            setProfilePatients,
-            profileMedications,
-            setProfileMedications,
+            profileId,
+            setProfileId,
+            profileName,
+            setProfileName,
             profileReminders,
             setProfileReminders,
-            profileActiveProfile,
-            setProfileActiveProfile,
-            
+
             setMedicationEdit,
+            setProfileEdit,
             resetTherapy,
-            resetMedication
+            resetMedication,
+            resetProfile
         }}>
             {
                 children
