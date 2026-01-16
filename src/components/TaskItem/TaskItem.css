@@ -17,6 +17,14 @@
     opacity: 0.4;
 }
 
+.task-item--checked .task-item-toggle .toggle-menu__button {
+    background-color: white;
+}
+
+.task-item--checked .task-item-toggle .toggle-menu__dots {
+    color: var(--tangerine-dream);
+}
+
 .task-item__button {
     all: unset; /* removes default button styles */
     position: relative; /* allows absolutely positioned checkmark inside */

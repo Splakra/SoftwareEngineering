@@ -1,12 +1,14 @@
 import PillIcon from "../../assets/pill.svg"
 import DropIcon from "../../assets/drop.svg"
 import BottleIcon from "../../assets/bottle.svg"
+import TrashIcon from "../../assets/trash.svg"
+import PlusIconWhite from "../../assets/plus-icon-white.svg"
+import PencilIcon from "../../assets/pencil.svg"
 import "./MedicineItem.css";
 import db from "../../database/DexieDatabase";
 import ToggleMenu from "../ToggleMenu/ToggleMenu";
 import {useNavigate, useRevalidator} from "react-router";
 import {useGlobal} from "../../pages/globalContext";
-
 
 export default function MedicineItem({
                                          id,
@@ -59,14 +61,17 @@ export default function MedicineItem({
                 </div>
                 <ToggleMenu className="medicine-toggle"
                             items={[{
-                                label: "Medikament mit zugehörigen Einnahmen löschen",
-                                onClick: () => deleteMedication()
+                                label: "Einzelne Einnahme hinzufügen",
+                                icon: PlusIconWhite,
+                                onClick: () => addIntake()
                             }, {
                                 label: "Medikament bearbeiten",
+                                icon: PencilIcon,
                                 onClick: () => editMedication()
                             }, {
-                                label: "Einzelne Einnahme hinzufügen",
-                                onClick: () => addIntake()
+                                label: "Medikament löschen", // Achtung: Löscht alle zugehörigen Erinnerungen!
+                                icon: TrashIcon,
+                                onClick: () => deleteMedication()
                             }]}/>
             </div>
             <div className={"medicine-item__details"}>

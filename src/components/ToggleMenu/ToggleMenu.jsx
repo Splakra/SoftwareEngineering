@@ -6,7 +6,7 @@ export default function ToggleMenu({items, className = ""}) {
     const [open, setOpen] = useState(false);
 
     const handleToggle = (e) => {
-        e.stopPropagation(); // Prevents clicking on the button from triggering other actions.
+        e.stopPropagation(); // prevents clicking on the button from triggering other actions.
         setOpen(!open);
     };
 
@@ -29,6 +29,9 @@ export default function ToggleMenu({items, className = ""}) {
                     {/* Bottom Sheet */}
                     <div className="toggle-menu__sheet" onClick={(e) => e.stopPropagation()}>
                         <div className="toggle-menu__sheet-content">
+                            <div className="toggle-menu__title">
+                                Optionen
+                            </div>
                             {items.map((item, i) => (
                                 <button
                                     key={i}
@@ -38,11 +41,20 @@ export default function ToggleMenu({items, className = ""}) {
                                         handleClose();
                                     }}
                                 >
+                                    {item.icon && (
+                                        <img
+                                            src={item.icon}
+                                            alt=""
+                                            className="toggle-menu__sheet-item-icon"
+                                        />
+                                    )}
+                                    <span className="toggle-menu__sheet-item-label">
                                     {item.label}
+                                    </span>
                                 </button>
                             ))}
 
-                            <button className="toggle-menu__sheet-cancel" onClick={handleClose}>
+                            <button className="control button toggle-menu__sheet-cancel" onClick={handleClose}>
                                 Abbrechen
                             </button>
                         </div>
