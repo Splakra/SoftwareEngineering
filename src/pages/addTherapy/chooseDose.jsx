@@ -8,16 +8,16 @@ import {useGlobal} from "../globalContext";
 
 function ChooseDose() {
     const navigate = useNavigate();
-    const {medication, dose, setDose} = useGlobal();
+    const {therapyMedication, therapyDose, setTherapyDose} = useGlobal();
 
     function nextPage() {
         navigate("/addTherapy/reminder")
     }
 
     function getDoseUnit() {
-        if (!medication) return "";
+        if (!therapyMedication) return "";
 
-        switch (JSON.parse(medication).type) {
+        switch (JSON.parse(therapyMedication).type) {
             case "pills":
                 return "Tabletten";
             case "fluid":
@@ -51,8 +51,8 @@ function ChooseDose() {
                         min="0"
                         step="any"
                         placeholder="666"
-                        value={dose ?? ""}
-                        onChange={e => setDose(e.target.value)}
+                        value={therapyDose ?? ""}
+                        onChange={e => setTherapyDose(e.target.value)}
                     />
                     <span
                         className="choose-dose__unit">
@@ -63,7 +63,7 @@ function ChooseDose() {
 
             <button
                 className="control button button-next"
-                disabled={dose == null || dose === ""}
+                disabled={therapyDose == null || therapyDose === ""}
                 onClick={nextPage}
             >
                 Weiter

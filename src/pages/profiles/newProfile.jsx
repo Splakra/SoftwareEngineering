@@ -7,8 +7,7 @@ import {useGlobal} from "../globalContext";
 
 export default function NewProfile() {
     const navigate = useNavigate();
-    const {profile, setProfile, routeBackToChooseProfile, setRouteBackToChooseProfile} = useGlobal();
-
+    const {routeBackToChooseProfile, setRouteBackToChooseProfile} = useGlobal();
 
     function handleSubmit(input) {
         input.preventDefault();

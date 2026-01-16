@@ -1,15 +1,15 @@
 import {useGlobal} from "../globalContext";
 
 export default function SetReminderInterval() {
-    const {intervalType, setIntervalType} = useGlobal();
-    const {intervalValue, setIntervalValue} = useGlobal();
+    const {therapyIntervalType, setTherapyIntervalType} = useGlobal();
+    const {therapyIntervalValue, setTherapyIntervalValue} = useGlobal();
 
     return <div>
         <div>
             Alle
         </div>
-        <input type="number" value={intervalValue} onChange={e => setIntervalValue(e.target.value)}/>
-        <select value={intervalType} onChange={e => setIntervalType(e.target.value)}>
+        <input type="number" value={therapyIntervalValue} onChange={e => setTherapyIntervalValue(e.target.value)}/>
+        <select value={therapyIntervalType} onChange={e => setTherapyIntervalType(e.target.value)}>
             <option value={"hours"}>
                 Stunden
             </option>

@@ -17,23 +17,33 @@ function Review() {
     const displayedWeekdays = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
 
     const {
-        profile, medication, dose, rhythm, startDate, endDate, time, weekday, intervalType, intervalValue, resetTherapy
+        therapyProfile,
+        therapyMedication,
+        therapyDose,
+        therapyRhythm,
+        therapyStartDate,
+        therapyEndDate,
+        therapyTime,
+        therapyWeekday,
+        therapyIntervalType,
+        therapyIntervalValue,
+        resetTherapy
     } = useGlobal();
 
 
     async function nextPage() {
 
         await db.reminders.add({
-            medicationId: JSON.parse(medication).id,
-            profileId: JSON.parse(profile).id,
-            rhythm: rhythm,
-            startDate: startDate,
-            endDate: endDate,
-            time: time,
-            dose: dose,
-            weekdays: weekday,
-            intervalType: intervalType,
-            intervalValue: intervalValue
+            medicationId: JSON.parse(therapyMedication).id,
+            profileId: JSON.parse(therapyProfile).id,
+            rhythm: therapyRhythm,
+            startDate: therapyStartDate,
+            endDate: therapyEndDate,
+            time: therapyTime,
+            dose: therapyDose,
+            weekdays: therapyWeekday,
+            intervalType: therapyIntervalType,
+            intervalValue: therapyIntervalValue
         })
         resetTherapy();
         navigate("/")
@@ -47,10 +57,10 @@ function Review() {
 
             </div>
             <div>
-                <div>Profil: {JSON.parse(profile).name}</div>
-                <div>Medikament: {JSON.parse(medication).name}</div>
-                <div>Dosis: {dose} {(() => {
-                    switch (JSON.parse(medication).type) {
+                <div>Profil: {JSON.parse(therapyProfile).name}</div>
+                <div>Medikament: {JSON.parse(therapyMedication).name}</div>
+                <div>Dosis: {therapyDose} {(() => {
+                    switch (JSON.parse(therapyMedication).type) {
                         case"pills":
                             return "Tabletten"
 
@@ -65,10 +75,10 @@ function Review() {
                     }
                 })()
                 } </div>
-                <div>Startdatum: {formatDate(startDate)}</div>
-                <div>Enddatum: {endDate ? formatDate(endDate) : "kein Enddatum festgelegt"}</div>
+                <div>Startdatum: {formatDate(therapyStartDate)}</div>
+                <div>Enddatum: {therapyEndDate ? formatDate(therapyEndDate) : "kein Enddatum festgelegt"}</div>
                 <div>Rhytmus: {(() => {
-                    switch (rhythm) {
+                    switch (therapyRhythm) {
                         case"daily":
                             return <span>Jeden Tag</span>
 
@@ -82,17 +92,17 @@ function Review() {
                 } </div>
 
                 <div>{(() => {
-                    switch (rhythm) {
+                    switch (therapyRhythm) {
                         case"daily":
-                            return <div>Uhrzeit: {time.map(value => <div>{value} Uhr</div>)}</div>
+                            return <div>Uhrzeit: {therapyTime.map(value => <div>{value} Uhr</div>)}</div>
 
                         case"weekdays":
-                            return <div>Wochentage: {weekday.map((day, index) =>
+                            return <div>Wochentage: {therapyWeekday.map((day, index) =>
                                 <div>{day ? displayedWeekdays[index] : null}</div>)}</div>
 
                         case"interval":
-                            return <div>Intervall: alle {intervalValue}{(() => {
-                                switch (intervalType) {
+                            return <div>Intervall: alle {therapyIntervalValue}{(() => {
+                                switch (therapyIntervalType) {
                                     case"hours":
                                         return <span> Stunden</span>
 

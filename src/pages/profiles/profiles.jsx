@@ -6,55 +6,60 @@ import {useNavigate} from "react-router";
 import TaskItem from "../../components/TaskItem/TaskItem";
 import {deleteEntries} from "./delete";
 import {NavigationBar} from "../../components/NavigationBar/NavigationBar";
+import {useGlobal} from "../globalContext";
 
 
 export default function Profile() {
     const navigate = useNavigate();
-
-    //dummy medication
+    const {
+        profilePatients,
+        setProfilePatients,
+        profileMedications,
+        setProfileMedications,
+        profileReminders,
+        setProfileReminders,
+        profileActiveProfile,
+        setProfileActiveProfile
+    } = useGlobal();
 
 
     function handleClick() {
         navigate("/profile/add");
     }
 
-    const [patients, setPatients] = useState([])
     useEffect(() => {
         async function loadPatients() {
             const loadedPatients = await db.profiles.toArray();
-            setPatients(loadedPatients);
+            setProfilePatients(loadedPatients);
         }
 
         loadPatients();
     }, [])
 
-    const [medications, setMedications] = useState([])
     useEffect(() => {
         async function loadMedications() {
             const loadedMedications = await db.medications.toArray();
-            setMedications(loadedMedications);
+            setProfileMedications(loadedMedications);
         }
 
         loadMedications();
     }, [])
 
-    const [reminders, setReminders] = useState([])
     useEffect(() => {
         async function loadReminders() {
             const loadedReminders = await db.reminders.toArray();
-            setReminders(loadedReminders);
+            setProfileReminders(loadedReminders);
         }
 
         loadReminders();
     }, [])
 
-    const [activeProfile, setActiveProfile] = useState(null);
 
     useEffect(() => {
-        if (!activeProfile && patients.length > 0) {
-            setActiveProfile(patients[0]);
+        if (!profileActiveProfile && profilePatients.length > 0) {
+            setProfileActiveProfile(profilePatients[0]);
         }
-    }, [patients]);
+    }, [profilePatients]);
 
     function handleDelete(id) {
         db.reminders.where("profileId").equals(id).delete();
@@ -72,36 +77,36 @@ export default function Profile() {
 
 
     return (
-        <div className={"profile"}>
+        <div className={"therapyProfile"}>
             {
-                patients.map(profile => {
-                    return <div className="profile" key={profile.id}>
+                profilePatients.map(therapyProfile => {
+                    return <div className="therapyProfile" key={therapyProfile.id}>
                         <img alt="" className={"task-item__person"} src={PersonIcon}/>
                         {
-                            profile.name
+                            therapyProfile.name
                         }
                         <button
                             className={"control button profile__delete-button"}
-                            onClick={() => handleDelete(profile.id)}>
+                            onClick={() => handleDelete(therapyProfile.id)}>
                             Profil löschen
                         </button>
                         <button
                             className={"control button profile__active-button"}
                             onClick={() => {
-                                setActiveProfile(profile);
+                                setProfileActiveProfile(therapyProfile);
 
                             }}>
                             Pläne anzeigen
                         </button>
                         <div>
-                            {activeProfile?.id === profile.id &&
-                                reminders
-                                    .filter(r => r.profileId === activeProfile.id)
+                            {profileActiveProfile?.id === therapyProfile.id &&
+                                profileReminders
+                                    .filter(r => r.profileId === profileActiveProfile.id)
                                     .map(reminder => {
 
-                                        const patient = patients.find(p => p.id === reminder.profileId);
-                                        console.log(medications?.find(m => m.id === reminder.medicationId));
-                                        const medication = medications?.find(m => m.id === reminder.medicationId);
+                                        const patient = profilePatients.find(p => p.id === reminder.profileId);
+                                        console.log(profileMedications?.find(m => m.id === reminder.medicationId));
+                                        const medication = profileMedications?.find(m => m.id === reminder.medicationId);
                                         if (!patient || !medication) return null;
 
                                         return <TaskItem

@@ -2,20 +2,27 @@ import {useState} from "react";
 import {useGlobal} from "../globalContext";
 
 export default function SetReminderDaily() {
-    const {time, setTime, startDate, setStartDate, endDate, setEndDate,} = useGlobal();
+    const {
+        therapyTime,
+        setTherapyTime,
+        therapyStartDate,
+        setTherapyStartDate,
+        therapyEndDate,
+        setTherapyEndDate,
+    } = useGlobal();
 
     function addTime() {
-        setTime([...time, null]);
+        setTherapyTime([...therapyTime, null]);
     }
 
     function removeTime(index) {
-        setTime(time.toSpliced(index, 1));
+        setTherapyTime(therapyTime.toSpliced(index, 1));
     }
 
     function updateTime(value, index) {
-        const updated = [...time];
+        const updated = [...therapyTime];
         updated[index] = value;
-        setTime(updated);
+        setTherapyTime(updated);
     }
 
     return <div>
@@ -23,7 +30,7 @@ export default function SetReminderDaily() {
         <div>
             <div>Uhrzeit hinzufügen</div>
             {
-                time.map((t, index) => {
+                therapyTime.map((t, index) => {
                     return (
                         <div>
                             <input type="time" value={t} onChange={e => updateTime(e.target.value, index)}/>

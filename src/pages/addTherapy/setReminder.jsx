@@ -9,10 +9,10 @@ import {useGlobal} from "../globalContext";
 function SetReminder() {
     const navigate = useNavigate();
     const {
-        rhythm, setRhythm,
-        time, intervalValue,
-        weekday, startDate, setStartDate,
-        endDate, setEndDate
+        therapyRhythm, setTherapyRhythm,
+        therapyTime, therapyIntervalValue,
+        therapyWeekday, therapyStartDate, setTherapyStartDate,
+        therapyEndDate, setTherapyEndDate
     } = useGlobal();
 
     function nextPage() {
@@ -20,20 +20,20 @@ function SetReminder() {
     }
 
     const isButtonDisabled = () => {
-        switch (rhythm) {
+        switch (therapyRhythm) {
             case "daily":
-                return !time.every(t => t);
+                return !therapyTime.every(t => t);
             case "weekdays":
-                return !weekday.some(v => v);
+                return !therapyWeekday.some(v => v);
             case "interval":
-                return !intervalValue;
+                return !therapyIntervalValue;
             default:
                 return true;
         }
     };
 
     const renderRhythm = () => {
-        switch (rhythm) {
+        switch (therapyRhythm) {
             case "daily":
                 return <SetReminderDaily/>;
             case "weekdays":
@@ -59,11 +59,11 @@ function SetReminder() {
                     <div className="select-wrapper">
                         <select
                             className={`control select ${
-                                rhythm === "" || rhythm == null ? "is-placeholder" : ""
+                                therapyRhythm === "" || therapyRhythm == null ? "is-placeholder" : ""
                             }`}
                             id="rhythmSelect"
-                            value={rhythm ?? ""}
-                            onChange={e => setRhythm(e.target.value)}
+                            value={therapyRhythm ?? ""}
+                            onChange={e => setTherapyRhythm(e.target.value)}
                         >
                             <option value="" disabled hidden>
                                 Glitzerheilstaub
@@ -81,8 +81,8 @@ function SetReminder() {
                         <input
                             type="date"
                             className="control select date"
-                            value={startDate}
-                            onChange={e => setStartDate(e.target.value)}
+                            value={therapyStartDate}
+                            onChange={e => setTherapyStartDate(e.target.value)}
                         />
                     </label>
 
@@ -91,8 +91,8 @@ function SetReminder() {
                         <input
                             type="date"
                             className="control select date"
-                            value={endDate ?? ""}
-                            onChange={e => setEndDate(e.target.value)}
+                            value={therapyEndDate ?? ""}
+                            onChange={e => setTherapyEndDate(e.target.value)}
                         />
                     </label>
                 </div>

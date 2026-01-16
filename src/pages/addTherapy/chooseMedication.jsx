@@ -8,7 +8,7 @@ import {add} from "dexie";
 
 function ChooseMedication() {
     const navigate = useNavigate();
-    const {medication, setMedication, setRouteBackToChooseMedication} = useGlobal();
+    const {therapyMedication, setTherapyMedication, setRouteBackToChooseMedication} = useGlobal();
 
     function nextPage() {
         navigate("/addTherapy/dose")
@@ -45,10 +45,10 @@ function ChooseMedication() {
                     <div className="select-wrapper">
                         <select
                             className={`control select ${
-                                medication === "" || medication == null ? "is-placeholder" : ""
+                                therapyMedication === "" || therapyMedication == null ? "is-placeholder" : ""
                             }`}
-                            value={medication ?? ""}
-                            onChange={e => setMedication(e.target.value)}
+                            value={therapyMedication ?? ""}
+                            onChange={e => setTherapyMedication(e.target.value)}
                         >
                             <option value="" disabled hidden>
                                 Glitzerheilstaub
@@ -75,7 +75,7 @@ function ChooseMedication() {
             <button
                 className="control button button-next"
                 onClick={nextPage}
-                disabled={!medication}
+                disabled={!therapyMedication}
             >
                 Weiter
             </button>

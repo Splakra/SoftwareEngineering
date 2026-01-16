@@ -4,16 +4,16 @@ const GlobalContext = createContext({});
 
 export function GlobalProvider({children}) {
     //addTherapy
-    const [profile, setProfile] = useState();
-    const [medication, setMedication] = useState();
-    const [dose, setDose] = useState();
-    const [rhythm, setRhythm] = useState("daily");
-    const [startDate, setStartDate] = useState(new Date().toISOString().split("T")[0]);
-    const [endDate, setEndDate] = useState();
-    const [time, setTime] = useState([null]);
-    const [weekday, setWeekday] = useState([false, false, false, false, false, false, false]);
-    const [intervalType, setIntervalType] = useState("hours");
-    const [intervalValue, setIntervalValue] = useState();
+    const [therapyProfile, setTherapyProfile] = useState();
+    const [therapyMedication, setTherapyMedication] = useState();
+    const [therapyDose, setTherapyDose] = useState();
+    const [therapyRhythm, setTherapyRhythm] = useState("daily");
+    const [therapyStartDate, setTherapyStartDate] = useState(new Date().toISOString().split("T")[0]);
+    const [therapyEndDate, setTherapyEndDate] = useState();
+    const [therapyTime, setTherapyTime] = useState([null]);
+    const [therapyWeekday, setTherapyWeekday] = useState([false, false, false, false, false, false, false]);
+    const [therapyIntervalType, setTherapyIntervalType] = useState("hours");
+    const [therapyIntervalValue, setTherapyIntervalValue] = useState();
 
     const [routeBackToChooseMedication, setRouteBackToChooseMedication] = useState(false);
     const [routeBackToChooseProfile, setRouteBackToChooseProfile] = useState(false)
@@ -28,18 +28,24 @@ export function GlobalProvider({children}) {
     const [medicationExpiresValue, setMedicationExpiresValue] = useState();
     const [medicationExpiresType, setMedicationExpiresType] = useState("days");
 
+    //profiles
+    const [profilePatients, setProfilePatients] = useState([])
+    const [profileMedications, setProfileMedications] = useState([])
+    const [profileReminders, setProfileReminders] = useState([])
+    const [profileActiveProfile, setProfileActiveProfile] = useState(null);
+
 
     function resetTherapy() {
-        setProfile(null);
-        setMedication(null);
-        setDose(null);
-        setRhythm("daily");
-        setStartDate(new Date().toISOString().split("T")[0])
-        setEndDate(null);
-        setTime([null]);
-        setWeekday([false, false, false, false, false, false, false]);
-        setIntervalType("hours");
-        setIntervalValue(null);
+        setTherapyProfile(null);
+        setTherapyMedication(null);
+        setTherapyDose(null);
+        setTherapyRhythm("daily");
+        setTherapyStartDate(new Date().toISOString().split("T")[0])
+        setTherapyEndDate(null);
+        setTherapyTime([null]);
+        setTherapyWeekday([false, false, false, false, false, false, false]);
+        setTherapyIntervalType("hours");
+        setTherapyIntervalValue(null);
     }
 
     function setMedicationEdit(medication) {
@@ -66,26 +72,26 @@ export function GlobalProvider({children}) {
 
     return (
         <GlobalContext.Provider value={{
-            profile,
-            setProfile,
-            medication,
-            setMedication,
-            dose,
-            setDose,
-            rhythm,
-            setRhythm,
-            startDate,
-            setStartDate,
-            endDate,
-            setEndDate,
-            time,
-            setTime,
-            weekday,
-            setWeekday,
-            intervalType,
-            setIntervalType,
-            intervalValue,
-            setIntervalValue,
+            therapyProfile,
+            setTherapyProfile,
+            therapyMedication,
+            setTherapyMedication,
+            therapyDose,
+            setTherapyDose,
+            therapyRhythm,
+            setTherapyRhythm,
+            therapyStartDate,
+            setTherapyStartDate,
+            therapyEndDate,
+            setTherapyEndDate,
+            therapyTime,
+            setTherapyTime,
+            therapyWeekday,
+            setTherapyWeekday,
+            therapyIntervalType,
+            setTherapyIntervalType,
+            therapyIntervalValue,
+            setTherapyIntervalValue,
 
             routeBackToChooseMedication,
             setRouteBackToChooseMedication,
@@ -109,6 +115,15 @@ export function GlobalProvider({children}) {
             medicationId,
             setMedicationId,
 
+            profilePatients,
+            setProfilePatients,
+            profileMedications,
+            setProfileMedications,
+            profileReminders,
+            setProfileReminders,
+            profileActiveProfile,
+            setProfileActiveProfile,
+            
             setMedicationEdit,
             resetTherapy,
             resetMedication

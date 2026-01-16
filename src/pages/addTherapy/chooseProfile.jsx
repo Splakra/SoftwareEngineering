@@ -7,7 +7,7 @@ import {useGlobal} from "../globalContext";
 
 function ChooseProfile() {
     const navigate = useNavigate();
-    const {profile, setProfile, setRouteBackToChooseProfile} = useGlobal();
+    const {therapyProfile, setTherapyProfile, setRouteBackToChooseProfile} = useGlobal();
     const [patients, setPatients] = useState([])
 
     useEffect(() => {
@@ -25,6 +25,7 @@ function ChooseProfile() {
     }
 
     function nextPage() {
+        console.log(therapyProfile);
         navigate("/addTherapy/medication")
     }
 
@@ -42,10 +43,10 @@ function ChooseProfile() {
                     <div className="select-wrapper">
                         <select
                             className={`control select ${
-                                profile === "" || profile == null ? "is-placeholder" : ""
+                                therapyProfile === "" || therapyProfile == null ? "is-placeholder" : ""
                             }`}
-                            value={profile ?? ""}
-                            onChange={e => setProfile(e.target.value)}
+                            value={therapyProfile ?? ""}
+                            onChange={e => setTherapyProfile(e.target.value)}
                         >
                             <option value="" disabled hidden>
                                 Schnurzipups
@@ -73,7 +74,7 @@ function ChooseProfile() {
             <button
                 className="control button button-next"
                 onClick={nextPage}
-                disabled={!profile}
+                disabled={!therapyProfile}
             >
                 Weiter
             </button>
