@@ -118,6 +118,7 @@ function Review() {
                         {therapyWeekday.map((day, index) =>
                             day ? <div key={index}>{displayedWeekdays[index]}</div> : null
                         )}
+                        {therapyTime ? <div>Uhrzeit: {therapyTime} Uhr</div> : null}
                     </div>
                 )}
 
