@@ -16,7 +16,7 @@ export default function SetReminderDaily() {
     }
 
     function removeTime(index) {
-        if (time.length === 1) return; // last time must not be deleted
+        if (therapyTime.length === 1) return; // last time must not be deleted
         setTherapyTime(therapyTime.toSpliced(index, 1));
     }
 

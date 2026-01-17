@@ -22,8 +22,8 @@ function SetReminder() {
     const isButtonDisabled = () => {
         switch (therapyRhythm) {
             case "daily":
-                // return time.length === 0 || therapyTime.some(t => t === "");
-                return !therapyTime.every(t => t);
+                return therapyTime.length === 0 || therapyTime.some(t => t === "");
+            // return !therapyTime.every(t => t);
             case "weekdays":
                 return !therapyWeekday.some(v => v);
             case "interval":
