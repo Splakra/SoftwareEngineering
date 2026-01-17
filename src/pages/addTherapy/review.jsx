@@ -1,4 +1,3 @@
-//back & quit auslagern für alle verfügbar
 import './review.css';
 import PageHeader from "../../components/PageHeader/PageHeader";
 import db from "../../database/DexieDatabase";
@@ -30,9 +29,44 @@ function Review() {
         resetTherapy
     } = useGlobal();
 
+    const parsedProfile = therapyProfile ? JSON.parse(therapyProfile) : null;
+    const parsedMedication = therapyMedication ? JSON.parse(therapyMedication) : null;
+
+    const rhythmLabel = {
+        daily: "Jeden Tag",
+        weekdays: "Bestimmte Wochentage",
+        interval: "Intervall"
+    }[therapyRhythm];
+
+    function getDoseUnit(type) {
+        switch (type) {
+            case "pills":
+                return "Tabletten";
+            case "fluid":
+                return "ml";
+            case "drops":
+                return "Tropfen";
+            default:
+                return "";
+        }
+    }
+
+    function getIntervalUnit(type) {
+        switch (type) {
+            case "hours":
+                return "Stunden";
+            case "days":
+                return "Tage";
+            case "weeks":
+                return "Wochen";
+            case "months":
+                return "Monate";
+            default:
+                return "";
+        }
+    }
 
     async function nextPage() {
-
         await db.reminders.add({
             medicationId: JSON.parse(therapyMedication).id,
             profileId: JSON.parse(therapyProfile).id,
@@ -50,81 +84,54 @@ function Review() {
     }
 
     return (
-        <div>
+        <div className={"page"}>
             <PageHeader title="Einnahme hinzufügen"/>
-            <div className={"choose-dose_heading"}>
-                Sind die eingaben korrekt?
 
-            </div>
+            <h2 className="title">
+                Sind alle Eingaben korrekt?
+            </h2>
+
             <div>
-                <div>Profil: {JSON.parse(therapyProfile)?.name}</div>
-                <div>Medikament: {JSON.parse(therapyMedication)?.name}</div>
-                <div>Dosis: {therapyDose} {(() => {
-                    switch (JSON.parse(therapyMedication)?.type) {
-                        case"pills":
-                            return "Tabletten"
+                <div>Profil: {parsedProfile?.name}</div>
+                <div>Medikament: {parsedMedication?.name}</div>
+                <div>Dosis: {therapyDose} {getDoseUnit(parsedMedication?.type)}</div>
 
-                        case"fluid":
-                            return "ml"
-
-                        case"drops":
-                            return "Tropfen"
-
-                        default:
-                            return ""
-                    }
-                })()
-                } </div>
                 <div>Startdatum: {formatDate(therapyStartDate)}</div>
-                <div>Enddatum: {therapyEndDate ? formatDate(therapyEndDate) : "kein Enddatum festgelegt"}</div>
-                <div>Rhytmus: {(() => {
-                    switch (therapyRhythm) {
-                        case"daily":
-                            return <span>Jeden Tag</span>
+                <div>
+                    Enddatum: {therapyEndDate ? formatDate(therapyEndDate) : "kein Enddatum festgelegt"}
+                </div>
 
-                        case"weekdays":
-                            return <span>Bestimmte Wochentage</span>
+                <div>Rhythmus: {rhythmLabel}</div>
 
-                        case"interval":
-                            return <span>Intervall</span>
-                    }
-                })()
-                } </div>
+                {therapyRhythm === "daily" && (
+                    <div>
+                        Uhrzeit:
+                        {therapyTime.map((value, index) => (
+                            <div key={index}>{value} Uhr</div>
+                        ))}
+                    </div>
+                )}
 
-                <div>{(() => {
-                    switch (therapyRhythm) {
-                        case"daily":
-                            return <div>Uhrzeit: {therapyTime.map(value => <div>{value} Uhr</div>)}</div>
+                {therapyRhythm === "weekdays" && (
+                    <div>
+                        Wochentage:
+                        {therapyWeekday.map((day, index) =>
+                            day ? <div key={index}>{displayedWeekdays[index]}</div> : null
+                        )}
+                    </div>
+                )}
 
-                        case"weekdays":
-                            return <div>Wochentage: {therapyWeekday.map((day, index) =>
-                                <div>{day ? displayedWeekdays[index] : null} </div>)} {therapyTime ?? therapyTime}</div>
-
-                        case"interval":
-                            return <div>Intervall: alle {therapyIntervalValue}{(() => {
-                                switch (therapyIntervalType) {
-                                    case"hours":
-                                        return <span> Stunden</span>
-
-                                    case"days":
-                                        return <span> Tage</span>
-
-                                    case"weeks":
-                                        return <span> Wochen</span>
-
-                                    case"months":
-                                        return <span> Monate</span>
-                                }
-                            })()
-                            }</div>
-                    }
-                })()
-                } </div>
-
-
+                {therapyRhythm === "interval" && (
+                    <div>
+                        Intervall: alle {therapyIntervalValue} {getIntervalUnit(therapyIntervalType)}
+                    </div>
+                )}
             </div>
-            <button onClick={nextPage}>
-                Speichern & Eingabe beenden
+
+            <button
+                className={"control button button-next"}
+                onClick={nextPage}>
+                Einnahme speichern und beenden
             </button>
         </div>
     );

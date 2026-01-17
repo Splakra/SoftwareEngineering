@@ -12,10 +12,11 @@ export default function SetReminderDaily() {
     } = useGlobal();
 
     function addTime() {
-        setTherapyTime([...therapyTime, null]);
+        setTherapyTime([...therapyTime, ""]); // start value "" instead of null
     }
 
     function removeTime(index) {
+        if (time.length === 1) return; // last time must not be deleted
         setTherapyTime(therapyTime.toSpliced(index, 1));
     }
 
@@ -32,9 +33,13 @@ export default function SetReminderDaily() {
             {
                 therapyTime.map((t, index) => {
                     return (
-                        <div>
-                            <input type="time" value={t} onChange={e => updateTime(e.target.value, index)}/>
-                            <button onClick={() => removeTime(index)}>
+                        <div key={index}>
+                            <input type="time"
+                                   value={t ?? ""}
+                                   onChange={e => updateTime(e.target.value, index)}/>
+                            <button
+                                onClick={() => removeTime(index)}
+                                disabled={therapyTime.length === 1}>
                                 X
                             </button>
                         </div>
