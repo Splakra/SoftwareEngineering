@@ -22,7 +22,8 @@ function SetReminder() {
     const isButtonDisabled = () => {
         switch (therapyRhythm) {
             case "daily":
-                return !therapyTime.every(t => t);
+                return therapyTime.length === 0 || therapyTime.some(t => t === "");
+            // return !therapyTime.every(t => t);
             case "weekdays":
                 return !therapyWeekday.some(v => v);
             case "interval":
@@ -40,6 +41,8 @@ function SetReminder() {
                 return <SetReminderWeekdays/>;
             case "interval":
                 return <SetReminderInterval/>;
+            default:
+                return null;
         }
     };
 
@@ -65,9 +68,6 @@ function SetReminder() {
                             value={therapyRhythm ?? ""}
                             onChange={e => setTherapyRhythm(e.target.value)}
                         >
-                            <option value="" disabled hidden>
-                                Glitzerheilstaub
-                            </option>
                             <option value="daily">Jeden Tag</option>
                             <option value="weekdays">Bestimmte Wochentage</option>
                             <option value="interval">Intervall</option>
@@ -81,7 +81,7 @@ function SetReminder() {
                         <input
                             type="date"
                             className="control select date"
-                            value={therapyStartDate}
+                            value={therapyStartDate ?? ""}
                             onChange={e => setTherapyStartDate(e.target.value)}
                         />
                     </label>

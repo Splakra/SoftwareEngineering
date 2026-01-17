@@ -10,7 +10,7 @@ export function GlobalProvider({children}) {
     const [therapyRhythm, setTherapyRhythm] = useState("daily");
     const [therapyStartDate, setTherapyStartDate] = useState(new Date().toISOString().split("T")[0]);
     const [therapyEndDate, setTherapyEndDate] = useState();
-    const [therapyTime, setTherapyTime] = useState([null]);
+    const [therapyTime, setTherapyTime] = useState([""]);
     const [therapyWeekday, setTherapyWeekday] = useState([false, false, false, false, false, false, false]);
     const [therapyIntervalType, setTherapyIntervalType] = useState("hours");
     const [therapyIntervalValue, setTherapyIntervalValue] = useState();

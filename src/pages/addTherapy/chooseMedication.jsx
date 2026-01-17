@@ -49,9 +49,10 @@ function ChooseMedication() {
                             }`}
                             value={therapyMedication ?? ""}
                             onChange={e => setTherapyMedication(e.target.value)}
+                            disabled={medications.length === 0}
                         >
-                            <option value="" disabled hidden>
-                                Glitzerheilstaub
+                            <option value="" hidden>
+                                {medications.length === 0 ? "Noch nichts angelegt" : "Glitzerheilstaub"}
                             </option>
                             {medications.map(med => (
                                 <option key={med.id} value={JSON.stringify(med)}>

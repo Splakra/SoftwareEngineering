@@ -47,7 +47,7 @@
         background: var(--tangerine-dream)
     }
     100% {
-        background: color-mix(in oklab, var(--tangerine-dream), transparent);
+        background: var(--tangerine-dream-light);
     }
 }
 
