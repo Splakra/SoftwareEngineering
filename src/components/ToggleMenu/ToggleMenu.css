@@ -58,7 +58,7 @@
 }
 
 .toggle-menu__title {
-    margin-block: var(--margin-small) 1.3rem;
+    margin-block: var(--margin-small) 1.2rem;
     font-size: var(--font-size-xl);
     font-weight: bold;
 }
@@ -90,8 +90,8 @@
 }
 
 .toggle-menu__sheet-cancel {
-    margin-top: 1.3rem;
-    background-color: var(--charcoal-blue);
+    margin-top: 1.2rem;
+    background-color: var(--tangerine-dream);
     color: white;
     font-size: var(--font-size-l);
     transition: background 0.2s;

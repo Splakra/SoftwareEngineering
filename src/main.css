@@ -5,6 +5,7 @@
     --tomato: #ff5733ff;
     --warning-red: #F52D00;
     --tangerine-dream: #fe8c46ff;
+    --tangerine-dream-light: color-mix(in oklab, var(--tangerine-dream), transparent);
     --sunflower-gold: #fec34bff;
     --tea-green: #c5edacff;
     --charcoal-blue: #0E4257; /* new color test */
@@ -107,24 +108,24 @@ img {
     line-height: 1;
 }
 
-.control:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
+.control:focus-visible {
+    outline: 0.2rem solid var(--tangerine-dream);
+    outline-offset: 0.2rem;
 }
 
 .date {
     width: calc(100% - (2 * var(--padding-inline-base)));
 }
 
-.control:focus-visible {
-    outline: 0.2rem solid var(--tangerine-dream);
-    outline-offset: 0.2rem;
-}
-
 .button {
     justify-content: center;
     border: none;
     cursor: pointer;
+}
+
+.button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 .button-next {
@@ -144,6 +145,7 @@ img {
     appearance: none;
     -webkit-appearance: none;
     border: none;
+    line-height: normal;
     margin-block: var(--margin-base);
     background-color: white;
     box-shadow: 0.1rem 0.4rem 1.5rem color-mix(in oklab, var(--tea-green) 30%, transparent);

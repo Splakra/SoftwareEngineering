@@ -50,7 +50,7 @@ function ChooseDose() {
                         inputMode="numeric" // opens numeric keypad on phone
                         min="0"
                         step="any"
-                        placeholder="666"
+                        placeholder="42"
                         value={therapyDose ?? ""}
                         onChange={e => setTherapyDose(e.target.value)}
                     />
