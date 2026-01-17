@@ -46,11 +46,10 @@ export default function ProfileItems({activeProfile}) {
 
                                 return <TaskItem
                                     disableActions={true}
+                                    {...reminder}
                                     key={reminder.id}
                                     patient={activeProfile}
                                     medication={medication}
-                                    time={reminder.time}
-                                    dose={reminder.dose}
                                     showTime={true}/>
                             })}
                         </div>
