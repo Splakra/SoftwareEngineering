@@ -16,6 +16,7 @@ import PencilIcon from "../../assets/pencil.svg"
 
 export default function Profile() {
     const navigate = useNavigate();
+    const {setProfileEdit} = useGlobal();
 
     function handleClick() {
         navigate("/profile/add");
@@ -39,11 +40,11 @@ export default function Profile() {
         db.reminders.where("profileId").equals(id).delete();
         db.profiles.delete(id); //löschen von db einträgen
         window.location.reload(); //neu laden der Seite
-        return null;
     }
 
-    function editProfile() {
-        return null;
+    function editProfile(therapyProfile) {
+        setProfileEdit(therapyProfile);
+        navigate("/profile/add");
     }
 
     const handleDeleteEntries = async () => {//schnelles entfernen von medikamenten
@@ -72,7 +73,7 @@ export default function Profile() {
                                 }, {
                                     label: "Profil bearbeiten",
                                     icon: PencilIcon,
-                                    onClick: () => editProfile()
+                                    onClick: () => editProfile(therapyProfile)
                                 }
                             ]}/>
                         </div>
