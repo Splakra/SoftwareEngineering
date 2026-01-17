@@ -41,14 +41,13 @@ function ChooseProfile() {
                     Profil auswählen
                     <div className="select-wrapper">
                         <select
-                            className={`control select ${
-                                therapyProfile === "" || therapyProfile == null ? "is-placeholder" : ""
-                            }`}
+                            className={`control select ${therapyProfile === "" || therapyProfile == null ? "is-placeholder" : ""}`}
                             value={therapyProfile ?? ""}
                             onChange={e => setTherapyProfile(e.target.value)}
+                            disabled={patients.length === 0}
                         >
-                            <option value="" disabled hidden>
-                                Schnurzipups
+                            <option value="" hidden>
+                                {patients.length === 0 ? "Noch nichts angelegt" : "Schnurzipups"}
                             </option>
                             {patients.map(profile => (
                                 <option key={profile.id} value={JSON.stringify(profile)}>
