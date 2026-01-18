@@ -14,6 +14,8 @@ export function GlobalProvider({children}) {
     const [therapyWeekday, setTherapyWeekday] = useState([false, false, false, false, false, false, false]);
     const [therapyIntervalType, setTherapyIntervalType] = useState("hours");
     const [therapyIntervalValue, setTherapyIntervalValue] = useState();
+    const [therapyIntervalMonths, setTherapyIntervalMonths] = useState();
+    const [therapyIntervalHoursStartTime, setTherapyIntervalHoursStartTime] = useState();
 
     const [routeBackToChooseMedication, setRouteBackToChooseMedication] = useState(false);
     const [routeBackToChooseProfile, setRouteBackToChooseProfile] = useState(false)
