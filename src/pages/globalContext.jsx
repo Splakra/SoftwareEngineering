@@ -105,6 +105,10 @@ export function GlobalProvider({children}) {
             setTherapyIntervalType,
             therapyIntervalValue,
             setTherapyIntervalValue,
+            therapyIntervalMonths,
+            setTherapyIntervalMonths,
+            therapyIntervalHoursStartTime,
+            setTherapyIntervalHoursStartTime,
 
             routeBackToChooseMedication,
             setRouteBackToChooseMedication,

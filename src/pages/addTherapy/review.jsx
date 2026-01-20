@@ -81,7 +81,7 @@ function Review() {
             intervalType: therapyIntervalType,
             intervalValue: therapyIntervalValue,
             intervalValueMonths: therapyIntervalMonths,
-            //startTime: therapyIntervalHoursStartTime
+            startTime: therapyIntervalHoursStartTime
         })
         resetTherapy();
         navigate("/")
