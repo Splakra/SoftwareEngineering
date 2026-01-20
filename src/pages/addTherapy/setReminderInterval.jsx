@@ -1,12 +1,26 @@
 import {useGlobal} from "../globalContext";
+import SetReminderDaily from "./setReminderDaily";
+import SetReminderWeekdays from "./setReminderWeeksdays";
+import SetReminderIntervalMonths from "./setReminderIntervalMonths";
+import SetReminderIntervalHours from "./setReminderIntervalHours";
 
 export default function SetReminderInterval() {
     const {
         therapyIntervalType,
         setTherapyIntervalType,
         therapyIntervalValue,
-        setTherapyIntervalValue
+        setTherapyIntervalValue,
+        therapyStartDate
     } = useGlobal();
+
+    const renderType = () => {
+        const day = new Date(therapyStartDate).getDate();
+        return (therapyIntervalType === "months" && day >= 29)
+            ? <SetReminderIntervalMonths/>
+            : (therapyIntervalType === "hours")
+                ? <SetReminderIntervalHours/>
+                : null;
+    };
 
     return (
         <div>
@@ -28,6 +42,9 @@ export default function SetReminderInterval() {
                 <option value="weeks">Wochen</option>
                 <option value="months">Monate</option>
             </select>
+            <div className="set-reminder-interval-months__details">
+                {renderType()}
+            </div>
         </div>
     );
 }

@@ -9,7 +9,7 @@ export default function SetReminderWeekdays() {
     function updateWeekday(value, index) {
         const updated = [...therapyWeekday];
         updated[index] = value;
-        setTherapyWeekday(updated);
+        setTherapyWeekday(updated)
     }
 
     return (
