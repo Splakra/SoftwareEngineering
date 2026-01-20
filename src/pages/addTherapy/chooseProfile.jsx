@@ -7,7 +7,7 @@ import {useGlobal} from "../globalContext";
 
 function ChooseProfile() {
     const navigate = useNavigate();
-    const {therapyProfile, setTherapyProfile, setRouteBackToChooseProfile} = useGlobal();
+    const {therapyProfile, setTherapyProfile, setRouteBackToChooseProfile, resetProfile} = useGlobal();
     const [patients, setPatients] = useState([])
 
     useEffect(() => {
@@ -21,6 +21,7 @@ function ChooseProfile() {
 
     function addProfile() {
         setRouteBackToChooseProfile(true);
+        resetProfile();
         navigate("/profile/add");
     }
 

@@ -22,8 +22,9 @@ function Review() {
         therapyRhythm,
         therapyStartDate,
         therapyEndDate,
-        therapyTime,
+        therapyDailyTime,
         therapyWeekday,
+        therapyWeekdayTime,
         therapyIntervalType,
         therapyIntervalValue,
         therapyIntervalMonths,
@@ -75,13 +76,14 @@ function Review() {
             rhythm: therapyRhythm,
             startDate: therapyStartDate,
             endDate: therapyEndDate,
-            time: therapyTime,
+            dailyTime: therapyDailyTime,
             dose: therapyDose,
             weekdays: therapyWeekday,
+            weekdayTime: therapyWeekdayTime,
             intervalType: therapyIntervalType,
             intervalValue: therapyIntervalValue,
             intervalValueMonths: therapyIntervalMonths,
-            startTime: therapyIntervalHoursStartTime
+            intervalStartTime: therapyIntervalHoursStartTime
         })
         resetTherapy();
         navigate("/")
@@ -110,7 +112,7 @@ function Review() {
                 {therapyRhythm === "daily" && (
                     <div>
                         Uhrzeit:
-                        {therapyTime.map((value, index) => (
+                        {therapyDailyTime.map((value, index) => (
                             <div key={index}>{value} Uhr</div>
                         ))}
                     </div>
@@ -122,13 +124,15 @@ function Review() {
                         {therapyWeekday.map((day, index) =>
                             day ? <div key={index}>{displayedWeekdays[index]}</div> : null
                         )}
-                        {therapyTime ? <div>Uhrzeit: {therapyTime} Uhr</div> : null}
+                        {therapyWeekdayTime ? <div>Uhrzeit: {therapyWeekdayTime} Uhr</div> : null}
                     </div>
                 )}
 
                 {therapyRhythm === "interval" && (
                     <div>
                         Intervall: alle {therapyIntervalValue} {getIntervalUnit(therapyIntervalType)}
+                        {therapyIntervalHoursStartTime ? <div>Uhrzeit: {therapyIntervalHoursStartTime} Uhr</div> : null}
+
                     </div>
                 )}
             </div>

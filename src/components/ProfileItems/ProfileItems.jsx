@@ -34,9 +34,9 @@ export default function ProfileItems({activeProfile}) {
                 ["Täglich", dailyReminder],
                 ["Intervall", intervalReminder],
                 ["Bestimmte Wochentage", weekdayReminder]
-            ].map(([reminderLabel, reminders]) => {
+            ].map(([reminderLabel, reminders], index) => {
                 return (
-                    <div>
+                    <div key={index}>
                         <div>{reminderLabel}</div>
                         <div>
                             {reminders.filter(r => r.profileId === activeProfile.id).map(reminder => {

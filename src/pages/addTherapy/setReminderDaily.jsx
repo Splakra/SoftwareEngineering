@@ -3,27 +3,23 @@ import {useGlobal} from "../globalContext";
 
 export default function SetReminderDaily() {
     const {
-        therapyTime,
-        setTherapyTime,
-        therapyStartDate,
-        setTherapyStartDate,
-        therapyEndDate,
-        setTherapyEndDate,
+        therapyDailyTime,
+        setTherapyDailyTime,
     } = useGlobal();
 
     function addTime() {
-        setTherapyTime([...therapyTime, ""]); // start value "" instead of null
+        setTherapyDailyTime([...therapyDailyTime, ""]); // start value "" instead of null
     }
 
     function removeTime(index) {
-        if (therapyTime.length === 1) return; // last time must not be deleted
-        setTherapyTime(therapyTime.toSpliced(index, 1));
+        if (therapyDailyTime.length === 1) return; // last time must not be deleted
+        setTherapyDailyTime(therapyDailyTime.toSpliced(index, 1));
     }
 
     function updateTime(value, index) {
-        const updated = [...therapyTime];
+        const updated = [...therapyDailyTime];
         updated[index] = value;
-        setTherapyTime(updated);
+        setTherapyDailyTime(updated);
     }
 
     return <div>
@@ -31,7 +27,7 @@ export default function SetReminderDaily() {
         <div>
             <div>Uhrzeit hinzufügen</div>
             {
-                therapyTime.map((t, index) => {
+                therapyDailyTime.map((t, index) => {
                     return (
                         <div key={index}>
                             <input type="time"
@@ -39,7 +35,7 @@ export default function SetReminderDaily() {
                                    onChange={e => updateTime(e.target.value, index)}/>
                             <button
                                 onClick={() => removeTime(index)}
-                                disabled={therapyTime.length === 1}>
+                                disabled={therapyDailyTime.length === 1}>
                                 X
                             </button>
                         </div>
