@@ -108,7 +108,15 @@ function Dashboard({loaderData}) {
                 return (start > activeDay)
                        ? false
                        : (reminder.intervalType === "hours" )
-                           ? (((activeDay - start) / msPerDay) % reminder.intervalValue === 0) && (activeDay <= end) //startUhrzeit fehlt, daran berechnen
+                           ? (() => {
+                               const [hours, minutes] = reminder.startTime.split(":").map(Number);
+                               console.log(hours, minutes);
+                               const startHour = start.setHours(hours, minutes);
+                               console.log(startHour);
+                               const intervalMs = reminder.intervalValue * 60 * 60 * 1000;
+                               const diffHoursMs = activeDay - startHour; //muss neue reminder erstellen, da pro uhrzeit ein reminder. geht hand in hand mit aufgabe "2 uhrzeiten haben nur einen reminder"
+
+                        })//(((activeDay - start) / msPerDay) % reminder.intervalValue === 0) && (activeDay <= end) //startUhrzeit fehlt, daran berechnen
                            : (reminder.intervalType === "days")
                                ? (endDay && activeDayOnly > endDay)
                                    ? false
@@ -194,7 +202,7 @@ function Dashboard({loaderData}) {
                     .filter(reminder => activeReminder(reminder))
                     .map((reminder, index) => {
                     reminder.showTime = true;
-                    if (index > 0) {
+                    if (index > 0) { //hier anfassen für uhrzeit problem
                         reminder.showTime = reminder.time === reminders[index - 1].time ? null : reminder.time;
                     }
                     return (<TaskItem key={reminder.id} {...reminder} />)
