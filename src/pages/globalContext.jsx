@@ -10,8 +10,9 @@ export function GlobalProvider({children}) {
     const [therapyRhythm, setTherapyRhythm] = useState("daily");
     const [therapyStartDate, setTherapyStartDate] = useState(new Date().toISOString().split("T")[0]);
     const [therapyEndDate, setTherapyEndDate] = useState();
-    const [therapyTime, setTherapyTime] = useState([""]);
+    const [therapyDailyTime, setTherapyDailyTime] = useState([""]);
     const [therapyWeekday, setTherapyWeekday] = useState([false, false, false, false, false, false, false]);
+    const [therapyWeekdayTime, setTherapyWeekdayTime] = useState();
     const [therapyIntervalType, setTherapyIntervalType] = useState("hours");
     const [therapyIntervalValue, setTherapyIntervalValue] = useState();
     const [therapyIntervalMonths, setTherapyIntervalMonths] = useState();
@@ -22,17 +23,17 @@ export function GlobalProvider({children}) {
 
     //addMedication
     const [medicationId, setMedicationId] = useState();
-    const [medicationName, setMedicationName] = useState();
-    const [medicationType, setMedicationType] = useState();
-    const [medicationStock, setMedicationStock] = useState();
-    const [medicationBuyNew, setMedicationBuyNew] = useState();
-    const [medicationExpDate, setMedicationExpDate] = useState();
-    const [medicationExpiresValue, setMedicationExpiresValue] = useState();
+    const [medicationName, setMedicationName] = useState("");
+    const [medicationType, setMedicationType] = useState("");
+    const [medicationStock, setMedicationStock] = useState("");
+    const [medicationBuyNew, setMedicationBuyNew] = useState("");
+    const [medicationExpDate, setMedicationExpDate] = useState("");
+    const [medicationExpiresValue, setMedicationExpiresValue] = useState("");
     const [medicationExpiresType, setMedicationExpiresType] = useState("days");
 
     //profiles
     const [profileId, setProfileId] = useState();
-    const [profileName, setProfileName] = useState();
+    const [profileName, setProfileName] = useState("");
     const [profileReminders, setProfileReminders] = useState();
 
 
@@ -43,10 +44,13 @@ export function GlobalProvider({children}) {
         setTherapyRhythm("daily");
         setTherapyStartDate(new Date().toISOString().split("T")[0])
         setTherapyEndDate(null);
-        setTherapyTime([null]);
+        setTherapyDailyTime([""]);
         setTherapyWeekday([false, false, false, false, false, false, false]);
+        setTherapyWeekdayTime(null);
         setTherapyIntervalType("hours");
         setTherapyIntervalValue(null);
+        setTherapyIntervalMonths(null);
+        setTherapyIntervalHoursStartTime(null);
     }
 
     function setMedicationEdit(medication) {
@@ -61,12 +65,12 @@ export function GlobalProvider({children}) {
     }
 
     function resetMedication() {
-        setMedicationName(null);
-        setMedicationType(null);
-        setMedicationStock(null);
-        setMedicationBuyNew(null);
-        setMedicationExpDate(null);
-        setMedicationExpiresValue(null);
+        setMedicationName("");
+        setMedicationType("");
+        setMedicationStock("");
+        setMedicationBuyNew("");
+        setMedicationExpDate("");
+        setMedicationExpiresValue("");
         setMedicationExpiresType("days");
         setMedicationId(null);
     }
@@ -79,7 +83,7 @@ export function GlobalProvider({children}) {
 
     function resetProfile() {
         setProfileId(null);
-        setProfileName(null);
+        setProfileName("");
     }
 
 
@@ -97,10 +101,12 @@ export function GlobalProvider({children}) {
             setTherapyStartDate,
             therapyEndDate,
             setTherapyEndDate,
-            therapyTime,
-            setTherapyTime,
+            therapyDailyTime,
+            setTherapyDailyTime,
             therapyWeekday,
             setTherapyWeekday,
+            therapyWeekdayTime,
+            setTherapyWeekdayTime,
             therapyIntervalType,
             setTherapyIntervalType,
             therapyIntervalValue,
@@ -143,7 +149,7 @@ export function GlobalProvider({children}) {
             setProfileEdit,
             resetTherapy,
             resetMedication,
-            resetProfile
+            resetProfile,
         }}>
             {
                 children

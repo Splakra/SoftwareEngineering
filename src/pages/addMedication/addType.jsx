@@ -27,7 +27,7 @@ function addType() {
 
                 <div>Einheit auswählen</div>
                 <select value={medicationType} onChange={e => setMedicationType(e.target.value)}>
-                    <option selected></option>
+                    <option value={""}></option>
                     <option value={"pills"}>
                         Tabletten
                     </option>

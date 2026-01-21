@@ -8,9 +8,6 @@ import {NavigationBar} from "../../components/NavigationBar/NavigationBar";
 import {useGlobal} from "../globalContext";
 
 
-
-
-
 export async function clientLoader() {
     const reminders = await db.reminders.orderBy("time").toArray(); // get all reminders
     //console.log(reminders)
@@ -45,7 +42,11 @@ function Dashboard({loaderData}) {
     const currentDate = new Date();
     const navigate = useNavigate();
 
+
+    const {resetTherapy} = useGlobal();
+
     function addIntake() {
+        resetTherapy();
         navigate("/addTherapy/profile")
     }
 
@@ -54,9 +55,10 @@ function Dashboard({loaderData}) {
 
     });
 
+
     function handleDayClick(day) {
         setActiveDay(day);//.getDate());
-       // debugger;
+        // debugger;
     }
 
     function daysBetween(date1, date2) {
@@ -74,29 +76,29 @@ function Dashboard({loaderData}) {
         );
 
 
-        return Math.floor((utcB-utcA) / msPerDay);
+        return Math.floor((utcB - utcA) / msPerDay);
     }
 
-    function activeReminder(reminder){
+    function activeReminder(reminder) {
         //console.log(reminder)
         const start = new Date(reminder.startDate);
         //console.log(start)
-        const startDay = new Date (start.getFullYear(), start.getMonth(), start.getDate())
+        const startDay = new Date(start.getFullYear(), start.getMonth(), start.getDate())
         const end = reminder.endDate ? new Date(reminder.endDate) : null;
-        const endDay = end ? new Date (end.getFullYear(), end.getMonth(), end.getDate()) : null ;
-        const activeDayOnly = new Date (activeDay.getFullYear(), activeDay.getMonth(), activeDay.getDate())
+        const endDay = end ? new Date(end.getFullYear(), end.getMonth(), end.getDate()) : null;
+        const activeDayOnly = new Date(activeDay.getFullYear(), activeDay.getMonth(), activeDay.getDate())
         const intervalMonthsValue = reminder.intervalValueMonths ? reminder.intervalValueMonths : null;
-       //console.log(end, activeDay);
+        //console.log(end, activeDay);
         const monthsDiff = (activeDay.getFullYear() - start.getFullYear()) * 12 + (activeDay.getMonth() - start.getMonth());
 
-        const diffDays =  daysBetween(start, activeDay);
-       // const diffWeeksMs = Math.abs(startDay - activeDayOnly)
-       // console.log(diffWeeksMs)
-       // const msPerWeek = 7 * 24 * 60 * 60 * 1000;
+        const diffDays = daysBetween(start, activeDay);
+        // const diffWeeksMs = Math.abs(startDay - activeDayOnly)
+        // console.log(diffWeeksMs)
+        // const msPerWeek = 7 * 24 * 60 * 60 * 1000;
         const msPerDay = 1000 * 60 * 60 * 24;
-       // console.log(diffDays, activeDay - start, Math.floor((activeDay - start) / msPerDay), Math.floor((activeDay - start) / msPerDay) % reminder.intervalValue)
+        // console.log(diffDays, activeDay - start, Math.floor((activeDay - start) / msPerDay), Math.floor((activeDay - start) / msPerDay) % reminder.intervalValue)
 
-        switch (reminder.rhythm){
+        switch (reminder.rhythm) {
             case "daily":
                 return (startDay > activeDayOnly)
                     ? false
@@ -129,11 +131,26 @@ function Dashboard({loaderData}) {
                                        ? (endDay && activeDayOnly > endDay)
                                            ? false
                                            : (intervalMonthsValue && (monthsDiff % reminder.intervalValue === 0))
+                    ? false
+                    : (reminder.intervalType === "hours")
+                        ? (((activeDay - start) / msPerDay) % reminder.intervalValue === 0) && (activeDay <= end) //startUhrzeit fehlt, daran berechnen
+                        : (reminder.intervalType === "days")
+                            ? (endDay && activeDayOnly > endDay)
+                                ? false
+                                : (diffDays % reminder.intervalValue === 0)
+                            : (reminder.intervalType === "weeks")
+                                ? (endDay && activeDayOnly > endDay)
+                                    ? false
+                                    : (diffDays % (reminder.intervalValue * 7) === 0)
+                                : (reminder.intervalType === "months")
+                                    ? (endDay && activeDayOnly > endDay)
+                                        ? false
+                                        : (intervalMonthsValue && (monthsDiff % reminder.intervalValue === 0))
                                             ? (() => {
                                                 const lastDayOfMonth = new Date(activeDay.getFullYear(), activeDay.getMonth() + 1, 0);
                                                 const lastWeekdayOfMonth = lastDayOfMonth.getDay();
                                                 const lastNrDayOfMonth = lastDayOfMonth.getDate();
-                                               // const day = lastDayOfMonth.getDay();
+                                                // const day = lastDayOfMonth.getDay();
 
                                                 switch (reminder.intervalValueMonths) {
                                                     case "lastDay":
@@ -166,8 +183,8 @@ function Dashboard({loaderData}) {
                                                     ? (!(endDay && activeDayOnly > endDay))
                                                     : false
                                                 : false
-                                    : false ;
-            }
+                                    : false;
+        }
     }
 
 
@@ -201,11 +218,11 @@ function Dashboard({loaderData}) {
                 {reminders
                     .filter(reminder => activeReminder(reminder))
                     .map((reminder, index) => {
-                    reminder.showTime = true;
-                    if (index > 0) { //hier anfassen für uhrzeit problem
-                        reminder.showTime = reminder.time === reminders[index - 1].time ? null : reminder.time;
-                    }
-                    return (<TaskItem key={reminder.id} {...reminder} />)
+                        reminder.showTime = true;
+                        if (index > 0) {
+                            reminder.showTime = reminder.time === reminders[index - 1].time ? null : reminder.time;
+                        }
+                        return (<TaskItem key={reminder.id} {...reminder} />)
                     })
                 }
                 <button className={"dashboard__add-button"} onClick={addIntake}>

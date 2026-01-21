@@ -16,9 +16,10 @@ import PencilIcon from "../../assets/pencil.svg"
 
 export default function Profile() {
     const navigate = useNavigate();
-    const {setProfileEdit} = useGlobal();
+    const {setProfileEdit, resetProfile} = useGlobal();
 
     function handleClick() {
+        resetProfile();
         navigate("/profile/add");
     }
 

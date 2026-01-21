@@ -34,9 +34,9 @@ export default function ProfileItems({activeProfile}) {
                 ["Täglich", dailyReminder],
                 ["Intervall", intervalReminder],
                 ["Bestimmte Wochentage", weekdayReminder]
-            ].map(([reminderLabel, reminders]) => {
+            ].map(([reminderLabel, reminders], index) => {
                 return (
-                    <div>
+                    <div key={index}>
                         <div>{reminderLabel}</div>
                         <div>
                             {reminders.filter(r => r.profileId === activeProfile.id).map(reminder => {
@@ -46,11 +46,10 @@ export default function ProfileItems({activeProfile}) {
 
                                 return <TaskItem
                                     disableActions={true}
+                                    {...reminder}
                                     key={reminder.id}
                                     patient={activeProfile}
                                     medication={medication}
-                                    time={reminder.time}
-                                    dose={reminder.dose}
                                     showTime={true}/>
                             })}
                         </div>

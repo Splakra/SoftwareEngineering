@@ -10,7 +10,7 @@ function SetReminder() {
     const navigate = useNavigate();
     const {
         therapyRhythm, setTherapyRhythm,
-        therapyTime, therapyIntervalValue,
+        therapyDailyTime, therapyIntervalValue,
         therapyWeekday, therapyStartDate, setTherapyStartDate,
         therapyEndDate, setTherapyEndDate
     } = useGlobal();
@@ -22,7 +22,7 @@ function SetReminder() {
     const isButtonDisabled = () => {
         switch (therapyRhythm) {
             case "daily":
-                return therapyTime.length === 0 || therapyTime.some(t => t === "");
+                return therapyDailyTime.length === 0 || therapyDailyTime.some(t => t === "");
             // return !therapyTime.every(t => t);
             case "weekdays":
                 return !therapyWeekday.some(v => v);

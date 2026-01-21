@@ -4,7 +4,7 @@ import {useGlobal} from "../globalContext";
 export default function SetReminderWeekdays() {
 
     const weekdays = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
-    const {therapyWeekday, setTherapyWeekday, therapyTime, setTherapyTime} = useGlobal();
+    const {therapyWeekday, setTherapyWeekday, therapyWeekdayTime, setTherapyWeekdayTime} = useGlobal();
 
     function updateWeekday(value, index) {
         const updated = [...therapyWeekday];
@@ -31,8 +31,8 @@ export default function SetReminderWeekdays() {
             <h3>Uhrzeit hinzufügen</h3>
             <input
                 type="time"
-                value={therapyTime}
-                onChange={e => setTherapyTime(e.target.value)}
+                value={therapyWeekdayTime}
+                onChange={e => setTherapyWeekdayTime(e.target.value)}
             />
         </div>
     );
