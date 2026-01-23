@@ -11,7 +11,7 @@ export default function SetReminderIntervalMonths() {
             <span>Alle</span>
 
             <select
-                value={therapyIntervalMonths}
+                value={therapyIntervalMonths ?? "lastDay"}
                 onChange={e => setTherapyIntervalMonths(e.target.value)}>
 
                 <option value="lastDay">letzter Tag des Monats</option>

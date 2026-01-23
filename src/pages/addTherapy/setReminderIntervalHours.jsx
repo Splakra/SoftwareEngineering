@@ -15,8 +15,8 @@ export default function SetReminderIntervalMonths() {
                 <input
                     type="time"
                     className="control select time"
-                    value={therapyIntervalHoursStartTime}
-                    onChange={e => setTherapyIntervalHoursStartTime(e.target.value)} //hilfe, wie speichere ich die uhrzeit?
+                    value={therapyIntervalHoursStartTime ?? "00:00"}
+                    onChange={e => setTherapyIntervalHoursStartTime(e.target.value)}
                 />
         </div>
     )
