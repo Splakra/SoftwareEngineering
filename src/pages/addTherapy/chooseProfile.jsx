@@ -29,44 +29,46 @@ function ChooseProfile() {
     }
 
     return (
-        <div className="page">
+        <div className="choose-profile page">
             <PageHeader title="einnahme hinzufügen"/>
 
-            <h2 className={"title"}>
-                Für wen soll eine neue Einnahme angelegt werden?
-            </h2>
+            <div className="query-wrapper">
+                <h2 className="title">
+                    Für wen ist die Einnahme?
+                </h2>
 
-            <div className={"choose-profile__existing"}>
-                <label>
-                    Profil auswählen
-                    <div className="select-wrapper">
-                        <select
-                            className={`control select ${therapyProfile === "" || therapyProfile == null ? "is-placeholder" : ""}`}
-                            value={therapyProfile ?? ""}
-                            onChange={e => setTherapyProfile(e.target.value)}
-                            disabled={patients.length === 0}
-                        >
-                            <option value="" hidden>
-                                {patients.length === 0 ? "Noch nichts angelegt" : "Schnurzipups"}
-                            </option>
-                            {patients.map(profile => (
-                                <option key={profile.id} value={JSON.stringify(profile)}>
-                                    {profile.name}
+                <div className={"choose-profile__existing"}>
+                    <label>
+                        Profil auswählen
+                        <div className="select-wrapper">
+                            <select
+                                className={`control select ${therapyProfile === "" || therapyProfile == null ? "is-placeholder" : ""}`}
+                                value={therapyProfile ?? ""}
+                                onChange={e => setTherapyProfile(e.target.value)}
+                                disabled={patients.length === 0}
+                            >
+                                <option value="" hidden>
+                                    {patients.length === 0 ? "Noch nichts angelegt" : "Schnurzipups"}
                                 </option>
-                            ))}
-                        </select>
-                    </div>
-                </label>
-            </div>
+                                {patients.map(profile => (
+                                    <option key={profile.id} value={JSON.stringify(profile)}>
+                                        {profile.name}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                    </label>
+                </div>
 
-            <div>
-                <span>oder</span>
-                <button
-                    className="control button choose-profile__new"
-                    onClick={addProfile}
-                >
-                    Profil hinzufügen
-                </button>
+                <div className="choose-profile__alternative">
+                    <span className="choose-profile__or">oder</span>
+                    <button
+                        className="control button choose-profile__new"
+                        onClick={addProfile}
+                    >
+                        Profil hinzufügen
+                    </button>
+                </div>
             </div>
 
             <button

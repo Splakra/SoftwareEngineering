@@ -13,27 +13,37 @@ export default function SetReminderWeekdays() {
     }
 
     return (
-        <div>
-            <h3>Bestimmte Tage wählen</h3>
-            <div>
+        <div className="set-reminder-weekdays">
+            <fieldset className="set-reminder-weekdays__days">
+                <legend className="set-reminder__title set-reminder-weekdays__title">
+                    Wochentage wählen
+                </legend>
+
                 {weekdays.map((day, index) => (
-                    <label key={day} className="weekdays">
+                    <label className="weekdays">
                         <input
                             type="checkbox"
-                            checked={therapyWeekday[index]}
+                            checked={Boolean(therapyWeekday[index])}
+                            aria-label={`Wochentag ${day}`}
                             onChange={e => updateWeekday(e.target.checked, index)}
                         />
                         <span className="weekdays_span">{day}</span>
                     </label>
                 ))}
-            </div>
+            </fieldset>
 
-            <h3>Uhrzeit hinzufügen</h3>
-            <input
-                type="time"
-                value={therapyTime}
-                onChange={e => setTherapyTime(e.target.value)}
-            />
+            <label className="set-reminder-weekdays__time-wrapper">
+                <span className="set-reminder__title ">
+                    Uhrzeit
+                </span>
+                <input
+                    className="date set-reminder-weekdays__time"
+                    type="time"
+                    value={therapyTime}
+                    aria-label="Uhrzeit"
+                    onChange={e => setTherapyTime(e.target.value)}
+                />
+            </label>
         </div>
     );
 }

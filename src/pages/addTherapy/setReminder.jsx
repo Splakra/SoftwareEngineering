@@ -23,9 +23,10 @@ function SetReminder() {
         switch (therapyRhythm) {
             case "daily":
                 return therapyTime.length === 0 || therapyTime.some(t => t === "");
-            // return !therapyTime.every(t => t);
             case "weekdays":
-                return !therapyWeekday.some(v => v);
+                // check whether at least one weekday is selected AND a time is set
+                // still not working??
+                return !therapyWeekday.some(v => v) || !therapyTime;
             case "interval":
                 return !therapyIntervalValue;
             default:
@@ -47,23 +48,22 @@ function SetReminder() {
     };
 
     return (
-        <div className="page">
+        <div className="set-reminder page">
             <PageHeader title="Einnahme hinzufügen"/>
 
-            <h2 className="title">
-                Wann möchtest du erinnert werden?
-            </h2>
+            <div className="query-wrapper">
+                <h2 className="title">
+                    Wann möchtest du erinnert werden?
+                </h2>
 
-            <section className="set-reminder__section">
                 <div className="set-reminder__rhythm">
-                    <label htmlFor="rhythmSelect">
-                        Rhythmus auswählen
+                    <label
+                        htmlFor="rhythmSelect">
+                        Rhythmus wählen
                     </label>
                     <div className="select-wrapper">
                         <select
-                            className={`control select ${
-                                therapyRhythm === "" || therapyRhythm == null ? "is-placeholder" : ""
-                            }`}
+                            className={`control select ${therapyRhythm === "" || therapyRhythm == null ? "is-placeholder" : ""}`}
                             id="rhythmSelect"
                             value={therapyRhythm ?? ""}
                             onChange={e => setTherapyRhythm(e.target.value)}
@@ -74,33 +74,47 @@ function SetReminder() {
                         </select>
                     </div>
                 </div>
+            </div>
 
-                <div className="set-reminder__dates">
+            <div className="set-reminder__dates">
+                <div className="set-reminder__date-wrapper">
                     <label>
                         Startdatum
+                    </label>
+                    <div className="set-reminder__date-input-wrapper">
                         <input
                             type="date"
-                            className="control select date"
+                            id="startDate"
+                            className="date set-reminder__date"
                             value={therapyStartDate ?? ""}
                             onChange={e => setTherapyStartDate(e.target.value)}
                         />
-                    </label>
+                    </div>
+                </div>
 
-                    <label>
-                        Enddatum
+                <div className="set-reminder__date-wrapper">
+                    <div className="set-reminder__date-label">
+                        <label>
+                            Enddatum
+                        </label>
+                        <span className="optional optional--small">optional</span>
+                    </div>
+
+                    <div className="set-reminder__date-input-wrapper">
                         <input
                             type="date"
-                            className="control select date"
+                            id="endDate"
+                            className="date set-reminder__date"
                             value={therapyEndDate ?? ""}
                             onChange={e => setTherapyEndDate(e.target.value)}
                         />
-                    </label>
+                    </div>
                 </div>
+            </div>
 
-                <div className="set-reminder__details">
-                    {renderRhythm()}
-                </div>
-            </section>
+            <div className="set-reminder__details">
+                {renderRhythm()}
+            </div>
 
             <button
                 className="control button button-next"
