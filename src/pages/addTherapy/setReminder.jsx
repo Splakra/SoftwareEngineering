@@ -24,8 +24,8 @@ function SetReminder() {
             case "daily":
                 return therapyDailyTime.length === 0 || therapyDailyTime.some(t => t === "");
             case "weekdays":
-                // check whether at least one weekday is selected AND a time is set
-                return !therapyWeekday.some(v => v) || !therapyTime;
+                // check whether at least one weekday is selected AND a time is set -> TODO
+                return !therapyWeekday.some(v => v);
             case "interval":
                 return !therapyIntervalValue;
             default:
