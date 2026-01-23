@@ -75,7 +75,6 @@ export default function TaskItem({disableActions, patient, medication, time, sho
     };
 
     const deleteReminders = async () => {
-        console.log(id)
         await db.reminders.where("id").equals(id).delete();
         window.location.reload(); // better with state-update?
     };

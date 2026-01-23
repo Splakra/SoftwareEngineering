@@ -165,7 +165,7 @@ function Dashboard({loaderData}) {
         const interval = reminder.intervalValue;
         const start = new Date(year, month -1, day, hours, minutes);
         const activeDayZero = new Date(activeDay.getFullYear(), activeDay.getMonth(), activeDay.getDate(),0,0,0,0);
-        const activeDayEnd = new Date(activeDay.getFullYear(), activeDay.getMonth() - 1, activeDay.getDate(),23,59,59,999);
+        const activeDayEnd = new Date(activeDay.getFullYear(), activeDay.getMonth() , activeDay.getDate(),23,59,59,999);
 
         const intervalMs = interval * 60 * 60 * 1000;
         const diffMs = activeDayZero - start;
@@ -176,10 +176,11 @@ function Dashboard({loaderData}) {
 
         while (current < activeDayZero) {
             current = new Date(current.getTime() + intervalMs);
+           // console.log(current)
         }
 
         while (current <= activeDayEnd){
-            hourlyReminders.push(current.getTime());
+            hourlyReminders.push(current.toLocaleTimeString("de-DE", {hour: "2-digit", minute: "2-digit"}));
             current = new Date(current.getTime() + intervalMs);
         }
         return hourlyReminders;
@@ -218,21 +219,22 @@ function Dashboard({loaderData}) {
                         reminder.showTime = true;
                         let timers = reminder.dailyTime ? reminder.dailyTime : reminder.weekdayTime ? [reminder.weekdayTime] : [];
                         if (reminder.intervalType === "hours" && reminder.rhythm === "interval"){
-                            timers.push(getHourlyReminder(reminder));
+                            timers = getHourlyReminder(reminder);
                         }
 
                         /*if (index > 0) {
                             reminder.showTime = reminder.time === reminders[index - 1].time ? null : reminder.time; //zeit sortierung muss nochmal überarbeitet werden
                         }*/
 
-                        return timers.map(time =>(
-                            <TaskItem
+                        return timers.map(time => {
+                           // console.log(`${reminder.id}-${time}`)
+                            return <TaskItem
                                 key={`${reminder.id}-${time}`}
                                 {...reminder}
                                 time={time}
                                 showTime={true}
                             />
-                        ))
+                        })
 
                     })
                 }
