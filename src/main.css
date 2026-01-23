@@ -6,9 +6,9 @@
     --warning-red: #F52D00;
     --tangerine-dream: #fe8c46ff;
     --tangerine-dream-light: color-mix(in oklab, var(--tangerine-dream), transparent);
-    --sunflower-gold: #fec34bff;
     --tea-green: #c5edacff;
     --charcoal-blue: #0E4257; /* new color test */
+    --sunflower-gold: #fec34bff;
 
     /* general colors */
     --color-text: var(--rich-mahogany);
@@ -36,7 +36,8 @@
     /* padding */
     --padding-block-small: 0.3rem;
     --padding-block-base: 1.25rem;
-    --padding-inline-small: 0.7rem;
+    --padding-inline-s: 0.7rem;
+    --padding-inline-m: 1rem;
     --padding-inline-base: 1.75rem;
 
     /* gap */
@@ -81,31 +82,73 @@ img {
     height: auto;
 }
 
+option {
+    font-style: normal;
+    color: var(--rich-mahogany);
+    font-size: var(--font-size-base);
+    font-family: "Ysabeau Office", serif;
+}
+
+legend {
+    padding: 0;
+}
+
+fieldset {
+    min-inline-size: unset;
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
 /* base classes */
 
 .page {
     min-height: 100vh; /* 100% of the height of the visible browser window */
     box-sizing: border-box;
-    padding: var(--padding-block-base) var(--padding-inline-base);
+    padding: var(--padding-inline-base);
     display: flex;
     flex-direction: column;
 }
 
 .title {
-    margin-block: var(--margin-base);
+    margin-top: 0;
+    margin-bottom: var(--margin-base);
     font-size: var(--font-size-xxl);
     font-weight: bold;
 }
 
-.control {
-    height: 3.5rem;
-    padding-inline: var(--padding-inline-base);
-    display: flex;
-    align-items: center;
-    width: 100%;
-    border-radius: var(--border-radius-large);
+.query-wrapper {
+    background: color-mix(in oklab, var(--snow) 97%, black);
+    margin-top: var(--margin-base);
+    padding: var(--padding-inline-base);
+    border-radius: var(--border-radius-small);
+}
+
+.query-wrapper .title {
+    margin-top: calc(-1 * var(--margin-small));
+}
+
+.set-reminder__title {
+    margin: 0;
+    font-size: var(--font-size-base);
     font-weight: bold;
-    line-height: 1;
+}
+
+.control {
+    box-sizing: border-box;
+    display: flex;
+    height: 3.5rem;
+    width: 100%;
+    align-items: center;
+    line-height: normal;
+    overflow: visible;
+    padding-inline: var(--padding-inline-base);
+    border: none;
+    border-radius: var(--border-radius-large);
+    font-family: "Ysabeau Office", serif;
+    font-size: var(--font-size-base);
+    font-weight: bold;
+    color: var(--rich-mahogany);
 }
 
 .control:focus-visible {
@@ -113,46 +156,21 @@ img {
     outline-offset: 0.2rem;
 }
 
-.date {
-    width: calc(100% - (2 * var(--padding-inline-base)));
-}
-
-.button {
-    justify-content: center;
-    border: none;
-    cursor: pointer;
-}
-
-.button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-
-.button-next {
-    margin-top: auto;
-    position: sticky;
-    bottom: var(--padding-block-base);
-    background-image: radial-gradient(
-            circle at 15% 25%,
-            var(--tangerine-dream) 10%,
-            var(--tomato) 100%
-    );
-    color: var(--snow);
-    font-size: var(--font-size-l);
+select.is-placeholder {
+    color: grey;
+    font-style: italic;
 }
 
 .select {
     appearance: none;
     -webkit-appearance: none;
-    border: none;
-    line-height: normal;
-    margin-block: var(--margin-base);
     background-color: white;
     box-shadow: 0.1rem 0.4rem 1.5rem color-mix(in oklab, var(--tea-green) 30%, transparent);
 }
 
 .select-wrapper {
     position: relative;
+    margin-top: var(--margin-base);
 }
 
 .select-wrapper::after {
@@ -169,19 +187,128 @@ img {
     right: 1.5rem;
 }
 
-select.is-placeholder {
-    color: grey;
-    font-style: italic;
+.button {
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+}
+
+.button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.button-next {
+    margin-top: auto;
+    position: sticky;
+    bottom: var(--padding-inline-base);
+    background-image: radial-gradient(
+            circle at 15% 25%,
+            var(--tangerine-dream) 10%,
+            var(--tomato) 100%
+    );
+    color: var(--snow);
+    font-size: var(--font-size-xl);
+}
+
+.date-wrapper {
+    margin-top: var(--margin-base);
+}
+
+.date {
+    position: relative;
+    border: none;
+    height: 3rem;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: var(--border-radius-small);
+    padding-inline: var(--padding-inline-m);
+    background: var(--charcoal-blue);
+    color: white;
+    font-family: "Ysabeau Office", serif;
+    font-size: var(--font-size-base);
+    font-weight: bold;
+}
+
+.unit {
+    font-weight: bold;
+    font-size: var(--font-size-l);
+}
+
+.optional {
+    font-weight: normal;
+}
+
+.optional--small {
+    font-size: var(--font-size-s);
+}
+
+.optional--title {
+    margin-left: 0.4rem;
+    font-size: var(--font-size-l);
+    color: var(--tomato);
 }
 
 /* input */
 
+.input {
+    box-shadow: 0.1rem 0.4rem 1.5rem color-mix(in oklab, var(--tea-green) 30%, transparent);
+}
+
+.input-line {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-base);
+}
+
+.input-wrapper {
+    margin-top: var(--margin-base);
+}
+
+input::placeholder {
+    color: grey;
+    font-style: italic;
+}
+
+input::-webkit-input-placeholder {
+    color: grey;
+    font-style: italic;
+}
+
+input::-moz-placeholder {
+    color: grey;
+    font-style: italic;
+}
+
 input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button { /* hide arrows in Chrome, Safari, Edge, Opera */
+input::-webkit-inner-spin-button { /* hide arrows for number inputs in Chrome, Safari, Edge, Opera */
     -webkit-appearance: none;
     margin: 0;
 }
 
-input[type=number] { /* hide arrows in Firefox */
+input[type=number] { /* hide arrows for number inputs in Firefox */
     -moz-appearance: textfield;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator {
+    position: absolute;
+    right: var(--padding-inline-m);
+    width: 1.2rem;
+    height: 1.2rem;
+    cursor: pointer;
+    outline-offset: 0.2rem;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background-image: url("./assets/calendar.svg");
+}
+
+input[type="time"]::-webkit-calendar-picker-indicator {
+    background-image: url("./assets/clock.svg");
+}
+
+input[type="date"]:focus-visible, /* my own focus style */
+input[type="time"]:focus-visible {
+    outline: 0.2rem solid var(--tangerine-dream);
 }

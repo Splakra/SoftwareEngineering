@@ -73,7 +73,7 @@
     align-items: center;
     gap: var(--gap-small);
     margin-bottom: var(--margin-small);
-    padding: var(--padding-block-small) var(--padding-inline-small);
+    padding: var(--padding-block-small) var(--padding-inline-s);
     background: var(--tangerine-dream);
     color: white;
     border-radius: var(--border-radius-small);

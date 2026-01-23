@@ -1,22 +1,17 @@
+.choose-medication__existing {
+    margin-bottom: var(--margin-base);
+}
+
 .choose-medication__existing label {
     display: flex;
     flex-direction: column;
 }
 
-.choose-medication__existing select {
-    margin-block: var(--margin-base);
-    background-color: white;
-    box-shadow: 0.1rem 0.4rem 1.5rem color-mix(in oklab, var(--tea-green) 30%, transparent);
-}
-
-.choose-medication__existing option {
-    font-style: normal;
-    color: var(--rich-mahogany);
-    font-size: var(--font-size-base);
-    font-family: "Ysabeau Office", serif;
-}
-
 .choose-medication__new {
-    margin-block: var(--margin-base);
+    margin-top: var(--margin-base);
+}
+
+.choose-medication__new.control {
     background-color: var(--tea-green);
+    box-shadow: none;
 }

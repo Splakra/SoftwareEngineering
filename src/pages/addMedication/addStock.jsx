@@ -1,10 +1,8 @@
-import './addName.css';
 import PageHeader from "../../components/PageHeader/PageHeader";
 import db from "../../database/DexieDatabase";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router";
 import {useGlobal} from "../globalContext";
-
 
 function addStock() {
     const navigate = useNavigate();
@@ -17,54 +15,97 @@ function addStock() {
         medicationId
     } = useGlobal();
 
-
-    async function nextPage() {
+    function nextPage() {
         navigate("/addMedication/expirationDate")
     }
 
+    const getUnit = () => {
+        switch (medicationType) {
+            case "pills":
+                return "Tabletten";
+            case "fluid":
+            case "drops":
+                return "ml";
+            default:
+                return "Sonstige";
+        }
+    };
+
     return (
-        <div className="addStock">
-            <PageHeader title={medicationId ? "Medikament bearbeiten" : "Medikament hinzufügen"}
-                        quitPath={"/medication"}/>
-            <div className={"addStock__content"}>
-                Wie viel ist von dem Medikament vorrätig?
-            </div>
-            <div>
-                <div>Aktueller Vorrat</div>
-                <input type="number" value={medicationStock} onChange={e => setMedicationStock(e.target.value)}/>
-                <div>{(() => {
-                    switch (medicationType) {
-                        case"pills":
-                            return "Tabletten"
+        <div className="page">
+            <PageHeader
+                title={medicationId ? "Medikament bearbeiten" : "Medikament hinzufügen"}
+                quitPath={"/medication"}
+            />
 
-                        case"fluid":
-                            return "ml"
+            <div className="query-wrapper">
+                <h2 className={"title"}>
+                    Wie viel ist noch vorrätig?
+                </h2>
 
-                        case"drops":
-                            return "ml"
-                    }
-                })()}</div>
-            </div>
-            <div className={"addStock__content"}>
-                Möchten Sie rechtzeitig an die nächste Packung erinnert werden? (optional)
-            </div>
-            <div>
-                <div>Erinnerung ab</div>
-                <input type="number" value={medicationBuyNew} onChange={e => setMedicationBuyNew(e.target.value)}/>
-                <div>{(() => {
-                    switch (medicationType) {
-                        case"pills":
-                            return "Tabletten"
+                {/* Aktueller Vorrat */}
+                <label htmlFor="stockInput">
+                    Aktueller Vorrat
+                </label>
 
-                        case"fluid":
-                            return "ml"
-
-                        case"drops":
-                            return "ml"
-                    }
-                })()}</div>
+                <div className="input-wrapper">
+                    <div className="input-line">
+                        <input
+                            className="control input"
+                            id="stockInput"
+                            type="number"
+                            inputMode="numeric" // opens numeric keypad on phone
+                            min="0"
+                            step="any"
+                            placeholder="1312"
+                            value={medicationStock ?? ""}
+                            onChange={e => setMedicationStock(e.target.value)}
+                        />
+                        <span
+                            className="unit">
+                        {getUnit()}
+                    </span>
+                    </div>
+                </div>
             </div>
-            <button onClick={nextPage} disabled={!medicationStock}>
+
+            {/* Optionale Erinnerung */}
+            <div className="query-wrapper">
+                <h3 className="title">
+                    Erinnerung bei niedrigem Vorrat
+                    <span className="optional optional--title">(optional)</span>
+                </h3>
+
+                <label htmlFor="buyNewInput">
+                    Erinnerung ab
+                </label>
+
+                <div className="input-wrapper">
+                    <div className="input-line">
+                        <input
+                            className="control input"
+                            id="buyNewInput"
+                            type="number"
+                            inputMode="numeric" // opens numeric keypad on phone
+                            min="0"
+                            step="any"
+                            placeholder="161"
+                            value={medicationBuyNew ?? ""}
+                            onChange={e => setMedicationBuyNew(e.target.value)}
+                        />
+                        <span
+                            className="unit">
+                        {getUnit()}
+                    </span>
+                    </div>
+                </div>
+            </div>
+
+            <button
+                className="control button button-next"
+                disabled={!medicationStock}
+                onClick={nextPage}
+            >
                 Weiter
             </button>
         </div>

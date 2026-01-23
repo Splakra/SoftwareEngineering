@@ -1,0 +1,37 @@
+.set-reminder__dates {
+    display: grid;
+    gap: var(--margin-base);
+    margin-block: var(--margin-base);
+    background: white;
+    padding: var(--padding-inline-base);
+    border-radius: var(--border-radius-small);
+    box-shadow: 0.1rem 0.4rem 1.5rem color-mix(in oklab, var(--tea-green) 30%, transparent);
+}
+
+.set-reminder__date-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    align-items: center;
+    font-weight: bold;
+}
+
+.set-reminder__date-input-wrapper {
+    width: 100%;
+}
+
+.set-reminder__date-label {
+    display: flex;
+    flex-direction: column;
+    line-height: var(--line-height-base);
+}
+
+/* media query */
+
+@media (max-width: 24rem) {
+    .set-reminder__date-wrapper {
+        display: grid;
+        grid-template-columns: 1fr;
+        align-items: stretch;
+        gap: var(--gap-base);
+    }
+}

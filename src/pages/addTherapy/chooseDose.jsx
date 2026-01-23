@@ -25,39 +25,41 @@ function ChooseDose() {
             case "drops":
                 return "Tropfen";
             default:
-                return "";
+                return "Sonstige";
         }
     }
 
     return (
-        <div className="page">
+        <div className="choose-dose page">
             <PageHeader title="einnahme hinzufügen"/>
 
-            <h2 className="title">
-                In welcher Dosis soll das Medikament verabreicht werden?
-            </h2>
+            <div className="query-wrapper">
+                <h2 className="title">
+                    Wie hoch ist die Dosis?
+                </h2>
 
-            <div className="choose-dose__input-wrapper">
-                <label className="choose-dose__label" htmlFor="doseInput">
+                <label htmlFor="doseInput">
                     Gewünschte Dosis eingeben
                 </label>
 
-                <div className="choose-dose__input-line">
-                    <input
-                        className="control choose-dose__input"
-                        id="doseInput"
-                        type="number"
-                        inputMode="numeric" // opens numeric keypad on phone
-                        min="0"
-                        step="any"
-                        placeholder="42"
-                        value={therapyDose ?? ""}
-                        onChange={e => setTherapyDose(e.target.value)}
-                    />
-                    <span
-                        className="choose-dose__unit">
-                        {getDoseUnit()}
-                    </span>
+                <div className="input-wrapper">
+                    <div className="input-line">
+                        <input
+                            className="control input"
+                            id="doseInput"
+                            type="number"
+                            inputMode="numeric" // opens numeric keypad on phone
+                            min="0"
+                            step="any"
+                            placeholder="42"
+                            value={therapyDose ?? ""}
+                            onChange={e => setTherapyDose(e.target.value)}
+                        />
+                        <span
+                            className="unit">
+                                {getDoseUnit()}
+                            </span>
+                    </div>
                 </div>
             </div>
 

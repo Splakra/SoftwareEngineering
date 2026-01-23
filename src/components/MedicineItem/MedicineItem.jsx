@@ -22,14 +22,21 @@ export default function MedicineItem({
                                      }) {
     const navigate = useNavigate();
     const {setMedicationEdit} = useGlobal();
-    const medicineTypeIcon = type === "fluid" ? BottleIcon : type === "drops" ? DropIcon : PillIcon;
-    const storageText = `${amount} ${type === "fluid" ? "ml" : type === "drops" ? "ml" : type === "pills" ? "Tabletten" : ""}`;
+    const medicineTypeIcon =
+        type === "fluid" ? BottleIcon
+            : type === "drops" ? DropIcon
+                : PillIcon;
+    const storageText = `${amount} ${
+        type === "fluid" ? "ml"
+            : type === "drops" ? "ml"
+                : type === "pills" ? "Tabletten"
+                    : ""}`;
     const empty = Number(amount) <= Number(reminderBuyNew);
     const expDate = new Date(expiration);
     const expired = Date.now() > expDate.getTime();
-    const status = expiration
-        ? `${expired ? "Abgelaufen seit:" : "Läuft ab am:"} ${expDate.toLocaleDateString(navigator.language)}`
-        : "Kein Ablaufdatum";
+    const status =
+        expiration ? `${expired ? "Abgelaufen seit:" : "Läuft ab am:"} ${expDate.toLocaleDateString(navigator.language)}`
+            : "Kein Ablaufdatum";
 
     async function deleteMedication() {
         await db.reminders.where("medicationId").equals(id).delete();
