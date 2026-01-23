@@ -1,0 +1,103 @@
+.set-reminder-daily {
+    margin-bottom: var(--margin-base);
+    background: white;
+    padding: var(--padding-inline-base);
+    border-radius: var(--border-radius-small);
+    box-shadow: 0.1rem 0.4rem 1.5rem color-mix(in oklab, var(--tea-green) 30%, transparent);
+}
+
+.set-reminder-daily__time-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    align-items: start;
+    margin-bottom: var(--margin-base);
+}
+
+.set-reminder-daily__title {
+    height: 3rem; /* same height as .control */
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+}
+
+.set-reminder-daily__time-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--margin-base);
+}
+
+.set-reminder-daily__time-row {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-base);
+}
+
+.set-reminder-daily__time-input-wrapper {
+    width: 100%;
+}
+
+.set-reminder-daily__remove {
+    border: none;
+    width: 2.8rem;
+    height: 2.8rem;
+    border-radius: 50%;
+    background: var(--tangerine-dream);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.set-reminder-daily__remove:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.set-reminder-daily__remove:focus-visible,
+.set-reminder-daily__add:focus-visible {
+    outline: 0.2rem solid var(--tangerine-dream);
+    outline-offset: 0.2rem;
+}
+
+.trash-icon {
+    width: 1.2rem;
+    height: 1.2rem;
+}
+
+.set-reminder-daily__add-container {
+    display: flex;
+    justify-content: center;
+}
+
+.set-reminder-daily__add {
+    align-items: center;
+    justify-content: center;
+    display: inline-flex;
+    height: 3rem;
+    width: 100%;
+    padding: 0 var(--padding-inline-base);
+    gap: var(--gap-small);
+    background: var(--tangerine-dream-light);
+    border: none;
+    border-radius: var(--border-radius-large);
+    font-family: "Ysabeau Office", serif;
+    font-size: var(--font-size-base);
+    font-weight: bold;
+    color: var(--rich-mahogany);
+    line-height: var(--line-height-base);
+}
+
+.plus-icon {
+    width: 0.8rem;
+    padding: 0.2rem;
+    border: 0.1rem solid var(--rich-mahogany);
+    border-radius: 50%;
+}
+
+@media (max-width: 24rem) {
+    .set-reminder-daily__time-wrapper {
+        grid-template-columns: 1fr;
+        align-items: stretch;
+    }
+}

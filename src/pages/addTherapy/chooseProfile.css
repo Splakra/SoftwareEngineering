@@ -1,17 +1,17 @@
+.choose-profile__existing {
+    margin-bottom: var(--margin-base);
+}
+
 .choose-profile__existing label {
     display: flex;
     flex-direction: column;
 }
 
-.choose-profile__existing option {
-    font-style: normal;
-    color: var(--rich-mahogany);
-    font-size: var(--font-size-base);
-    font-family: "Ysabeau Office", serif;
-}
-
 .choose-profile__new {
-    margin-block: var(--margin-base);
-    background-color: var(--tea-green);
+    margin-top: var(--margin-base);
 }
 
+.choose-profile__new.control {
+    background-color: var(--tea-green);
+    box-shadow: none;
+}

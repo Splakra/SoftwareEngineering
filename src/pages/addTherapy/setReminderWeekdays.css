@@ -1,24 +1,76 @@
+.set-reminder-weekdays {
+    margin-bottom: var(--margin-base);
+    background: white;
+    padding: var(--padding-inline-base);
+    border-radius: var(--border-radius-small);
+    box-shadow: 0.1rem 0.4rem 1.5rem color-mix(in oklab, var(--tea-green) 30%, transparent);
+}
+
+.set-reminder-weekdays__days {
+    display: flex;
+    justify-content: space-between; /* erster links, letzter rechts */
+    flex-wrap: wrap; /* geht in nächste Reihe bei kleinerem Screen */
+    margin-bottom: var(--margin-base);
+}
+
+.set-reminder-weekdays__title {
+    margin-bottom: var(--margin-base);
+}
+
 .weekdays {
     display: inline-flex;
     align-items: center;
     cursor: pointer;
+    user-select: none; /* verhindert versehentliches Text-Marking */
 }
 
 .weekdays input {
-    display: none;
+    position: absolute; /* Input bleibt für Screenreader, bleibt fokussierbar */
+    opacity: 0;
+    width: 0;
+    height: 0;
 }
 
 .weekdays_span {
-    width: 2rem;
-    height: 2rem;
-    border-radius: 50%;
-    border: 2px #FE8C46 solid;
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    padding: 0.2rem;
+    background: var(--tangerine-dream-light);
+    border-radius: 50%;
+    font-size: var(--font-size-s);
+    font-weight: bold;
+    transition: all 0.2s ease;
 }
 
 .weekdays input:checked + .weekdays_span {
-    background: burlywood;
+    background: var(--tangerine-dream);
+    color: white;
+    border-color: var(--tangerine-dream);
 }
 
+.weekdays:active .weekdays_span {
+    transform: scale(1.2);
+}
+
+.weekdays input:focus-visible + .weekdays_span {
+    outline: 0.2rem solid var(--tangerine-dream);
+    outline-offset: 0.2rem;
+}
+
+.set-reminder-weekdays__time-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    align-items: center;
+}
+
+@media (max-width: 24rem) {
+    .set-reminder-weekdays__time-wrapper {
+        display: grid;
+        grid-template-columns: 1fr;
+        align-items: stretch;
+        gap: var(--gap-base);
+    }
+}

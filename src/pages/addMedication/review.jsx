@@ -56,89 +56,91 @@ function review() {
         }
     }
 
-
     return (
         <div className="addName">
             <PageHeader title={medicationId ? "Medikament bearbeiten" : "Medikament hinzufügen"}
                         quitPath={"/medication"}/>
-            <div className={"addName__content"}>
-                Sind die Eingaben korrekt?
-            </div>
-            <div>
-                <div>
-                    Name: {medicationName}
+
+            <div className="query-wrapper">
+                <div className={"addName__content"}>
+                    Sind die Eingaben korrekt?
                 </div>
                 <div>
-                    Art:
-                    {(() => {
+                    <div>
+                        Name: {medicationName}
+                    </div>
+                    <div>
+                        Art:
+                        {(() => {
+                            switch (medicationType) {
+                                case"pills":
+                                    return "Tabletten"
+
+                                case"fluid":
+                                    return "Flüssig (ml)"
+
+                                case"drops":
+                                    return "Tropfen"
+                            }
+                        })()}
+                    </div>
+                    <div>Aktueller Vorrat: {medicationStock} {(() => {
                         switch (medicationType) {
                             case"pills":
                                 return "Tabletten"
 
                             case"fluid":
-                                return "Flüssig (ml)"
+                                return "ml"
 
                             case"drops":
                                 return "Tropfen"
+
+                            default:
+                                return ""
                         }
-                    })()}
-                </div>
-                <div>Aktueller Vorrat: {medicationStock} {(() => {
-                    switch (medicationType) {
-                        case"pills":
-                            return "Tabletten"
+                    })()
+                    } </div>
+                    <div>
+                        Erinnerung bei {medicationBuyNew} verbleibenden {(() => {
+                        switch (medicationType) {
+                            case"pills":
+                                return "Tabletten"
 
-                        case"fluid":
-                            return "ml"
+                            case"fluid":
+                                return "ml"
 
-                        case"drops":
-                            return "Tropfen"
+                            case"drops":
+                                return "Tropfen"
 
-                        default:
-                            return ""
-                    }
-                })()
-                } </div>
-                <div>
-                    Erinnerung bei {medicationBuyNew} verbleibenden {(() => {
-                    switch (medicationType) {
-                        case"pills":
-                            return "Tabletten"
-
-                        case"fluid":
-                            return "ml"
-
-                        case"drops":
-                            return "Tropfen"
-
-                        default:
-                            return ""
-                    }
-                })()
-                }
-                </div>
-                <div>
-                    Ablaufdatum: {medicationExpDate ? formatDate(medicationExpDate) : "Kein Ablaufdatum angegeben"}
-                </div>
-                <div>
-                    Erinnerung an Ablaufen:
-                    {(() => {
-                        if (medicationExpiresValue) {
-                            switch (medicationExpiresType) {
-                                case"days":
-                                    return <span> {medicationExpiresValue} Tage vorher</span>
-
-                                case"weeks":
-                                    return <span> {medicationExpiresValue} Wochen vorher</span>
-
-                                case"months":
-                                    return <span>{medicationExpiresValue} Monate vorher</span>
-                            }
-                        } else {
-                            return " Keine Erinnerung aktiviert"
+                            default:
+                                return ""
                         }
                     })()
                     }
+                    </div>
+                    <div>
+                        Ablaufdatum: {medicationExpDate ? formatDate(medicationExpDate) : "Kein Ablaufdatum angegeben"}
+                    </div>
+                    <div>
+                        Erinnerung an Ablaufen:
+                        {(() => {
+                            if (medicationExpiresValue) {
+                                switch (medicationExpiresType) {
+                                    case"days":
+                                        return <span> {medicationExpiresValue} Tage vorher</span>
+
+                                    case"weeks":
+                                        return <span> {medicationExpiresValue} Wochen vorher</span>
+
+                                    case"months":
+                                        return <span>{medicationExpiresValue} Monate vorher</span>
+                                }
+                            } else {
+                                return " Keine Erinnerung aktiviert"
+                            }
+                        })()
+                        }
+                    </div>
                 </div>
             </div>
             <button onClick={nextPage}>

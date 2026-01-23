@@ -1,10 +1,9 @@
-import './addName.css';
+import './addExpirationDate.css';
 import PageHeader from "../../components/PageHeader/PageHeader";
 import db from "../../database/DexieDatabase";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router";
 import {useGlobal} from "../globalContext";
-
 
 function addExpirationDate() {
     const navigate = useNavigate();
@@ -18,43 +17,65 @@ function addExpirationDate() {
         medicationId
     } = useGlobal();
 
-    async function nextPage() {
+    function nextPage() {
         navigate("/addMedication/review")
     }
 
-
     return (
-        <div className="addExpirationDate">
+        <div className="page">
             <PageHeader title={medicationId ? "Medikament bearbeiten" : "Medikament hinzufügen"}
                         quitPath={"/medication"}/>
-            <div className={"addExpirationDate__content"}>
-                Wann läuft das Medikament ab? (optional)
+
+            {/*Ablaufdatum*/}
+            <div className="query-wrapper">
+                <h2 className={"title"}>
+                    Wann läuft das Medikament ab?
+                    <span className="optional optional--title">(optional)</span>
+                </h2>
+                <label htmlFor="expirationDate">
+                    Ablaufdatum
+                </label>
+                <div className="date-wrapper">
+                    <input
+                        className="date"
+                        type="date"
+                        value={medicationExpDate ?? ""}
+                        onChange={e => setMedicationExpDate(e.target.value)}/>
+                </div>
             </div>
-            <div>
-                <div>Ablaufdatum</div>
-                <input type="date" value={medicationExpDate} onChange={e => setMedicationExpDate(e.target.value)}/>
+
+            <div className="query-wrapper">
+                <h3 className="title">
+                    Vor dem Ablauf erinnern lassen?
+                    <span className="optional optional--title">(optional)</span>
+                </h3>
+                <div>
+                    <label>
+                        Erinnerung ab
+                    </label>
+                    <div className="expiration__reminder">
+                        <input type="number" value={medicationExpiresValue}
+                               onChange={e => setMedicationExpiresValue(e.target.value)}/>
+                        <select value={medicationExpiresType} onChange={e => setMedicationExpiresType(e.target.value)}>
+                            <option selected></option>
+                            <option value={"days"}>
+                                Tage
+                            </option>
+                            <option value={"weeks"}>
+                                Wochen
+                            </option>
+                            <option value={"months"}>
+                                Monate
+                            </option>
+                        </select>vorher
+                    </div>
+                </div>
             </div>
-            <div className={"addExpirationDate__content"}>
-                Möchten Sie rechtzeitig vor dem Ablaufen erinnert werden? (optional)
-            </div>
-            <div>
-                <div>Erinnerung ab</div>
-                <input type="number" value={medicationExpiresValue}
-                       onChange={e => setMedicationExpiresValue(e.target.value)}/>
-                <select value={medicationExpiresType} onChange={e => setMedicationExpiresType(e.target.value)}>
-                    <option selected></option>
-                    <option value={"days"}>
-                        Tage
-                    </option>
-                    <option value={"weeks"}>
-                        Wochen
-                    </option>
-                    <option value={"months"}>
-                        Monate
-                    </option>
-                </select>vorher
-            </div>
-            <button onClick={nextPage}>
+
+            <button
+                className="control button button-next"
+                onClick={nextPage}
+            >
                 Weiter
             </button>
         </div>

@@ -9,7 +9,6 @@ import SetReminderWeekdays from "./setReminderWeeksdays";
 import SetReminderInterval from "./setReminderInterval";
 import {formatDate} from "../dateFormat";
 
-
 function Review() {
     const navigate = useNavigate();
 
@@ -50,7 +49,7 @@ function Review() {
             case "drops":
                 return "Tropfen";
             default:
-                return "";
+                return "Sonstige";
         }
     }
 
@@ -93,21 +92,22 @@ function Review() {
         <div className={"page"}>
             <PageHeader title="Einnahme hinzufügen"/>
 
-            <h2 className="title">
-                Sind alle Eingaben korrekt?
-            </h2>
+            <div className="query-wrapper">
+                <h2 className="title">
+                    Sind alle Eingaben korrekt?
+                </h2>
 
-            <div>
-                <div>Profil: {parsedProfile?.name}</div>
-                <div>Medikament: {parsedMedication?.name}</div>
-                <div>Dosis: {therapyDose} {getDoseUnit(parsedMedication?.type)}</div>
-
-                <div>Startdatum: {formatDate(therapyStartDate)}</div>
                 <div>
-                    Enddatum: {therapyEndDate ? formatDate(therapyEndDate) : "kein Enddatum festgelegt"}
-                </div>
+                    <div>Profil: {parsedProfile?.name}</div>
+                    <div>Medikament: {parsedMedication?.name}</div>
+                    <div>Dosis: {therapyDose} {getDoseUnit(parsedMedication?.type)}</div>
 
-                <div>Rhythmus: {rhythmLabel}</div>
+                    <div>Startdatum: {formatDate(therapyStartDate)}</div>
+                    <div>
+                        Enddatum: {therapyEndDate ? formatDate(therapyEndDate) : "kein Enddatum festgelegt"}
+                    </div>
+
+                    <div>Rhythmus: {rhythmLabel}</div>
 
                 {therapyRhythm === "daily" && (
                     <div>
@@ -142,6 +142,7 @@ function Review() {
                 onClick={nextPage}>
                 Einnahme speichern und beenden
             </button>
+            </div>
         </div>
     );
 }

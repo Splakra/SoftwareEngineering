@@ -68,7 +68,7 @@
     align-items: center;
     gap: var(--gap-small);
     margin-top: 0.5rem;
-    padding: calc(2 * var(--padding-block-small)) calc(2 * var(--padding-inline-small));
+    padding: calc(2 * var(--padding-block-small)) calc(2 * var(--padding-inline-s));
     align-self: flex-end; /* align button to the right */
     background: var(--tea-green);
     border-radius: var(--border-radius-large);
