@@ -122,7 +122,7 @@ export function getSortedTimes(reminder, activeDay) {
     else if (reminder.weekdayTime) timers = Array.isArray(reminder.weekdayTime) ? [...reminder.weekdayTime] : [reminder.weekdayTime];
 
     if (reminder.intervalType === "hours" && reminder.rhythm === "interval") {
-        timers = timers.concat(getHourlyReminder(reminder, activeDay));
+        timers = getHourlyReminder(reminder, activeDay);
     }
 
     timers = [...new Set(timers)];
