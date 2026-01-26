@@ -25,6 +25,10 @@
     line-height: var(--line-height-base);
 }
 
+.date-warning {
+    color: #F52D00;
+}
+
 /* media query */
 
 @media (max-width: 24rem) {

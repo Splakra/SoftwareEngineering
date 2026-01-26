@@ -19,7 +19,11 @@ function SetReminder() {
         navigate("/addTherapy/review");
     }
 
+    const isEndDateBeforeStartDate = () => new Date(therapyStartDate).getTime() > new Date(therapyEndDate).getTime();
     const isButtonDisabled = () => {
+        if (isEndDateBeforeStartDate()) {
+            return true;
+        }
         switch (therapyRhythm) {
             case "daily":
                 return therapyDailyTime.length === 0 || therapyDailyTime.some(t => t === "");
@@ -108,6 +112,9 @@ function SetReminder() {
                             onChange={e => setTherapyEndDate(e.target.value)}
                         />
                     </div>
+                </div>
+                <div className={"date-warning"}>
+                    {isEndDateBeforeStartDate() ? "Enddatum liegt vor dem Startdatum!" : null}
                 </div>
             </div>
 

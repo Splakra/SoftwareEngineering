@@ -119,7 +119,7 @@ export function getSortedTimes(reminder, activeDay) {
     let timers = [];
 
     if (reminder.dailyTime) timers = [...reminder.dailyTime];
-    else if (reminder.weekdayTime) timers = Array.isArray(reminder.weekdayTime) ? [...reminder.weekdayTime] : [reminder.weekdayTime];
+    if (reminder.weekdayTime) timers = [reminder.weekdayTime];
 
     if (reminder.intervalType === "hours" && reminder.rhythm === "interval") {
         timers = getHourlyReminder(reminder, activeDay);

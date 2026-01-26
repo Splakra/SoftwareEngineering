@@ -5,6 +5,7 @@ import PencilIcon from "../../assets/pencil.svg";
 import TrashIcon from "../../assets/trash.svg";
 import PawIcon from "../../assets/paw.svg";
 import db from "../../database/DexieDatabase";
+import {formatDate} from "../../pages/dateFormat";
 
 export default function InfoItem({
                                      id,
@@ -88,10 +89,10 @@ export default function InfoItem({
                         </div>
                     )}
                     <div className={"info-item__startDate"}>
-                        Startdatum: {startDate}
+                        Startdatum: {formatDate(startDate)}
                     </div>
                     <div className={"info-item__endDate"}>
-                        Enddatum: {endDate ? endDate : "Kein Enddatum angegeben"}
+                        Enddatum: {endDate ? formatDate(endDate) : "Kein Enddatum angegeben"}
                     </div>
                 </div>
 
