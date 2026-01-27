@@ -1,0 +1,7 @@
+.set-reminder-interval__time--wrapper {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    align-items: center;
+    font-weight: bold;
+    margin-top: var(--margin-base);
+}
