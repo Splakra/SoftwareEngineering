@@ -32,15 +32,17 @@ function addExpirationDate() {
                     Wann läuft das Medikament ab?
                     <span className="optional optional--title">(optional)</span>
                 </h2>
-                <label htmlFor="expirationDate">
-                    Ablaufdatum
-                </label>
-                <div className="date-wrapper">
-                    <input
-                        className="date"
-                        type="date"
-                        value={medicationExpDate ?? ""}
-                        onChange={e => setMedicationExpDate(e.target.value)}/>
+                <div className="expiration__date">
+                    <label htmlFor="expirationDate">
+                        Ablaufdatum
+                    </label>
+                    <div className="date-wrapper">
+                        <input
+                            className="date"
+                            type="date"
+                            value={medicationExpDate ?? ""}
+                            onChange={e => setMedicationExpDate(e.target.value)}/>
+                    </div>
                 </div>
             </div>
 
@@ -54,26 +56,30 @@ function addExpirationDate() {
                     Erinnerung ab
                 </label>
                 <div className="expiration__reminder">
-                    <input
-                        id="reminderValue"
-                        type="number"
-                        min="0"
-                        placeholder="7"
-                        value={medicationExpiresValue || ""}
-                        onChange={e => setMedicationExpiresValue(e.target.value)}
-                    />
-
-                    <select
-                        id="reminderType"
-                        value={medicationExpiresType || ""}
-                        onChange={e => setMedicationExpiresType(e.target.value)}
-                    >
-                        <option value="">--</option>
-                        <option value="days">Tage</option>
-                        <option value="weeks">Wochen</option>
-                        <option value="months">Monate</option>
-                    </select>
-                    vorher
+                    <div className="input-wrapper">
+                        <input
+                            className="control input"
+                            id="reminderValue"
+                            type="number"
+                            min="0"
+                            placeholder="0"
+                            value={medicationExpiresValue || ""}
+                            onChange={e => setMedicationExpiresValue(e.target.value)}
+                        />
+                    </div>
+                    <div className="select-wrapper">
+                        <select
+                            className="control select"
+                            id="reminderType"
+                            value={medicationExpiresType || ""}
+                            onChange={e => setMedicationExpiresType(e.target.value)}
+                        >
+                            <option value="days">Tage</option>
+                            <option value="weeks">Wochen</option>
+                            <option value="months">Monate</option>
+                        </select>
+                    </div>
+                    <span>vorher</span>
                 </div>
             </div>
 

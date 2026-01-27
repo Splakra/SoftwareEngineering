@@ -249,6 +249,10 @@ select.is-placeholder {
     color: var(--tomato);
 }
 
+.date-warning {
+    color: var(--tomato);
+}
+
 /* input */
 
 .input {
