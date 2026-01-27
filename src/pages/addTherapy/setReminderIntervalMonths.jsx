@@ -10,7 +10,7 @@ export default function SetReminderIntervalMonths() {
     return (
         <div>
 
-            <div className={"date-warning"}>
+            <div className={"warning"}>
                 {`In Monaten mit weniger als ${day} Tagen wird der Reminder auf den letzten Tag des Monats gelegt.`}
             </div>
         </div>

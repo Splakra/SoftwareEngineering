@@ -115,7 +115,7 @@ function SetReminder() {
                     </div>
                 </div>
                 {therapyEndDate && isEndDateBeforeStartDate() && (
-                    <div className="date-warning">
+                    <div className="warning">
                         Enddatum liegt vor dem Startdatum!
                     </div>
                 )}
