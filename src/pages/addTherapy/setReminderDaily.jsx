@@ -1,5 +1,4 @@
 import './setReminderDaily.css';
-import {useState} from "react";
 import {useGlobal} from "../globalContext";
 import TrashIcon from "../../assets/trash.svg"
 import PlusIcon from "../../assets/plus-icon.svg"
@@ -32,7 +31,7 @@ export default function SetReminderDaily() {
 
                 <div className="set-reminder-daily__time-list">
                     {therapyDailyTime.map((t, index) => (
-                        <div key={index} className="set-reminder-daily__time-row">
+                        <div className="set-reminder-daily__time-row" key={index}>
                             <div className="set-reminder-daily__time-input-wrapper">
                                 <input
                                     type="time"

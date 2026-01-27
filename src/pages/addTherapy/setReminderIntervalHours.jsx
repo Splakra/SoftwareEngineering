@@ -1,3 +1,4 @@
+import './setReminderIntervalHours.css';
 import {useGlobal} from "../globalContext";
 
 export default function SetReminderIntervalMonths() {
@@ -7,17 +8,21 @@ export default function SetReminderIntervalMonths() {
     } = useGlobal();
 
 
-
     return (
-        <div className="set-reminder-interval__time">
+        <div className="set-reminder-interval__horus">
 
-                <div> Startzeit </div>
+            <div className="set-reminder-interval__time--wrapper">
+                <label>
+                    Startzeit
+                </label>
+
                 <input
                     type="time"
-                    className="control select time"
+                    className="date"
                     value={therapyIntervalHoursStartTime ?? "00:00"}
                     onChange={e => setTherapyIntervalHoursStartTime(e.target.value)}
                 />
+            </div>
         </div>
     )
 }

@@ -23,32 +23,41 @@ export default function SetReminderInterval() {
 
     return (
         <div className="set-reminder-interval">
-            <label className="set-reminder-interval__wrapper">
-                <span className="set-reminder__title set-reminder-interval__title">Alle</span>
-                <input
-                    className="set-reminder-interval__input"
-                    type="number"
-                    inputMode="numeric" // opens numeric keypad on phone
-                    min="1"
-                    step="any"
-                    placeholder="0"
-                    value={therapyIntervalValue ?? ""}
-                    onChange={e => setTherapyIntervalValue(e.target.value)}
-                />
-                <select
-                    className="set-reminder-interval__rhythm"
-                    value={therapyIntervalType}
-                    onChange={e => setTherapyIntervalType(e.target.value)}
-                >
-                    <option value="hours">Stunden</option>
-                    <option value="days">Tage</option>
-                    <option value="weeks">Wochen</option>
-                    <option value="months">Monate</option>
-                </select>
-                <div className="set-reminder-interval-months__details">
-                    {renderType()}
+            <div className="set-reminder-interval__type">
+                <div className="set-reminder-interval__wrapper">
+                <span>
+                    Alle
+                </span>
+
+                    <input
+                        className="control input set-reminder-interval__value"
+                        type="number"
+                        inputMode="numeric" // opens numeric keypad on phone
+                        min="1"
+                        step="any"
+                        placeholder="0"
+                        value={therapyIntervalValue ?? ""}
+                        onChange={e => setTherapyIntervalValue(e.target.value)}
+                    />
+
+                    <div className="select-wrapper">
+                        <select
+                            className="control select set-reminder-interval__rhythm"
+                            value={therapyIntervalType}
+                            onChange={e => setTherapyIntervalType(e.target.value)}
+                        >
+                            <option value="hours">Stunden</option>
+                            <option value="days">Tage</option>
+                            <option value="weeks">Wochen</option>
+                            <option value="months">Monate</option>
+                        </select>
+                    </div>
                 </div>
-            </label>
+            </div>
+
+            <div className="set-reminder-interval__details">
+                {renderType()}
+            </div>
         </div>
     );
 }

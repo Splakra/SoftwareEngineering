@@ -20,7 +20,7 @@ export default function SetReminderWeekdays() {
                 </legend>
 
                 {weekdays.map((day, index) => (
-                    <label className="weekdays">
+                    <label className="weekdays" key={day}>
                         <input
                             type="checkbox"
                             checked={Boolean(therapyWeekday[index])}
@@ -39,7 +39,7 @@ export default function SetReminderWeekdays() {
                 <input
                     className="date set-reminder-weekdays__time"
                     type="time"
-                    value={therapyWeekdayTime}
+                    value={therapyWeekdayTime ?? ""}
                     aria-label="Uhrzeit"
                     onChange={e => setTherapyWeekdayTime(e.target.value)}
                 />

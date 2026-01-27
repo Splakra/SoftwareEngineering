@@ -1,0 +1,32 @@
+.set-reminder-interval {
+    margin-bottom: var(--margin-base);
+    background: white;
+    padding: var(--padding-inline-base);
+    border-radius: var(--border-radius-small);
+    box-shadow: 0.1rem 0.4rem 1.5rem color-mix(in oklab, var(--tea-green) 30%, transparent);
+}
+
+.set-reminder-interval__type {
+    display: grid;
+    gap: var(--margin-base);
+}
+
+.set-reminder-interval__wrapper {
+    display: grid;
+    grid-template-columns: auto 2fr 3fr;
+    gap: var(--gap-base);
+    align-items: center;
+    font-weight: bold;
+}
+
+.set-reminder-interval__wrapper .select-wrapper {
+    margin-top: 0;
+}
+
+.set-reminder-interval__value, .set-reminder-interval__rhythm {
+    height: 3rem;
+    border-radius: var(--border-radius-small);
+    padding-inline: var(--padding-inline-m);
+    background: var(--tangerine-dream-light);
+    box-shadow: none;
+}
