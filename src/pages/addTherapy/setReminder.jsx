@@ -11,28 +11,29 @@ function SetReminder() {
     const {
         therapyRhythm, setTherapyRhythm,
         therapyDailyTime, therapyIntervalValue,
-        therapyWeekday, therapyStartDate, setTherapyStartDate,
-        therapyEndDate, setTherapyEndDate
+        therapyWeekday, therapyWeekdayTime, therapyStartDate, setTherapyStartDate,
+        therapyEndDate, setTherapyEndDate,
+        therapyIntervalHoursStartTime
     } = useGlobal();
 
     function nextPage() {
         navigate("/addTherapy/review");
     }
 
-    const isEndDateBeforeStartDate = () => new Date(therapyStartDate).getTime() > new Date(therapyEndDate).getTime();
+    const isEndDateBeforeStartDate = () => therapyEndDate === null ? false : new Date(therapyStartDate).getTime() > new Date(therapyEndDate).getTime();
     const isButtonDisabled = () => {
         if (isEndDateBeforeStartDate()) {
             return true;
         }
         switch (therapyRhythm) {
             case "daily":
-                // not working anymore -> TODO
                 return therapyDailyTime.length === 0 || therapyDailyTime.some(t => t === "");
             case "weekdays":
+                console.log(!therapyWeekdayTime);
                 // check whether at least one weekday is selected AND a time is set -> TODO
-                return !therapyWeekday.some(v => v);
+                return !therapyWeekday.some(v => v) || !therapyWeekdayTime; //checks now whether at least one weekday and time is selected. Do we want that?
             case "interval":
-                return !therapyIntervalValue;
+                return !therapyIntervalValue || !therapyIntervalHoursStartTime;
             default:
                 return true;
         }

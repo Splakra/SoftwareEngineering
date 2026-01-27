@@ -20,6 +20,7 @@ export default function SetReminderDaily() {
     }
 
     function updateTime(value, index) {
+
         const updated = [...therapyDailyTime];
         updated[index] = value;
         setTherapyDailyTime(updated);
