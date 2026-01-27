@@ -42,33 +42,11 @@ export function activeReminder(reminder, activeDay) {
                                     : (intervalMonthsValue && (monthsDiff % reminder.intervalValue === 0))
                                         ? (() => {
                                             const lastDayOfMonth = new Date(activeDay.getFullYear(), activeDay.getMonth() + 1, 0);
-                                            const lastWeekdayOfMonth = lastDayOfMonth.getDay();
                                             const lastNrDayOfMonth = lastDayOfMonth.getDate();
 
                                             switch (reminder.intervalValueMonths) {
                                                 case "lastDay":
                                                     return activeDay.getDate() === lastNrDayOfMonth;
-                                                case "lastMonday":
-                                                    const diff1 = (lastWeekdayOfMonth - 1 + 7) % 7; //letzter Montag im Monat
-                                                    return activeDay.getDate() === (lastNrDayOfMonth - diff1);
-                                                case "lastTuesday":
-                                                    const diff2 = (lastWeekdayOfMonth - 2 + 7) % 7; //letzter Dientag im Monat
-                                                    return activeDay.getDate() === (lastNrDayOfMonth - diff2);
-                                                case "lastWednesday":
-                                                    const diff3 = (lastWeekdayOfMonth - 3 + 7) % 7; //letzter Mittwoch im Monat
-                                                    return activeDay.getDate() === (lastNrDayOfMonth - diff3);
-                                                case "lastThursday":
-                                                    const diff4 = (lastWeekdayOfMonth - 4 + 7) % 7; //letzter Donnerstag im Monat
-                                                    return activeDay.getDate() === (lastNrDayOfMonth - diff4);
-                                                case "lastFriday":
-                                                    const diff5 = (lastWeekdayOfMonth - 5 + 7) % 7; //letzter Freitag im Monat
-                                                    return activeDay.getDate() === (lastNrDayOfMonth - diff5);
-                                                case "lastSaturday":
-                                                    const diff6 = (lastWeekdayOfMonth - 6 + 7) % 7; //letzter Samstag im Monat
-                                                    return activeDay.getDate() === (lastNrDayOfMonth - diff6);
-                                                case "lastSunday":
-                                                    const diff0 = (lastWeekdayOfMonth + 7) % 7; //letzter Sonntag im Monat
-                                                    return activeDay.getDate() === (lastNrDayOfMonth - diff0);
                                             }
                                         })
                                         : (monthsDiff % reminder.intervalValue === 0)

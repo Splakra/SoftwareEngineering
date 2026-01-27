@@ -1,7 +1,5 @@
 import './setReminderInterval.css';
 import {useGlobal} from "../globalContext";
-import SetReminderDaily from "./setReminderDaily";
-import SetReminderWeekdays from "./setReminderWeeksdays";
 import SetReminderIntervalMonths from "./setReminderIntervalMonths";
 import SetReminderIntervalHours from "./setReminderIntervalHours";
 
@@ -33,7 +31,7 @@ export default function SetReminderInterval() {
                     inputMode="numeric" // opens numeric keypad on phone
                     min="1"
                     step="any"
-                    placeholder="7"
+                    placeholder="0"
                     value={therapyIntervalValue ?? ""}
                     onChange={e => setTherapyIntervalValue(e.target.value)}
                 />
