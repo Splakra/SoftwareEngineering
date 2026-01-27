@@ -29,9 +29,7 @@ function SetReminder() {
             case "daily":
                 return therapyDailyTime.length === 0 || therapyDailyTime.some(t => t === "");
             case "weekdays":
-                console.log(!therapyWeekdayTime);
-                // check whether at least one weekday is selected AND a time is set -> TODO
-                return !therapyWeekday.some(v => v) || !therapyWeekdayTime; //checks now whether at least one weekday and time is selected. Do we want that?
+                return !therapyWeekday.some(v => v); // || !therapyWeekdayTime;
             case "interval":
                 return !therapyIntervalValue || !therapyIntervalHoursStartTime;
             default:

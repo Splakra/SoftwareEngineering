@@ -33,9 +33,12 @@ export default function SetReminderWeekdays() {
             </fieldset>
 
             <label className="set-reminder-weekdays__time-wrapper">
-                <span className="set-reminder__title ">
-                    Uhrzeit
-                </span>
+                <div className="set-reminder-weekdays__time-label">
+                    <label className="set-reminder__title">
+                        Uhrzeit
+                    </label>
+                    <span className="optional optional--small">optional</span>
+                </div>
                 <input
                     className="date set-reminder-weekdays__time"
                     type="time"

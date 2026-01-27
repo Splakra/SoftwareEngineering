@@ -66,6 +66,12 @@
     align-items: center;
 }
 
+.set-reminder-weekdays__time-label {
+    display: flex;
+    flex-direction: column;
+    line-height: var(--line-height-base);
+}
+
 @media (max-width: 24rem) {
     .set-reminder-weekdays__time-wrapper {
         display: grid;
