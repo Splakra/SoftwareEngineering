@@ -97,9 +97,6 @@ export default function InfoItem({
                 </div>
 
             </div>
-            <div className={"medicine-item__details"}>
-
-            </div>
         </div>
     )
 }
