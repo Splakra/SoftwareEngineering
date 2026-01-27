@@ -30,3 +30,13 @@
     background: var(--tangerine-dream-light);
     box-shadow: none;
 }
+
+/* media query */
+
+@media (max-width: 24rem) {
+    .set-reminder-interval__wrapper {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: var(--gap-base);
+    }
+}

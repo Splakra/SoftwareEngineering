@@ -1,0 +1,32 @@
+.review__table {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-base);
+}
+
+.review__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: var(--padding-block-base);
+    border-bottom: 1px solid white;
+}
+
+.review__row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.review__label {
+}
+
+.review__value {
+    font-weight: bold;
+    text-align: right;
+}
+
+.review__sub {
+    font-size: var(--font-size-s);
+    font-weight: normal;
+    margin-top: var(--margin-small);
+}

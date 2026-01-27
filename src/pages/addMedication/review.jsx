@@ -1,11 +1,10 @@
-import './review.css';
+import '../addTherapy/review.css';
 import PageHeader from "../../components/PageHeader/PageHeader";
 import db from "../../database/DexieDatabase";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router";
 import {useGlobal} from "../globalContext";
 import {formatDate} from "../dateFormat";
-
 
 function review() {
     const navigate = useNavigate();
@@ -22,6 +21,19 @@ function review() {
         setRouteBackToChooseMedication,
         medicationId
     } = useGlobal();
+
+    function getTypeLabel(type) {
+        switch (type) {
+            case "pills":
+                return "Tabletten";
+            case "fluid":
+                return "Flüssig (ml)";
+            case "drops":
+                return "Tropfen";
+            default:
+                return "Sonstige";
+        }
+    }
 
     async function nextPage() {
         if (medicationId) {
@@ -57,94 +69,62 @@ function review() {
     }
 
     return (
-        <div className="addName">
-            <PageHeader title={medicationId ? "Medikament bearbeiten" : "Medikament hinzufügen"}
-                        quitPath={"/medication"}/>
+        <div className="review page">
+            <PageHeader
+                title={medicationId ? "Medikament bearbeiten" : "Medikament hinzufügen"}
+                quitPath="/medication"
+            />
 
             <div className="query-wrapper">
-                <div className={"addName__content"}>
-                    Sind die Eingaben korrekt?
-                </div>
-                <div>
-                    <div>
-                        Name: {medicationName}
+                <h2 className="title">Stimmt alles?</h2>
+
+                <div className="review__table">
+                    <div className="review__row">
+                        <span className="review__label">Name</span>
+                        <span className="review__value">{medicationName}</span>
                     </div>
-                    <div>
-                        Art:
-                        {(() => {
-                            switch (medicationType) {
-                                case"pills":
-                                    return "Tabletten"
 
-                                case"fluid":
-                                    return "Flüssig (ml)"
-
-                                case"drops":
-                                    return "Tropfen"
-                            }
-                        })()}
+                    <div className="review__row">
+                        <span className="review__label">Art</span>
+                        <span className="review__value">{getTypeLabel(medicationType)}</span>
                     </div>
-                    <div>Aktueller Vorrat: {medicationStock} {(() => {
-                        switch (medicationType) {
-                            case"pills":
-                                return "Tabletten"
 
-                            case"fluid":
-                                return "ml"
-
-                            case"drops":
-                                return "Tropfen"
-
-                            default:
-                                return ""
-                        }
-                    })()
-                    } </div>
-                    <div>
-                        Erinnerung bei {medicationBuyNew} verbleibenden {(() => {
-                        switch (medicationType) {
-                            case"pills":
-                                return "Tabletten"
-
-                            case"fluid":
-                                return "ml"
-
-                            case"drops":
-                                return "Tropfen"
-
-                            default:
-                                return ""
-                        }
-                    })()
-                    }
+                    <div className="review__row">
+                        <span className="review__label">Vorrat</span>
+                        <span className="review__value">
+                            {medicationStock} {getTypeLabel(medicationType)}
+                            <div className="review__sub">
+                                Erinnerung: {medicationBuyNew
+                                ? `${medicationBuyNew} ${getTypeLabel(medicationType)}`
+                                : "Keine Erinnerung"}
+                            </div>
+                        </span>
                     </div>
-                    <div>
-                        Ablaufdatum: {medicationExpDate ? formatDate(medicationExpDate) : "Kein Ablaufdatum angegeben"}
-                    </div>
-                    <div>
-                        Erinnerung an Ablaufen:
-                        {(() => {
-                            if (medicationExpiresValue) {
-                                switch (medicationExpiresType) {
-                                    case"days":
-                                        return <span> {medicationExpiresValue} Tage vorher</span>
 
-                                    case"weeks":
-                                        return <span> {medicationExpiresValue} Wochen vorher</span>
-
-                                    case"months":
-                                        return <span>{medicationExpiresValue} Monate vorher</span>
-                                }
-                            } else {
-                                return " Keine Erinnerung aktiviert"
-                            }
-                        })()
-                        }
+                    <div className="review__row">
+                        <span className="review__label">Ablaufdatum</span>
+                        <span className="review__value">
+                            {medicationExpDate ? formatDate(medicationExpDate) : "Kein Ablaufdatum"}
+                            <div className="review__sub">
+                                Erinnerung: {medicationExpiresValue
+                                ? `${medicationExpiresValue} ${
+                                    medicationExpiresType === "days"
+                                        ? "Tage"
+                                        : medicationExpiresType === "weeks"
+                                            ? "Wochen"
+                                            : "Monate"
+                                } vorher`
+                                : "Keine Erinnerung"}
+                            </div>
+                        </span>
                     </div>
                 </div>
             </div>
-            <button onClick={nextPage}>
-                {routeBackToChooseMedication ? 'Speichern & zurück zu "Einnahme hinzufügen"' : 'Speichern & Eingabe beenden'}
+
+            <button className="control button button-next" onClick={nextPage}>
+                {routeBackToChooseMedication
+                    ? 'Speichern & Fortfahren'
+                    : 'Speichern'}
             </button>
         </div>
     );

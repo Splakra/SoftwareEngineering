@@ -12,8 +12,6 @@ import {formatDate} from "../dateFormat";
 function Review() {
     const navigate = useNavigate();
 
-    const displayedWeekdays = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
-
     const {
         therapyProfile,
         therapyMedication,
@@ -31,6 +29,7 @@ function Review() {
         resetTherapy
     } = useGlobal();
 
+    const displayedWeekdays = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
     const parsedProfile = therapyProfile ? JSON.parse(therapyProfile) : null;
     const parsedMedication = therapyMedication ? JSON.parse(therapyMedication) : null;
 
@@ -89,60 +88,82 @@ function Review() {
     }
 
     return (
-        <div className={"page"}>
+        <div className={"review page"}>
             <PageHeader title="Einnahme hinzufügen"/>
 
             <div className="query-wrapper">
                 <h2 className="title">
-                    Sind alle Eingaben korrekt?
+                    Stimmt alles?
                 </h2>
 
-                <div>
-                    <div>Profil: {parsedProfile?.name}</div>
-                    <div>Medikament: {parsedMedication?.name}</div>
-                    <div>Dosis: {therapyDose} {getDoseUnit(parsedMedication?.type)}</div>
-
-                    <div>Startdatum: {formatDate(therapyStartDate)}</div>
-                    <div>
-                        Enddatum: {therapyEndDate ? formatDate(therapyEndDate) : "kein Enddatum festgelegt"}
+                <div className="review__table">
+                    <div className="review__row">
+                        <span className="review__label">Profil</span>
+                        <span className="review__value">{parsedProfile?.name}</span>
+                    </div>
+                    <div className="review__row">
+                        <span className="review__label">Medikament</span>
+                        <span className="review__value">{parsedMedication?.name}</span>
+                    </div>
+                    <div className="review__row">
+                        <span className="review__label">Dosis</span>
+                        <span className="review__value">{therapyDose} {getDoseUnit(parsedMedication?.type)}</span>
+                    </div>
+                    <div className="review__row">
+                        <span className="review__label">Startdatum</span>
+                        <span className="review__value">{formatDate(therapyStartDate)}</span>
+                    </div>
+                    <div className="review__row">
+                        <span className="review__label">Enddatum</span>
+                        <span
+                            className="review__value">{therapyEndDate ? formatDate(therapyEndDate) : "kein Enddatum"}</span>
+                    </div>
+                    <div className="review__row">
+                        <span className="review__label">Rhythmus</span>
+                        <span className="review__value">{rhythmLabel}</span>
                     </div>
 
-                    <div>Rhythmus: {rhythmLabel}</div>
+                    {therapyRhythm === "daily" && (
+                        <div className="review__row">
+                            <span className="review__label">Uhrzeit</span>
+                            <span className="review__value">{therapyDailyTime.filter(t => t).join(", ")} Uhr</span>
+                        </div>
+                    )}
 
-                {therapyRhythm === "daily" && (
-                    <div>
-                        Uhrzeit:
-                        {therapyDailyTime.map((value, index) => (
-                            <div key={index}>{value} Uhr</div>
-                        ))}
-                    </div>
-                )}
+                    {therapyRhythm === "weekdays" && (
+                        <>
+                            <div className="review__row">
+                                <span className="review__label">Wochentage</span>
+                                <span className="review__value">
+                                {therapyWeekday.map((day, index) => day ? displayedWeekdays[index] : null).filter(Boolean).join(", ")}
+                            </span>
+                            </div>
+                            {therapyWeekdayTime && (
+                                <div className="review__row">
+                                    <span className="review__label">Uhrzeit</span>
+                                    <span className="review__value">{therapyWeekdayTime} Uhr</span>
+                                </div>
+                            )}
+                        </>
+                    )}
 
-                {therapyRhythm === "weekdays" && (
-                    <div>
-                        Wochentage:
-                        {therapyWeekday.map((day, index) =>
-                            day ? <div key={index}>{displayedWeekdays[index]}</div> : null
-                        )}
-                        {therapyWeekdayTime ? <div>Uhrzeit: {therapyWeekdayTime} Uhr</div> : null}
-                    </div>
-                )}
-
-                {therapyRhythm === "interval" && (
-                    <div>
-                        Intervall: alle {therapyIntervalValue} {getIntervalUnit(therapyIntervalType)}
-                        {therapyIntervalHoursStartTime ? <div>Uhrzeit: {therapyIntervalHoursStartTime} Uhr</div> : null}
-
-                    </div>
-                )}
+                    {therapyRhythm === "interval" && (
+                        <div className="review__row">
+                            <span className="review__label">Intervall</span>
+                            <span className="review__value">
+                            alle {therapyIntervalValue} {getIntervalUnit(therapyIntervalType)}
+                                {therapyIntervalHoursStartTime ? `, ${therapyIntervalHoursStartTime} Uhr` : ""}
+                        </span>
+                        </div>
+                    )}
+                </div>
             </div>
 
             <button
                 className={"control button button-next"}
                 onClick={nextPage}>
-                Einnahme speichern und beenden
+                Speichern
             </button>
-            </div>
         </div>
     );
 }

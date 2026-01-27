@@ -25,9 +25,7 @@ export default function SetReminderInterval() {
         <div className="set-reminder-interval">
             <div className="set-reminder-interval__type">
                 <div className="set-reminder-interval__wrapper">
-                <span>
-                    Alle
-                </span>
+                    <span>Alle</span>
 
                     <input
                         className="control input set-reminder-interval__value"
