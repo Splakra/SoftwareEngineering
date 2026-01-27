@@ -37,17 +37,34 @@ export default function NewProfile() {
     }
 
     return (
-        <div>
+        <div className="new-profile page">
             <PageHeader title={profileId ? "Profil bearbeiten" : "Profil hinzufügen"}
                         quitPath={"/profile"}/>
-            <div>
-                <h1> "Wie heißt dein/e Patient/in?" </h1>
-                <label>
-                    <p> Name eingeben </p>
-                    <input type={"text"} value={profileName} onChange={e => setProfileName(e.target.value)}/>
+            <div className="query-wrapper">
+                <h2 className="title">
+                    Füge ein neues Profil hinzu!
+                </h2>
+                <label htmlFor="profile-name">
+                    Name des Profils eingeben
                 </label>
-                <button type="submit" onClick={handleClick}> Speichern</button>
+                <div className="input-wrapper">
+                    <input
+                        className="control input"
+                        id="profile-name"
+                        type="text"
+                        placeholder="Schnurzipups"
+                        value={profileName || ""}
+                        onChange={e => setProfileName(e.target.value)}/>
+                </div>
             </div>
+
+            <button
+                className="control button button-next"
+                disabled={!profileName?.trim()}
+                onClick={handleClick}
+            >
+                Speichern
+            </button>
         </div>
     )
 }
