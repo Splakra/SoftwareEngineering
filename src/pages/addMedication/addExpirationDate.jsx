@@ -17,6 +17,8 @@ function addExpirationDate() {
         medicationId
     } = useGlobal();
 
+    const isSkipping = !medicationExpDate && !(medicationExpiresValue && medicationExpiresType);
+
     function nextPage() {
         navigate("/addMedication/review")
     }
@@ -61,7 +63,7 @@ function addExpirationDate() {
                             className="control input"
                             id="reminderValue"
                             type="number"
-                            min="0"
+                            min="1"
                             placeholder="0"
                             value={medicationExpiresValue || ""}
                             onChange={e => setMedicationExpiresValue(e.target.value)}
@@ -71,8 +73,10 @@ function addExpirationDate() {
                         <select
                             className="control select"
                             id="reminderType"
-                            value={medicationExpiresType || ""}
-                            onChange={e => setMedicationExpiresType(e.target.value)}
+                            value={medicationExpiresType ?? ""}
+                            onChange={e => {
+                                setMedicationExpiresType(e.target.value);
+                            }}
                         >
                             <option value="days">Tage</option>
                             <option value="weeks">Wochen</option>
@@ -87,7 +91,7 @@ function addExpirationDate() {
                 className="control button button-next"
                 onClick={nextPage}
             >
-                Weiter
+                {isSkipping ? "Überspringen" : "Weiter"}
             </button>
         </div>
     );

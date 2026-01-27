@@ -26,6 +26,7 @@ function SetReminder() {
         }
         switch (therapyRhythm) {
             case "daily":
+                // not working anymore -> TODO
                 return therapyDailyTime.length === 0 || therapyDailyTime.some(t => t === "");
             case "weekdays":
                 // check whether at least one weekday is selected AND a time is set -> TODO
