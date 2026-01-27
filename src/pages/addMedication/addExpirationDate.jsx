@@ -63,7 +63,9 @@ function addExpirationDate() {
                             className="control input"
                             id="reminderValue"
                             type="number"
-                            min="1"
+                            inputMode="numeric" // opens numeric keypad on phone
+                            min="0"
+                            step="1"
                             placeholder="0"
                             value={medicationExpiresValue || ""}
                             onChange={e => setMedicationExpiresValue(e.target.value)}
@@ -85,10 +87,16 @@ function addExpirationDate() {
                     </div>
                     <span>vorher</span>
                 </div>
+                {(medicationExpiresValue < 0) && (
+                    <div className="warning warning--spaced">
+                        Bitte gib eine gültige Menge ein.
+                    </div>
+                )}
             </div>
 
             <button
                 className="control button button-next"
+                disabled={medicationExpiresValue < 0}
                 onClick={nextPage}
             >
                 {isSkipping ? "Überspringen" : "Weiter"}

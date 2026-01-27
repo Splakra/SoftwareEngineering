@@ -61,11 +61,16 @@ function ChooseDose() {
                             </span>
                     </div>
                 </div>
+                {(therapyDose < 0) && (
+                    <div className="warning warning--spaced">
+                        Bitte gib eine gültige Menge ein.
+                    </div>
+                )}
             </div>
 
             <button
                 className="control button button-next"
-                disabled={therapyDose == null || therapyDose === ""}
+                disabled={therapyDose === "" || therapyDose < 0}
                 onClick={nextPage}
             >
                 Weiter

@@ -253,6 +253,11 @@ select.is-placeholder {
     color: var(--tomato);
 }
 
+.warning--spaced {
+    margin-top: var(--margin-base);
+    font-weight: bold;
+}
+
 /* input */
 
 .input {

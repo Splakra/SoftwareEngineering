@@ -15,7 +15,6 @@ function chunkArray(array, size) {
     return result;
 }
 
-
 export default function MedicinePage({meds = []}) {
     const shelves = chunkArray(meds, 2);
     const navigate = useNavigate();

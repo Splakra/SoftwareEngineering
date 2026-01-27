@@ -63,10 +63,15 @@ function addStock() {
                         />
                         <span
                             className="unit">
-                        {getUnit()}
-                    </span>
+                            {getUnit()}
+                        </span>
                     </div>
                 </div>
+                {(medicationStock < 0) && (
+                    <div className="warning warning--spaced">
+                        Bitte gib eine gültige Menge ein.
+                    </div>
+                )}
             </div>
 
             {/* Optionale Erinnerung */}
@@ -99,11 +104,16 @@ function addStock() {
                     </span>
                     </div>
                 </div>
+                {(medicationBuyNew < 0) && (
+                    <div className="warning warning--spaced">
+                        Bitte gib eine gültige Menge ein.
+                    </div>
+                )}
             </div>
 
             <button
                 className="control button button-next"
-                disabled={!medicationStock}
+                disabled={medicationStock === "" || medicationStock < 0 || medicationBuyNew < 0}
                 onClick={nextPage}
             >
                 Weiter
