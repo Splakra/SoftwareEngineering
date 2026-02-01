@@ -1,7 +1,7 @@
 import "./Profiles.css"
 import db from "../../database/DexieDatabase";
 import { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { deleteEntries } from "./delete";
 import { NavigationBar } from "../../components/NavigationBar/NavigationBar";
 import { useGlobal } from "../globalContext";
@@ -89,8 +89,8 @@ export default function Profiles() {
                     {patients.map((therapyProfile) => (
                         <li
                             className={`profiles__scroller-item ${profileActiveProfile?.id === therapyProfile.id
-                                    ? "profiles__scroller-item--active"
-                                    : ""
+                                ? "profiles__scroller-item--active"
+                                : ""
                                 }`}
                             key={therapyProfile.id}
                             ref={setActiveProfileRef(therapyProfile.id)}
