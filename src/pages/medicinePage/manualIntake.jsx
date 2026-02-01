@@ -2,6 +2,7 @@ import PageHeader from "../../components/PageHeader/PageHeader";
 import {useNavigate, useParams} from "react-router";
 import {useEffect, useState} from "react";
 import db from "../../database/DexieDatabase";
+import {getDoseUnit} from "../../utils/therapyFormat";
 
 export default function manualIntake() {
     const navigate = useNavigate();
@@ -22,18 +23,6 @@ export default function manualIntake() {
         await db.medications.update(Number.parseInt(id), {amount: medication?.amount - Number.parseFloat(amount)})
         navigate("/medication")
     }
-
-    const getUnit = () => {
-        switch (medication?.type) {
-            case "pills":
-                return "Tabletten";
-            case "fluid":
-            case "drops":
-                return "ml";
-            default:
-                return "Sonstige";
-        }
-    };
 
     return (
         <div className="manual-intake page">
@@ -63,7 +52,7 @@ export default function manualIntake() {
                         />
                         <span
                             className="unit">
-                            {getUnit()}
+                            {getDoseUnit(medication?.type)}
                         </span>
                     </div>
                 </div>

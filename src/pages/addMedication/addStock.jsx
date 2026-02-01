@@ -3,6 +3,7 @@ import db from "../../database/DexieDatabase";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router";
 import {useGlobal} from "../globalContext";
+import {getDoseUnit} from "../../utils/therapyFormat";
 
 function addStock() {
     const navigate = useNavigate();
@@ -18,18 +19,6 @@ function addStock() {
     function nextPage() {
         navigate("/addMedication/expirationDate")
     }
-
-    const getUnit = () => {
-        switch (medicationType) {
-            case "pills":
-                return "Tabletten";
-            case "fluid":
-            case "drops":
-                return "ml";
-            default:
-                return "Sonstige";
-        }
-    };
 
     return (
         <div className="page">
@@ -63,7 +52,7 @@ function addStock() {
                         />
                         <span
                             className="unit">
-                            {getUnit()}
+                            {getDoseUnit(medicationType)}
                         </span>
                     </div>
                 </div>
@@ -100,8 +89,8 @@ function addStock() {
                         />
                         <span
                             className="unit">
-                        {getUnit()}
-                    </span>
+                            {getDoseUnit(medicationType)}
+                        </span>
                     </div>
                 </div>
                 {(medicationBuyNew < 0) && (

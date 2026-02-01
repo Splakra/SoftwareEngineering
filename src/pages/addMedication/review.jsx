@@ -4,7 +4,7 @@ import db from "../../database/DexieDatabase";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router";
 import {useGlobal} from "../globalContext";
-import {formatDate} from "../dateFormat";
+import {getDoseUnit, formatDate} from "../../utils/therapyFormat";
 
 function review() {
     const navigate = useNavigate();
@@ -21,19 +21,6 @@ function review() {
         setRouteBackToChooseMedication,
         medicationId
     } = useGlobal();
-
-    function getTypeLabel(type) {
-        switch (type) {
-            case "pills":
-                return "Tabletten";
-            case "fluid":
-                return "Flüssig (ml)";
-            case "drops":
-                return "Tropfen";
-            default:
-                return "Sonstige";
-        }
-    }
 
     async function nextPage() {
         if (medicationId) {
@@ -78,32 +65,32 @@ function review() {
             <div className="query-wrapper">
                 <h2 className="title">Stimmt alles?</h2>
 
-                <div className="review__table">
+                <dl className="review__table">
                     <div className="review__row">
-                        <span className="review__label">Name</span>
-                        <span className="review__value">{medicationName}</span>
+                        <dt className="review__label">Name</dt>
+                        <dd className="review__value">{medicationName}</dd>
                     </div>
 
                     <div className="review__row">
-                        <span className="review__label">Art</span>
-                        <span className="review__value">{getTypeLabel(medicationType)}</span>
+                        <dt className="review__label">Einheit</dt>
+                        <dd className="review__value">{getDoseUnit(medicationType)}</dd>
                     </div>
 
                     <div className="review__row">
-                        <span className="review__label">Vorrat</span>
-                        <span className="review__value">
-                            {medicationStock} {getTypeLabel(medicationType)}
+                        <dt className="review__label">Vorrat</dt>
+                        <dd className="review__value">
+                            {medicationStock} {getDoseUnit(medicationType)}
                             <div className="review__sub">
                                 Erinnerung: {medicationBuyNew
-                                ? `${medicationBuyNew} ${getTypeLabel(medicationType)}`
+                                ? `${medicationBuyNew} ${getDoseUnit(medicationType)}`
                                 : "Keine Erinnerung"}
                             </div>
-                        </span>
+                        </dd>
                     </div>
 
                     <div className="review__row">
-                        <span className="review__label">Ablaufdatum</span>
-                        <span className="review__value">
+                        <dt className="review__label">Ablaufdatum</dt>
+                        <dd className="review__value">
                             {medicationExpDate ? formatDate(medicationExpDate) : "Kein Ablaufdatum"}
                             <div className="review__sub">
                                 Erinnerung: {medicationExpiresValue
@@ -116,9 +103,9 @@ function review() {
                                 } vorher`
                                 : "Keine Erinnerung"}
                             </div>
-                        </span>
+                        </dd>
                     </div>
-                </div>
+                </dl>
             </div>
 
             <button className="control button button-next" onClick={nextPage}>
