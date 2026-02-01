@@ -3,31 +3,35 @@ import db from '../../database/DexieDatabase.js';
 import {useState} from "react";
 import TaskItem from "../../components/TaskItem/TaskItem";
 import PlusIcon from "../../assets/plus-icon.svg";
-import {useNavigate, useRevalidator} from "react-router";
+import {useNavigate, useRevalidator, useSearchParams} from "react-router";
 import {NavigationBar} from "../../components/NavigationBar/NavigationBar";
 import {useGlobal} from "../globalContext";
 import {activeReminder, getSortedTimes, compareTimes} from "../../utils/reminderUtils";
 
-export async function clientLoader() {
+export async function clientLoader({request}) {
+    const url = new URL(request.url);
+    const date = url.searchParams.get("date") || new Date().toISOString().split("T")[0];
     const reminders = await db.reminders.orderBy("dailyTime").toArray(); // get all reminders
 
     await Promise.all( // wait until all async functions inside the parenthesis are done
         reminders.map(async (reminder) => {
-            [reminder.medication, reminder.patient] = await Promise.all(
+            [reminder.medication, reminder.patient, reminder.done] = await Promise.all(
                 [
                     db.medications.where({id: reminder.medicationId}).first(), // .first(): get first as object, not as array like in .limit(1)
-                    db.profiles.where({id: reminder.profileId}).first()
+                    db.profiles.where({id: reminder.profileId}).first(),
+                    db.done.where({reminderId: reminder.id}).and((done) => done.date === date).toArray()
                 ]
             )
         })
     )
     return {
-        reminders
+        reminders,
+        date
     };
 }
 
 function Dashboard({loaderData}) {
-    const {reminders} = loaderData;
+    const {reminders, date} = loaderData;
     const revalidator = useRevalidator(); // only for now
 
     const weekly = [-2, -1, 0, 1, 2].map(value => {
@@ -35,7 +39,7 @@ function Dashboard({loaderData}) {
         today.setDate(today.getDate() + value);
         return today;
     })
-    const currentDate = new Date();
+    const currentDate = new Date(date);
     const navigate = useNavigate();
 
     const {resetTherapy} = useGlobal();
@@ -46,9 +50,11 @@ function Dashboard({loaderData}) {
     }
 
     const [activeDay, setActiveDay] = useState(currentDate);
+    const [search, setSearch] = useSearchParams();
 
     function handleDayClick(day) {
         setActiveDay(day);
+        setSearch({date: day.toISOString().split("T")[0]})
     }
 
     return (
@@ -93,15 +99,21 @@ function Dashboard({loaderData}) {
                     let lastTime = null;
 
                     return allTasks.map(({reminder, time}) => {
-                        const showTime = time !== lastTime ? time : null;
+                        if (!time) {
+                            time = "Ohne Zeit";
+                        }
+                        if (time === lastTime) {
+                            time = null;
+                        }
                         lastTime = time;
 
+                        const date = activeDay.toISOString().split("T")[0];
                         return (
                             <TaskItem
-                                key={`${reminder.id}-${time}`}
+                                key={`${reminder.id}-${date}-${time}`}
                                 {...reminder}
                                 time={time}
-                                showTime={showTime}
+                                date={date}
                             />
                         );
                     });
