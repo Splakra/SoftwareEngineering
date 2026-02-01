@@ -1,12 +1,12 @@
 import PageHeader from "../../components/PageHeader/PageHeader";
 import db from "../../database/DexieDatabase";
-import {useEffect, useState} from "react";
-import {useNavigate} from "react-router";
-import {useGlobal} from "../globalContext";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useGlobal } from "../globalContext";
 
-function addName() {
+export default function AddName() {
     const navigate = useNavigate();
-    const {medicationName, setMedicationName, medicationId} = useGlobal();
+    const { medicationName, setMedicationName, medicationId } = useGlobal();
 
     function nextPage() {
         navigate("/addMedication/type")
@@ -15,7 +15,7 @@ function addName() {
     return (
         <div className="page">
             <PageHeader title={medicationId ? "Medikament bearbeiten" : "Medikament hinzufügen"}
-                        quitPath={"/medication"}/>
+                quitPath={"/medication"} />
 
             <div className="query-wrapper">
                 <h2 className={"title"}>
@@ -32,7 +32,7 @@ function addName() {
                         type="text"
                         placeholder="Glitzerheilstaub"
                         value={medicationName || ""}
-                        onChange={e => setMedicationName(e.target.value)}/>
+                        onChange={e => setMedicationName(e.target.value)} />
                 </div>
             </div>
             <button
@@ -45,5 +45,3 @@ function addName() {
         </div>
     );
 }
-
-export default addName;

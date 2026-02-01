@@ -3,7 +3,7 @@ import PageHeader from "../../components/PageHeader/PageHeader";
 import SetReminderInterval from "./setReminderInterval";
 import SetReminderWeekdays from "./setReminderWeeksdays";
 import SetReminderDaily from "./setReminderDaily";
-import {useNavigate} from "react-router";
+import {useNavigate} from "react-router-dom";
 import {useGlobal} from "../globalContext";
 
 function SetReminder() {

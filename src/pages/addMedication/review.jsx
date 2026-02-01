@@ -1,12 +1,12 @@
 import '../addTherapy/review.css';
 import PageHeader from "../../components/PageHeader/PageHeader";
 import db from "../../database/DexieDatabase";
-import {useEffect, useState} from "react";
-import {useNavigate} from "react-router";
-import {useGlobal} from "../globalContext";
-import {formatDate} from "../dateFormat";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useGlobal } from "../globalContext";
+import { formatDate } from "../dateFormat";
 
-function review() {
+function ReviewMedication() {
     const navigate = useNavigate();
     const {
         medicationName,
@@ -95,8 +95,8 @@ function review() {
                             {medicationStock} {getTypeLabel(medicationType)}
                             <div className="review__sub">
                                 Erinnerung: {medicationBuyNew
-                                ? `${medicationBuyNew} ${getTypeLabel(medicationType)}`
-                                : "Keine Erinnerung"}
+                                    ? `${medicationBuyNew} ${getTypeLabel(medicationType)}`
+                                    : "Keine Erinnerung"}
                             </div>
                         </span>
                     </div>
@@ -107,14 +107,13 @@ function review() {
                             {medicationExpDate ? formatDate(medicationExpDate) : "Kein Ablaufdatum"}
                             <div className="review__sub">
                                 Erinnerung: {medicationExpiresValue
-                                ? `${medicationExpiresValue} ${
-                                    medicationExpiresType === "days"
+                                    ? `${medicationExpiresValue} ${medicationExpiresType === "days"
                                         ? "Tage"
                                         : medicationExpiresType === "weeks"
                                             ? "Wochen"
                                             : "Monate"
-                                } vorher`
-                                : "Keine Erinnerung"}
+                                    } vorher`
+                                    : "Keine Erinnerung"}
                             </div>
                         </span>
                     </div>
@@ -130,4 +129,4 @@ function review() {
     );
 }
 
-export default review;
+export default ReviewMedication;

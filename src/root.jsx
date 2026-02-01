@@ -4,8 +4,10 @@ import {
     Outlet,
     Scripts,
     ScrollRestoration,
-} from "react-router";
+} from "react-router-dom";
 import {GlobalProvider} from "./pages/globalContext";
+import {Route} from "react-router-dom";
+import Routes from "./routes";
 
 export function Layout({children}) {
     return (
@@ -28,7 +30,8 @@ export function Layout({children}) {
         </head>
         <body>
         <GlobalProvider>
-            {children}
+            <Routes>
+            </Routes>
         </GlobalProvider>
         {/* navigation component if global */}
         <ScrollRestoration/>

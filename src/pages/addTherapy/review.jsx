@@ -1,15 +1,15 @@
 import './review.css';
 import PageHeader from "../../components/PageHeader/PageHeader";
 import db from "../../database/DexieDatabase";
-import {useEffect, useState} from "react";
-import {useNavigate} from "react-router";
-import {useGlobal} from "../globalContext";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useGlobal } from "../globalContext";
 import SetReminderDaily from "./setReminderDaily";
 import SetReminderWeekdays from "./setReminderWeeksdays";
 import SetReminderInterval from "./setReminderInterval";
-import {formatDate} from "../dateFormat";
+import { formatDate } from "../dateFormat";
 
-function Review() {
+export default function ReviewTherapy() {
     const navigate = useNavigate();
 
     const {
@@ -89,7 +89,7 @@ function Review() {
 
     return (
         <div className={"review page"}>
-            <PageHeader title="Einnahme hinzufügen"/>
+            <PageHeader title="Einnahme hinzufügen" />
 
             <div className="query-wrapper">
                 <h2 className="title">
@@ -135,8 +135,8 @@ function Review() {
                             <div className="review__row">
                                 <span className="review__label">Wochentage</span>
                                 <span className="review__value">
-                                {therapyWeekday.map((day, index) => day ? displayedWeekdays[index] : null).filter(Boolean).join(", ")}
-                            </span>
+                                    {therapyWeekday.map((day, index) => day ? displayedWeekdays[index] : null).filter(Boolean).join(", ")}
+                                </span>
                             </div>
                             {therapyWeekdayTime && (
                                 <div className="review__row">
@@ -151,9 +151,9 @@ function Review() {
                         <div className="review__row">
                             <span className="review__label">Intervall</span>
                             <span className="review__value">
-                            alle {therapyIntervalValue} {getIntervalUnit(therapyIntervalType)}
+                                alle {therapyIntervalValue} {getIntervalUnit(therapyIntervalType)}
                                 {therapyIntervalHoursStartTime ? `, ${therapyIntervalHoursStartTime} Uhr` : ""}
-                        </span>
+                            </span>
                         </div>
                     )}
                 </div>
@@ -168,7 +168,6 @@ function Review() {
     );
 }
 
-export default Review;
 
 //{therapyIntervalMonths === "lastDay" && (
 //                     <div>

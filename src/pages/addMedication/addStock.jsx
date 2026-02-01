@@ -1,10 +1,10 @@
 import PageHeader from "../../components/PageHeader/PageHeader";
 import db from "../../database/DexieDatabase";
-import {useEffect, useState} from "react";
-import {useNavigate} from "react-router";
-import {useGlobal} from "../globalContext";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useGlobal } from "../globalContext";
 
-function addStock() {
+function AddStock() {
     const navigate = useNavigate();
     const {
         medicationStock,
@@ -100,8 +100,8 @@ function addStock() {
                         />
                         <span
                             className="unit">
-                        {getUnit()}
-                    </span>
+                            {getUnit()}
+                        </span>
                     </div>
                 </div>
                 {(medicationBuyNew < 0) && (
@@ -122,4 +122,4 @@ function addStock() {
     );
 }
 
-export default addStock;
+export default AddStock;

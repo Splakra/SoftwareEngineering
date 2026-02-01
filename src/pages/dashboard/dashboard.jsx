@@ -1,34 +1,33 @@
 import './dashboard.css';
 import db from '../../database/DexieDatabase.js';
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import TaskItem from "../../components/TaskItem/TaskItem";
 import PlusIcon from "../../assets/plus-icon.svg";
-import {useNavigate, useRevalidator} from "react-router";
 import {NavigationBar} from "../../components/NavigationBar/NavigationBar";
 import {useGlobal} from "../globalContext";
 import {activeReminder, getSortedTimes, compareTimes} from "../../utils/reminderUtils";
+import {useNavigate} from "react-router-dom";
 
-export async function clientLoader() {
-    const reminders = await db.reminders.orderBy("dailyTime").toArray(); // get all reminders
+function Dashboard({}) {
+    const [reminders, setReminders] = useState([]);
+    useEffect(() => {
+        const loadClientData = async () => {
+            const loadedReminders = await db.reminders.orderBy("dailyTime").toArray(); // get all reminders
 
-    await Promise.all( // wait until all async functions inside the parenthesis are done
-        reminders.map(async (reminder) => {
-            [reminder.medication, reminder.patient] = await Promise.all(
-                [
-                    db.medications.where({id: reminder.medicationId}).first(), // .first(): get first as object, not as array like in .limit(1)
-                    db.profiles.where({id: reminder.profileId}).first()
-                ]
+            await Promise.all( // wait until all async functions inside the parenthesis are done
+                loadedReminders.map(async (reminder) => {
+                    [reminder.medication, reminder.patient] = await Promise.all(
+                        [
+                            db.medications.where({id: reminder.medicationId}).first(), // .first(): get first as object, not as array like in .limit(1)
+                            db.profiles.where({id: reminder.profileId}).first()
+                        ]
+                    )
+                })
             )
-        })
-    )
-    return {
-        reminders
-    };
-}
-
-function Dashboard({loaderData}) {
-    const {reminders} = loaderData;
-    const revalidator = useRevalidator(); // only for now
+            setReminders(loadedReminders)
+        }
+        loadClientData();
+    }, []);
 
     const weekly = [-2, -1, 0, 1, 2].map(value => {
         const today = new Date();

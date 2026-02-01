@@ -1,11 +1,11 @@
 import PersonIcon from "../../assets/person-round.svg";
 import "./Profiles.css"
 import db from "../../database/DexieDatabase";
-import {useEffect, useState} from "react";
-import {useNavigate} from "react-router";
-import {deleteEntries} from "./delete";
-import {NavigationBar} from "../../components/NavigationBar/NavigationBar";
-import {useGlobal} from "../globalContext";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { deleteEntries } from "./delete";
+import { NavigationBar } from "../../components/NavigationBar/NavigationBar";
+import { useGlobal } from "../globalContext";
 import ProfileItems from "../../components/ProfileItems/ProfileItems";
 import ToggleMenu from "../../components/ToggleMenu/ToggleMenu";
 
@@ -14,9 +14,9 @@ import PlusIconWhite from "../../assets/plus-icon-white.svg"
 import PencilIcon from "../../assets/pencil.svg"
 
 
-export default function Profile() {
+export default function Profiles() {
     const navigate = useNavigate();
-    const {setProfileEdit, resetProfile} = useGlobal();
+    const { setProfileEdit, resetProfile } = useGlobal();
 
     function handleClick() {
         resetProfile();
@@ -62,7 +62,7 @@ export default function Profile() {
                         return <div className="therapyProfile" key={therapyProfile.id}>
                             <img alt="" className={"task-item__person"} src={PersonIcon} onClick={() => {
                                 setProfileActiveProfile(therapyProfile)
-                            }}/>
+                            }} />
                             {
                                 therapyProfile.name
                             }
@@ -76,17 +76,17 @@ export default function Profile() {
                                     icon: PencilIcon,
                                     onClick: () => editProfile(therapyProfile)
                                 }
-                            ]}/>
+                            ]} />
                         </div>
                     })
                 }
             </div>
-            {profileActiveProfile && <ProfileItems activeProfile={profileActiveProfile}/>}
+            {profileActiveProfile && <ProfileItems activeProfile={profileActiveProfile} />}
             <button
                 className={"control button profile__add-button"}
                 onClick={handleClick}> Profil hinzufügen
             </button>
-            <NavigationBar/>
+            <NavigationBar />
         </div>
     )
 }
