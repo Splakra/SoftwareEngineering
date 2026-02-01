@@ -1,15 +1,117 @@
-.profile-page__profiles {
+.profiles__profile-section {
+    margin: 0 calc(-1 * var(--padding-inline-base)); /* gleicht das .page-Padding aus */
+    background: white;
+    padding-inline: var(--padding-inline-base);
+    padding-block: var(--padding-inline-s);
+}
+
+.profiles__scroller {
     display: flex;
-    flex-wrap: nowrap;
-    overflow-x: scroll;
+    list-style: none;
+    overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-    -ms-overflow-style: none; /* Internet Explorer 10+ */
-    scrollbar-width: none; /* Firefox, Safari 18.2+, Chromium 121+ */
-
+    scrollbar-width: none;
+    align-items: center;
+    height: 8rem;
+    gap: var(--gap-base);
+    margin: 0;
+    padding: 0;
 }
 
-.therapyProfile {
+.profiles__scroller::-webkit-scrollbar {
+    display: none;
+}
+
+.profiles__scroller-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profiles__scroller-item-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    width: 4rem;
+    gap: var(--margin-small);
+    border: none;
+    background: transparent;
+    font-family: "Ysabeau Office", serif;
+    font-size: var(--font-size-base);
+    font-weight: bold;
+    color: color-mix(in oklab, var(--rich-mahogany), transparent);
+    transition: all 200ms ease;
+}
+
+.profiles__scroller-item-name {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 100%;
+}
+
+.profiles__scroller-item--active .profiles__scroller-item-button {
+    color: var(--rich-mahogany);
+    width: 4.5rem;
+}
+
+.profiles__scroller-item-button:focus-visible,
+.toggle-menu__button:focus-visible {
+    outline: 0.2rem solid var(--tangerine-dream);
+    outline-offset: 0.2rem;
+}
+
+.profiles__scroller-item-icon {
+    box-sizing: border-box;
+    display: block;
+    aspect-ratio: 1;
+    width: 100%;
+    height: auto;
+    padding: var(--padding-inline-m);
+    border-radius: 50%;
+    background: var(--tangerine-dream-light);
+    color: var(--snow);
+}
+
+.profiles__scroller-item--active .profiles__scroller-item-icon {
+    background-image: radial-gradient(
+            circle at 15% 25%,
+            var(--tangerine-dream) 10%,
+            var(--tomato) 100%
+    );
+    color: var(--snow);
+}
+
+.profiles__active-profile-header {
     position: relative;
-    width: 100px;
-    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: var(--margin-base) 0;
+    gap: var(--padding-inline-m);
+    background: color-mix(in oklab, var(--snow) 97%, black);
+    padding-inline: var(--padding-inline-base);
+    padding-block: var(--padding-inline-s);
+    border-radius: var(--border-radius-base);
 }
+
+.profiles__active-profile-title {
+    margin: 0;
+    font-size: var(--font-size-xl);
+}
+
+.profiles__active-profile-toggle .toggle-menu__button {
+    display: flex;
+    /*position: relative;*/
+    align-items: center;
+    height: 100%;
+    border-top-left-radius: unset;
+    border-top-right-radius: var(--border-radius-base);
+    /*border-radius: 50%;*/
+}
+
+.profiles__active-profile-toggle .toggle-menu__dots {
+}
+

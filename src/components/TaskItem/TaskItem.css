@@ -10,7 +10,7 @@
     font-variant-numeric: tabular-nums; /* sets all numbers to same size */
     font-weight: 600;
     font-style: italic;
-    letter-spacing: 0.07rem;
+    letter-spacing: 0.03rem;
 }
 
 .task-item--checked .task-item__time {
@@ -87,6 +87,7 @@
     padding: 0.2rem;
     overflow: visible;
     background: var(--snow);
+    color: var(--tangerine-dream);
     border-radius: 50%;
 }
 

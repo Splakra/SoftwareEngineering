@@ -13,7 +13,7 @@ function SetReminder() {
         therapyDailyTime, therapyIntervalValue,
         therapyWeekday, therapyWeekdayTime, therapyStartDate, setTherapyStartDate,
         therapyEndDate, setTherapyEndDate,
-        therapyIntervalHoursStartTime
+        therapyIntervalHoursStartTime, therapyIntervalType
     } = useGlobal();
 
     function nextPage() {
@@ -27,11 +27,11 @@ function SetReminder() {
         }
         switch (therapyRhythm) {
             case "daily":
-                return therapyDailyTime.length === 0 || therapyDailyTime.some(t => t === "");
+                return therapyDailyTime.some(t => t === "");
             case "weekdays":
                 return !therapyWeekday.some(v => v); // || !therapyWeekdayTime;
             case "interval":
-                return !therapyIntervalValue || !therapyIntervalHoursStartTime;
+                return !therapyIntervalValue || (!therapyIntervalHoursStartTime && therapyIntervalType === "hours");
             default:
                 return true;
         }

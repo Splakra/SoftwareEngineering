@@ -19,7 +19,7 @@ export default function SetReminderIntervalMonths() {
                 <input
                     type="time"
                     className="date"
-                    value={therapyIntervalHoursStartTime ?? "00:00"}
+                    value={therapyIntervalHoursStartTime ?? ""}
                     onChange={e => setTherapyIntervalHoursStartTime(e.target.value)}
                 />
             </div>

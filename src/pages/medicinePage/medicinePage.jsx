@@ -37,11 +37,11 @@ export default function MedicinePage({meds = []}) {
 
 
     return (
-        <div className="medicine-page">
-            <h2 className="medicine-page__title">
-                Medikamenten-Schrank
+        <div className="medicine page">
+            <h2 className="title">
+                Mein Medizinschrank
             </h2>
-            <div className="medicine-page__content">
+            <div className="medicine__content">
                 {medication.map((shelf, index) => (
                     <div className="medicine-shelf" key={index}>
                         <div className="medicine-shelf__items">
@@ -55,12 +55,13 @@ export default function MedicinePage({meds = []}) {
                         <div className="medicine-shelf__board"/>
                     </div>
                 ))}
-                <button className={"medicine-page__add-button"} onClick={addMed}>
-                    <img alt="" className={"medicine-page__plus-icon"} src={PlusIcon}/>
+                <button
+                    className={"medicine__add-button"}
+                    onClick={addMed}>
+                    <img alt="" className={"medicine__plus-icon"} src={PlusIcon}/>
                     Hinzufügen
                 </button>
             </div>
-
             <NavigationBar/>
         </div>
     );

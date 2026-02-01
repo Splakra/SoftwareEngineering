@@ -4,7 +4,7 @@ import db from "../../database/DexieDatabase";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {useGlobal} from "../globalContext";
-
+import {getDoseUnit} from "../../utils/therapyFormat";
 
 function ChooseDose() {
     const navigate = useNavigate();
@@ -12,21 +12,6 @@ function ChooseDose() {
 
     function nextPage() {
         navigate("/addTherapy/reminder")
-    }
-
-    function getDoseUnit() {
-        if (!therapyMedication) return "";
-
-        switch (JSON.parse(therapyMedication).type) {
-            case "pills":
-                return "Tabletten";
-            case "fluid":
-                return "ml";
-            case "drops":
-                return "Tropfen";
-            default:
-                return "Sonstige";
-        }
     }
 
     return (
@@ -57,7 +42,9 @@ function ChooseDose() {
                         />
                         <span
                             className="unit">
-                                {getDoseUnit()}
+                            {therapyMedication
+                                ? getDoseUnit(JSON.parse(therapyMedication).type)
+                                : ""}
                             </span>
                     </div>
                 </div>

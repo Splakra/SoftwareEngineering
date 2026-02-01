@@ -1,61 +1,31 @@
-.info-item {
-    --infos-border-left-width: 0.8rem; /* custom variable: width of the colored left border */
-    display: flex; /* places child elements next to each other */
-    gap: var(--gap-base); /* space between the children */
-    margin-bottom: var(--margin-base);
-
-
-}
-
 .info-item__infos {
-    padding: 1rem;
-    border-left: var(--infos-border-left-width) solid var(--tangerine-dream);
-    border-radius: var(--border-radius-base);
-    overflow: hidden;
-    background-color: white;
-    box-shadow: 0.1rem 0.4rem 1.5rem color-mix(in oklab, var(--tangerine-dream) 30%, transparent);
-    flex-grow: 1;
     position: relative;
+    padding: var(--padding-inline-base);
+    border-radius: var(--border-radius-base);
+    background: color-mix(in oklab, var(--snow) 97%, black);
+    /*box-shadow: 0.1rem 0.4rem 1.5rem color-mix(in oklab, var(--tangerine-dream) 30%, transparent);*/
 }
 
-.info-item__time {
-    flex: 0 0 3rem;
-    font-variant-numeric: tabular-nums; /* sets all numbers to same size */
-    font-weight: 600;
-    font-style: italic;
-    letter-spacing: 0.07rem;
-}
-
-.info-item__name {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--gap-small);
+.info-item__title {
     margin-bottom: var(--margin-small);
-    padding: var(--padding-block-small) var(--padding-inline-s);
-    background: var(--tangerine-dream);
-    color: white;
-    border-radius: var(--border-radius-small);
     font-size: var(--font-size-l);
     font-weight: bold;
 }
 
-.info-item__icon {
-    width: 0.8rem;
-    height: 0.8rem;
-    padding: 0.2rem;
-    overflow: visible;
-    background: var(--snow);
-    border-radius: 50%;
+.info-item__table {
+    display: grid;
+    grid-template-columns: max-content 1fr; /* Label + Value */
+    gap: var(--gap-small) var(--gap-base); /* row-gap column-gap */
+    align-items: start;
 }
 
-.info-item__medication {
-    font-weight: bold;
+.info-item__table dd {
+    margin: 0; /* entfernt Standard-Indent */
+    word-break: break-word;
+    font-style: italic;
 }
 
-.info-item__details--weekdays {
-    display: flex;
-}
-
-.info-item__details {
-    font-size: var(--font-size-s);
+.info-item:focus-within .info-item__infos {
+    outline: 0.15rem solid var(--tangerine-dream);
+    outline-offset: 0.15rem;
 }

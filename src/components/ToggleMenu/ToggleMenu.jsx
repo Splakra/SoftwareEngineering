@@ -1,6 +1,6 @@
 import {useState} from "react";
 import "./ToggleMenu.css";
-import ThreeDotsIcon from "../icons/ThreeDotsIcon";
+import ThreeDotsIcon from "../Icons/ThreeDotsIcon";
 
 export default function ToggleMenu({items, className = ""}) {
     const [open, setOpen] = useState(false);

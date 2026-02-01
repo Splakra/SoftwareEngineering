@@ -1,11 +1,11 @@
 .toggle-menu__button {
-    all: unset;
     position: absolute;
     display: flex;
     bottom: 0;
     right: 0;
     width: 2.5rem;
     height: 2.5rem;
+    border: none;
     border-top-left-radius: var(--border-radius-small);
     border-bottom-right-radius: var(--border-radius-base);
     background-color: var(--tangerine-dream);

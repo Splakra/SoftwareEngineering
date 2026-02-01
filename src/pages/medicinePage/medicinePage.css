@@ -1,16 +1,4 @@
-.medicine-page {
-    padding: calc(2 * var(--padding-block-base)) var(--padding-inline-base) var(--padding-block-base) var(--padding-inline-base);
-}
-
-.medicine-page__title {
-    all: unset;
-    display: block;
-    margin-bottom: var(--margin-base);
-    font-size: var(--font-size-xxl);
-    font-weight: bold;
-}
-
-.medicine-page__content {
+.medicine__content {
     display: flex;
     flex-direction: column;
     gap: var(--gap-base);
@@ -27,10 +15,10 @@
     height: 0.8rem;
     background: white;
     border-radius: 0 0 var(--border-radius-large) var(--border-radius-large);
-    box-shadow: 0.3rem 0.3rem 0.8em 0.1rem color-mix(in oklab, var(--tangerine-dream) 40%, transparent);
+    box-shadow: 0.3rem 0.3rem 0.8em 0.1rem color-mix(in oklab, var(--tangerine-dream) 15%, transparent);
 }
 
-.medicine-page__add-button {
+.medicine__add-button {
     all: unset;
     display: inline-flex;
     align-items: center;
@@ -44,7 +32,7 @@
     font-weight: bold;
 }
 
-.medicine-page__plus-icon {
+.medicine__plus-icon {
     width: 0.8rem;
     padding: 0.2rem;
     border: 0.1rem solid var(--rich-mahogany);

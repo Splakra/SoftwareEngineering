@@ -1,30 +1,45 @@
-import PersonIcon from "../../assets/person-round.svg";
 import "./Profiles.css"
 import db from "../../database/DexieDatabase";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router";
 import { deleteEntries } from "./delete";
 import { NavigationBar } from "../../components/NavigationBar/NavigationBar";
 import { useGlobal } from "../globalContext";
 import ProfileItems from "../../components/ProfileItems/ProfileItems";
 import ToggleMenu from "../../components/ToggleMenu/ToggleMenu";
-
+import PawIcon from "../../components/Icons/PawIcon.jsx";
 import TrashIcon from "../../assets/trash.svg"
-import PlusIconWhite from "../../assets/plus-icon-white.svg"
 import PencilIcon from "../../assets/pencil.svg"
-
 
 export default function Profiles() {
     const navigate = useNavigate();
     const { setProfileEdit, resetProfile } = useGlobal();
+    const profileRefs = useRef([]);
+    const [patients, setPatients] = useState([])
+    const [profileActiveProfile, setProfileActiveProfile] = useState()
+
+    function handleActiveProfile(therapyProfile) {
+        profileRefs.current[therapyProfile.id].scrollIntoView({
+            behavior: "smooth",
+            container: "nearest",
+            inline: "center"
+        })
+        setProfileActiveProfile(therapyProfile)
+    }
+
+    const setActiveProfileRef = (id) => (el) => {
+        if (el) {
+            profileRefs.current[id] = el;
+        } else {
+            delete profileRefs.current[id];
+        }
+    }
 
     function handleClick() {
         resetProfile();
         navigate("/profile/add");
     }
 
-    const [patients, setPatients] = useState([])
-    const [profileActiveProfile, setProfileActiveProfile] = useState()
     useEffect(() => {
         async function loadPatients() {
             const loadedPatients = await db.profiles.toArray();
@@ -48,6 +63,15 @@ export default function Profiles() {
         navigate("/profile/add");
     }
 
+    function formatTherapyTitle(name) {
+        if (!name) return "Meine Therapien";
+
+        const endsWithS = /[sxzß]$/i.test(name);
+        return endsWithS
+            ? `${name}’ Therapien`
+            : `${name}s Therapien`;
+    }
+
     const handleDeleteEntries = async () => {//schnelles entfernen von medikamenten
         const keepIds = [1, 2]; // die 2 IDs, die bleiben sollen
         await deleteEntries(keepIds);
@@ -55,39 +79,73 @@ export default function Profiles() {
     };
 
     return (
-        <div className={""}>
-            <div className={"profile-page__profiles"}>
-                {
-                    patients.map(therapyProfile => {
-                        return <div className="therapyProfile" key={therapyProfile.id}>
-                            <img alt="" className={"task-item__person"} src={PersonIcon} onClick={() => {
-                                setProfileActiveProfile(therapyProfile)
-                            }} />
-                            {
-                                therapyProfile.name
-                            }
-                            <ToggleMenu items={[
+        <div className="profiles page">
+            <h2 className="profiles__title title">
+                Meine Patient*innen
+            </h2>
+
+            <section className="profiles__profile-section">
+                <ul className="profiles__scroller">
+                    {patients.map((therapyProfile) => (
+                        <li
+                            className={`profiles__scroller-item ${profileActiveProfile?.id === therapyProfile.id
+                                    ? "profiles__scroller-item--active"
+                                    : ""
+                                }`}
+                            key={therapyProfile.id}
+                            ref={setActiveProfileRef(therapyProfile.id)}
+                        >
+                            <button
+                                className="profiles__scroller-item-button"
+                                onClick={() => handleActiveProfile(therapyProfile)}
+                                aria-label={`Profil ${therapyProfile.name} auswählen`}
+                            >
+                                <PawIcon className="profiles__scroller-item-icon" />
+                                <div className="profiles__scroller-item-name">
+                                    {therapyProfile.name}
+                                </div>
+                            </button>
+
+                        </li>
+                    ))}
+                </ul>
+            </section>
+
+            {profileActiveProfile && (
+                <section className="profiles__active-profile-section">
+                    <div className="profiles__active-profile-header">
+                        <h3 className="profiles__active-profile-title">
+                            {formatTherapyTitle(profileActiveProfile?.name)}
+                        </h3>
+                        <ToggleMenu
+                            className="profiles__active-profile-toggle"
+                            items={[
                                 {
                                     label: "Profil löschen",
                                     icon: TrashIcon,
-                                    onClick: () => handleDelete(therapyProfile.id)
-                                }, {
+                                    onClick: () => handleDelete(profileActiveProfile.id),
+                                },
+                                {
                                     label: "Profil bearbeiten",
                                     icon: PencilIcon,
-                                    onClick: () => editProfile(therapyProfile)
-                                }
-                            ]} />
-                        </div>
-                    })
-                }
-            </div>
-            {profileActiveProfile && <ProfileItems activeProfile={profileActiveProfile} />}
+                                    onClick: () => editProfile(profileActiveProfile),
+                                },
+                            ]}
+                        />
+                    </div>
+                    <ProfileItems activeProfile={profileActiveProfile} />
+                </section>
+            )}
+
             <button
-                className={"control button profile__add-button"}
-                onClick={handleClick}> Profil hinzufügen
+                className="control button profiles__add-button"
+                onClick={handleClick}
+            >
+                Profil hinzufügen
             </button>
+
             <NavigationBar />
         </div>
-    )
+    );
 }
 

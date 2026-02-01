@@ -1,9 +1,9 @@
 import './setReminderWeekdays.css'
 import {useGlobal} from "../globalContext";
+import {WEEKDAYS_SHORT} from "../../utils/therapyFormat";
 
 export default function SetReminderWeekdays() {
 
-    const weekdays = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
     const {therapyWeekday, setTherapyWeekday, therapyWeekdayTime, setTherapyWeekdayTime} = useGlobal();
 
     function updateWeekday(value, index) {
@@ -19,7 +19,7 @@ export default function SetReminderWeekdays() {
                     Wochentage wählen
                 </legend>
 
-                {weekdays.map((day, index) => (
+                {WEEKDAYS_SHORT.map((day, index) => (
                     <label className="weekdays" key={day}>
                         <input
                             type="checkbox"
