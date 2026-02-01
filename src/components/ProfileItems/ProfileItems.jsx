@@ -1,15 +1,15 @@
+import './ProfileItems.css';
 import db from "../../database/DexieDatabase";
 import {deleteEntries} from "../../pages/profiles/delete";
 import {useEffect, useState} from "react";
-import {useGlobal} from "../../pages/globalContext";
-import TaskItem from "../TaskItem/TaskItem";
 import InfoItem from "../InfoItems/InfoItem";
 
 export default function ProfileItems({activeProfile}) {
     const [medications, setMedications] = useState([])
     const [dailyReminder, setDailyReminder] = useState([]);
-    const [intervalReminder, setIntervalReminder] = useState([]);
     const [weekdayReminder, setWeekdayReminder] = useState([]);
+    const [intervalReminder, setIntervalReminder] = useState([]);
+
     useEffect(() => {
         async function loadMedications() {
             const loadedMedications = await db.medications.toArray();
@@ -30,30 +30,39 @@ export default function ProfileItems({activeProfile}) {
 
 
     return (
-        <div className={"profile-page__active-profile"}>
+        <div className={"profiles__active-profile"}>
             {[
                 ["Täglich", dailyReminder],
                 ["Bestimmte Wochentage", weekdayReminder],
                 ["Intervall", intervalReminder]
             ].map(([reminderLabel, reminders], index) => {
-                return (reminders.length !== 0 ?
-                        <div key={index}>
-                            <div>{reminderLabel}</div>
-                            <div>
-                                {reminders.filter(r => r.profileId === activeProfile.id).map(reminder => {
+                if (reminders.length === 0) return null;
 
-                                    const medication = medications?.find(m => m.id === reminder.medicationId);
+                return (
+                    <section key={index} className="profiles__reminder-group">
+                        <h4 className="profiles__reminder-group-title">{reminderLabel}</h4>
+                        <ul className="profiles__reminder-list">
+                            {reminders
+                                .filter(r => r.profileId === activeProfile.id)
+                                .map(reminder => {
+                                    const medication = medications?.find(
+                                        m => m.id === reminder.medicationId
+                                    );
                                     if (!activeProfile || !medication) return null;
 
-                                    return <InfoItem
-                                        {...reminder}
-                                        key={reminder.id}
-                                        patient={activeProfile}
-                                        medication={medication}
-                                        showTime={true}/>
+                                    return (
+                                        <li key={reminder.id} className="profiles__reminder-list-item">
+                                            <InfoItem
+                                                {...reminder}
+                                                patient={activeProfile}
+                                                medication={medication}
+                                                showTime={true}
+                                            />
+                                        </li>
+                                    );
                                 })}
-                            </div>
-                        </div> : null
+                        </ul>
+                    </section>
                 )
             })}
 
