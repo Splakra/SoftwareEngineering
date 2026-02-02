@@ -24,7 +24,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "start": "npm run dev",
-    "android": "cap sync && cap run android"
+    "android": "npm run build && cap sync && cap run android"
   },
   "eslintConfig": {
     "extends": [
