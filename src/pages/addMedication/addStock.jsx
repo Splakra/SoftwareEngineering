@@ -1,11 +1,11 @@
 import PageHeader from "../../components/PageHeader/PageHeader";
 import db from "../../database/DexieDatabase";
-import {useEffect, useState} from "react";
-import {useNavigate} from "react-router";
-import {useGlobal} from "../globalContext";
-import {getDoseUnit} from "../../utils/therapyFormat";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useGlobal } from "../globalContext";
+import { getDoseUnit } from "../../utils/therapyFormat";
 
-function addStock() {
+function AddStock() {
     const navigate = useNavigate();
     const {
         medicationStock,
@@ -111,4 +111,4 @@ function addStock() {
     );
 }
 
-export default addStock;
+export default AddStock;

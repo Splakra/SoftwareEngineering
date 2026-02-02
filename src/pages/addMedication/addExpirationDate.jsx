@@ -1,11 +1,11 @@
 import './addExpirationDate.css';
 import PageHeader from "../../components/PageHeader/PageHeader";
 import db from "../../database/DexieDatabase";
-import {useEffect, useState} from "react";
-import {useNavigate} from "react-router";
-import {useGlobal} from "../globalContext";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useGlobal } from "../globalContext";
 
-function addExpirationDate() {
+function AddExpirationDate() {
     const navigate = useNavigate();
     const {
         medicationExpDate,
@@ -26,7 +26,7 @@ function addExpirationDate() {
     return (
         <div className="expiration page">
             <PageHeader title={medicationId ? "Medikament bearbeiten" : "Medikament hinzufügen"}
-                        quitPath={"/medication"}/>
+                quitPath={"/medication"} />
 
             {/* Optionales Ablaufdatum */}
             <div className="query-wrapper">
@@ -43,7 +43,7 @@ function addExpirationDate() {
                             className="date"
                             type="date"
                             value={medicationExpDate ?? ""}
-                            onChange={e => setMedicationExpDate(e.target.value)}/>
+                            onChange={e => setMedicationExpDate(e.target.value)} />
                     </div>
                 </div>
             </div>
@@ -105,4 +105,4 @@ function addExpirationDate() {
     );
 }
 
-export default addExpirationDate;
+export default AddExpirationDate;

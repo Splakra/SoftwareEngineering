@@ -1,6 +1,6 @@
 import db from "../../database/DexieDatabase";
 import PageHeader from "../../components/PageHeader/PageHeader";
-import {useNavigate} from "react-router";
+import {useNavigate} from "react-router-dom";
 import {useGlobal} from "../globalContext";
 
 export default function NewProfile() {

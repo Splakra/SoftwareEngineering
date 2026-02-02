@@ -1,9 +1,9 @@
 import './review.css';
 import PageHeader from "../../components/PageHeader/PageHeader";
 import db from "../../database/DexieDatabase";
-import {useEffect, useState} from "react";
-import {useNavigate} from "react-router";
-import {useGlobal} from "../globalContext";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useGlobal } from "../globalContext";
 import SetReminderDaily from "./setReminderDaily";
 import SetReminderWeekdays from "./setReminderWeeksdays";
 import SetReminderInterval from "./setReminderInterval";
@@ -15,7 +15,7 @@ import {
     getDoseUnit,
 } from "../../utils/therapyFormat";
 
-function Review() {
+export default function ReviewTherapy() {
     const navigate = useNavigate();
 
     const {
@@ -66,7 +66,7 @@ function Review() {
 
     return (
         <div className={"review page"}>
-            <PageHeader title="Einnahme hinzufügen"/>
+            <PageHeader title="Einnahme hinzufügen" />
 
             <div className="query-wrapper">
                 <h2 className="title">
@@ -146,53 +146,3 @@ function Review() {
         </div>
     );
 }
-
-export default Review;
-
-//{therapyIntervalMonths === "lastDay" && (
-//                     <div>
-//                         Monatliche Erinnerung : Letzter Tag des Monats
-//                     </div>
-//                 )}
-//
-//                 {therapyIntervalMonths === "lastMonday" && (
-//                     <div>
-//                         Monatliche Erinnerung : Letzter Montag des Monats
-//                     </div>
-//                 )}
-//
-//                 {therapyIntervalMonths === "lastTuesday" && (
-//                     <div>
-//                         Monatliche Erinnerung : Letzter Dienstag des Monats
-//                     </div>
-//                 )}
-//
-//                 {therapyIntervalMonths === "lastWednesday" && (
-//                     <div>
-//                         Monatliche Erinnerung : Letzter Mittwoch des Monats
-//                     </div>
-//                 )}
-//
-//                 {therapyIntervalMonths === "lastThursday" && (
-//                     <div>
-//                         Monatliche Erinnerung : Letzter Donnerstag des Monats
-//                     </div>
-//                 )}
-//
-//                 {therapyIntervalMonths === "lastFriday" && (
-//                     <div>
-//                         Monatliche Erinnerung : Letzter Montag des Monats
-//                     </div>
-//                 )}
-//
-//                 {therapyIntervalMonths === "lastSaturday" && (
-//                     <div>
-//                         Monatliche Erinnerung : Letzter Freitag des Monats
-//                     </div>
-//                 )}
-//
-//                 {therapyIntervalMonths === "lastSunday" && (
-//                     <div>
-//                         Monatliche Erinnerung : Letzter Samstag des Monats
-//                     </div>
-//                 )}

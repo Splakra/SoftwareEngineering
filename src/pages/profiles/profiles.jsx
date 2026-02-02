@@ -1,19 +1,19 @@
 import "./Profiles.css"
 import db from "../../database/DexieDatabase";
-import {useEffect, useRef, useState} from "react";
-import {useNavigate} from "react-router";
-import {deleteEntries} from "./delete";
-import {NavigationBar} from "../../components/NavigationBar/NavigationBar";
-import {useGlobal} from "../globalContext";
+import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { deleteEntries } from "./delete";
+import { NavigationBar } from "../../components/NavigationBar/NavigationBar";
+import { useGlobal } from "../globalContext";
 import ProfileItems from "../../components/ProfileItems/ProfileItems";
 import ToggleMenu from "../../components/ToggleMenu/ToggleMenu";
 import PawIcon from "../../components/Icons/PawIcon.jsx";
 import TrashIcon from "../../assets/trash.svg"
 import PencilIcon from "../../assets/pencil.svg"
 
-export default function Profile() {
+export default function Profiles() {
     const navigate = useNavigate();
-    const {setProfileEdit, resetProfile} = useGlobal();
+    const { setProfileEdit, resetProfile } = useGlobal();
     const profileRefs = useRef([]);
     const [patients, setPatients] = useState([])
     const [profileActiveProfile, setProfileActiveProfile] = useState()
@@ -88,11 +88,10 @@ export default function Profile() {
                 <ul className="profiles__scroller">
                     {patients.map((therapyProfile) => (
                         <li
-                            className={`profiles__scroller-item ${
-                                profileActiveProfile?.id === therapyProfile.id
-                                    ? "profiles__scroller-item--active"
-                                    : ""
-                            }`}
+                            className={`profiles__scroller-item ${profileActiveProfile?.id === therapyProfile.id
+                                ? "profiles__scroller-item--active"
+                                : ""
+                                }`}
                             key={therapyProfile.id}
                             ref={setActiveProfileRef(therapyProfile.id)}
                         >
@@ -101,7 +100,7 @@ export default function Profile() {
                                 onClick={() => handleActiveProfile(therapyProfile)}
                                 aria-label={`Profil ${therapyProfile.name} auswählen`}
                             >
-                                <PawIcon className="profiles__scroller-item-icon"/>
+                                <PawIcon className="profiles__scroller-item-icon" />
                                 <div className="profiles__scroller-item-name">
                                     {therapyProfile.name}
                                 </div>
@@ -134,7 +133,7 @@ export default function Profile() {
                             ]}
                         />
                     </div>
-                    <ProfileItems activeProfile={profileActiveProfile}/>
+                    <ProfileItems activeProfile={profileActiveProfile} />
                 </section>
             )}
 
@@ -145,7 +144,7 @@ export default function Profile() {
                 Profil hinzufügen
             </button>
 
-            <NavigationBar/>
+            <NavigationBar />
         </div>
     );
 }

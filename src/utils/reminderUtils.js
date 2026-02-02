@@ -22,7 +22,7 @@ export function activeReminder(reminder, activeDay) {
                 ? false
                 : (!(endDay && activeDayOnly > endDay));
         case "weekdays":
-            return !!reminder.weekdays?.at(((activeDay.getDay() + 6) % 7)); // add ? so that it doesn't crash if weekdays is undefined
+            return !!reminder.weekdays?.[(activeDay.getDay() + 6) % 7]; // add ? so that it doesn't crash if weekdays is undefined
         case "interval":
             return (start > activeDay)
                 ? false
@@ -87,7 +87,7 @@ export function getHourlyReminder(reminder, activeDay) {
     }
 
     while (current <= activeDayEnd) {
-        hourlyReminders.push(current.toLocaleTimeString("de-DE", {hour: "2-digit", minute: "2-digit"}));
+        hourlyReminders.push(current.toLocaleTimeString("de-DE", { hour: "2-digit", minute: "2-digit" }));
         current = new Date(current.getTime() + intervalMs);
     }
     return hourlyReminders;

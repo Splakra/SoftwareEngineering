@@ -7,7 +7,7 @@ import PencilIcon from "../../assets/pencil.svg"
 import "./MedicineItem.css";
 import db from "../../database/DexieDatabase";
 import ToggleMenu from "../ToggleMenu/ToggleMenu";
-import {useNavigate, useRevalidator} from "react-router";
+import {useNavigate, useRevalidator} from "react-router-dom";
 import {useGlobal} from "../../pages/globalContext";
 import {getDoseUnit} from "../../utils/therapyFormat";
 
