@@ -1,19 +1,19 @@
 import "./Profiles.css"
 import db from "../../database/DexieDatabase";
-import {useEffect, useRef, useState} from "react";
-import {useNavigate} from "react-router";
-import {deleteEntries} from "./delete";
-import {NavigationBar} from "../../components/NavigationBar/NavigationBar";
-import {useGlobal} from "../globalContext";
+import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { deleteEntries } from "./delete";
+import { NavigationBar } from "../../components/NavigationBar/NavigationBar";
+import { useGlobal } from "../globalContext";
 import ProfileItems from "../../components/ProfileItems/ProfileItems";
 import ToggleMenu from "../../components/ToggleMenu/ToggleMenu";
 import PawIcon from "../../components/Icons/PawIcon.jsx";
 import TrashIcon from "../../assets/trash.svg"
 import PencilIcon from "../../assets/pencil.svg"
 
-export default function Profile() {
+export default function Profiles() {
     const navigate = useNavigate();
-    const {setProfileEdit, resetProfile} = useGlobal();
+    const { setProfileEdit, resetProfile } = useGlobal();
     const profileRefs = useRef([]);
     const [patients, setPatients] = useState([])
     const [profileActiveProfile, setProfileActiveProfile] = useState()
@@ -138,13 +138,6 @@ export default function Profile() {
                         <ProfileItems activeProfile={profileActiveProfile}/>
                     </section>
                 )}
-
-                {/*<button*/}
-                {/*    className="control button profiles__add-button"*/}
-                {/*    onClick={addProfile}*/}
-                {/*>*/}
-                {/*    Profil hinzufügen*/}
-                {/*</button>*/}
 
             </div>
             <NavigationBar onPlusClick={addProfile}/>

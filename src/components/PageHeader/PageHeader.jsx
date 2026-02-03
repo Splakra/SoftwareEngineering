@@ -1,4 +1,4 @@
-import {useNavigate} from "react-router";
+import {useNavigate} from "react-router-dom";
 import "./PageHeader.css"
 import ArrowIcon from "../../assets/arrow-left.svg";
 import CrossIcon from "../../assets/cross.svg";

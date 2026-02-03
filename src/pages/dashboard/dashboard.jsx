@@ -1,38 +1,48 @@
 import './dashboard.css';
 import db from '../../database/DexieDatabase.js';
-import {useState} from "react";
+import { useEffect, useState } from "react";
 import TaskItem from "../../components/TaskItem/TaskItem";
 import PlusIcon from "../../assets/plus-icon.svg";
-import {useNavigate, useRevalidator, useSearchParams} from "react-router";
-import {NavigationBar} from "../../components/NavigationBar/NavigationBar";
-import {useGlobal} from "../globalContext";
-import {activeReminder, getSortedTimes, compareTimes} from "../../utils/reminderUtils";
+import { NavigationBar } from "../../components/NavigationBar/NavigationBar";
+import { useGlobal } from "../globalContext";
+import { activeReminder, getSortedTimes, compareTimes } from "../../utils/reminderUtils";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 
-export async function clientLoader({request}) {
-    const url = new URL(request.url);
-    const date = url.searchParams.get("date") || new Date().toISOString().split("T")[0];
-    const reminders = await db.reminders.orderBy("dailyTime").toArray(); // get all reminders
+export async function clientLoader({ request }) {
 
-    await Promise.all( // wait until all async functions inside the parenthesis are done
-        reminders.map(async (reminder) => {
-            [reminder.medication, reminder.patient, reminder.done] = await Promise.all(
-                [
-                    db.medications.where({id: reminder.medicationId}).first(), // .first(): get first as object, not as array like in .limit(1)
-                    db.profiles.where({id: reminder.profileId}).first(),
-                    db.done.where({reminderId: reminder.id}).and((done) => done.date === date).toArray()
-                ]
-            )
-        })
-    )
     return {
         reminders,
         date
     };
 }
 
-function Dashboard({loaderData}) {
-    const {reminders, date} = loaderData;
-    const revalidator = useRevalidator(); // only for now
+function Dashboard() {
+    const [reminders, setReminders] = useState([]);
+
+    const [search, setSearch] = useSearchParams();
+    const query = new URLSearchParams(search);
+    const date = query.get("date") ?? new Date().toISOString().split("T")[0];
+
+
+    useEffect(() => {
+        async function dataLoader() {
+            const loadedReminders = await db.reminders.orderBy("dailyTime").toArray(); // get all reminders
+
+            await Promise.all( // wait until all async functions inside the parenthesis are done
+                loadedReminders.map(async (reminder) => {
+                    [reminder.medication, reminder.patient, reminder.done] = await Promise.all(
+                        [
+                            db.medications.where({ id: reminder.medicationId }).first(), // .first(): get first as object, not as array like in .limit(1)
+                            db.profiles.where({ id: reminder.profileId }).first(),
+                            db.done.where({ reminderId: reminder.id }).and((done) => done.date === date).toArray()
+                        ]
+                    )
+                })
+            )
+            setReminders(loadedReminders)
+        }
+        dataLoader();
+    }, [search])
 
     const weekly = [-2, -1, 0, 1, 2].map(value => {
         const today = new Date();
@@ -42,7 +52,7 @@ function Dashboard({loaderData}) {
     const currentDate = new Date(date);
     const navigate = useNavigate();
 
-    const {resetTherapy} = useGlobal();
+    const { resetTherapy } = useGlobal();
 
     function addIntake() {
         resetTherapy();
@@ -50,11 +60,10 @@ function Dashboard({loaderData}) {
     }
 
     const [activeDay, setActiveDay] = useState(currentDate);
-    const [search, setSearch] = useSearchParams();
 
     function handleDayClick(day) {
         setActiveDay(day);
-        setSearch({date: day.toISOString().split("T")[0]}, {viewTransition: true})
+        setSearch({ date: day.toISOString().split("T")[0] })
     }
 
     return (
@@ -70,10 +79,10 @@ function Dashboard({loaderData}) {
                 <div className={"calendar__week"}>
                     {weekly.map(day => (
                         <div key={day.toISOString()}
-                             className={"calendar__weekday"}
-                             onClick={() => handleDayClick(day)}>
+                            className={"calendar__weekday"}
+                            onClick={() => handleDayClick(day)}>
                             <div className={"calendar__weekday-name"}>
-                                {day.toLocaleDateString("de-DE", {weekday: "short"})}
+                                {day.toLocaleDateString("de-DE", { weekday: "short" })}
                             </div>
                             <div
                                 className={`calendar__weekday-number ${activeDay.getDate() === day.getDate() ? "calendar__weekday-number--active" : ""}`}>

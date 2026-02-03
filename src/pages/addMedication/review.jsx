@@ -1,12 +1,12 @@
 import '../addTherapy/review.css';
 import PageHeader from "../../components/PageHeader/PageHeader";
 import db from "../../database/DexieDatabase";
-import {useEffect, useState} from "react";
-import {useNavigate} from "react-router";
-import {useGlobal} from "../globalContext";
-import {getDoseUnit, formatDate, getMedicationUnit} from "../../utils/therapyFormat";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useGlobal } from "../globalContext";
+import { getDoseUnit, formatDate, getMedicationUnit } from "../../utils/therapyFormat";
 
-function review() {
+function ReviewMedication() {
     const navigate = useNavigate();
     const {
         medicationName,
@@ -118,4 +118,4 @@ function review() {
     );
 }
 
-export default review;
+export default ReviewMedication;

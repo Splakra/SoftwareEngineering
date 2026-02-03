@@ -1,3 +1,3 @@
-export default function Component() {
+export default function CatchAll() {
     return null; // for later: error handling etc.
 }

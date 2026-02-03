@@ -1,10 +1,10 @@
 import './ProfileItems.css';
 import db from "../../database/DexieDatabase";
-import {deleteEntries} from "../../pages/profiles/delete";
-import {useEffect, useState} from "react";
+import { deleteEntries } from "../../pages/profiles/delete";
+import { useEffect, useState } from "react";
 import InfoItem from "../InfoItems/InfoItem";
 
-export default function ProfileItems({activeProfile}) {
+export default function ProfileItems({ activeProfile }) {
     const [medications, setMedications] = useState([])
     const [dailyReminder, setDailyReminder] = useState([]);
     const [weekdayReminder, setWeekdayReminder] = useState([]);
@@ -21,7 +21,7 @@ export default function ProfileItems({activeProfile}) {
             const filteredReminders = loadedReminders.filter(r => r.profileId === activeProfile.id)
             setDailyReminder(filteredReminders.filter(r => r.rhythm === "daily").sort((a, b) => a.dailyTime[0].localeCompare(b.dailyTime[0])));
             setIntervalReminder(filteredReminders.filter(r => r.rhythm === "interval"));
-            setWeekdayReminder(filteredReminders.filter(r => r.rhythm === "weekdays").sort((a, b) => a.weekdayTime.localeCompare(b.weekdayTime)));
+            setWeekdayReminder(filteredReminders.filter(r => r.rhythm === "weekdays").sort((a, b) => (a.weekdayTime ?? "00:00").localeCompare(b.weekdayTime ?? "00:00")));
         }
 
         loadMedications();

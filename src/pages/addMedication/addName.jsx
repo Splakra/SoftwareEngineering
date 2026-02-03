@@ -1,12 +1,12 @@
 import PageHeader from "../../components/PageHeader/PageHeader";
 import db from "../../database/DexieDatabase";
-import {useEffect, useState} from "react";
-import {useNavigate} from "react-router";
-import {useGlobal} from "../globalContext";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useGlobal } from "../globalContext";
 
-function addName() {
+export default function AddName() {
     const navigate = useNavigate();
-    const {medicationName, setMedicationName, medicationId} = useGlobal();
+    const { medicationName, setMedicationName, medicationId } = useGlobal();
 
     function nextPage() {
         navigate("/addMedication/type", {viewTransition: true})
@@ -15,7 +15,7 @@ function addName() {
     return (
         <div className="page">
             <PageHeader title={medicationId ? "Medikament bearbeiten" : "Medikament hinzufügen"}
-                        quitPath={"/medication"}/>
+                        quitPath={"/medication"} />
             <div className="view-transition-form">
                 <div className="query-wrapper">
                     <h2 className={"title"}>
@@ -46,5 +46,3 @@ function addName() {
         </div>
     );
 }
-
-export default addName;

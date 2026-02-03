@@ -1,5 +1,5 @@
 import "./NavigationBar.css";
-import {useLocation, useNavigate} from "react-router";
+import {useLocation, useNavigate} from "react-router-dom";
 import CalendarIcon from "../Icons/CalendarIcon";
 import PawIcon from "../Icons/PawIcon";
 import Medication from "../Icons/Medication";
