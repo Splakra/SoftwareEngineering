@@ -1,14 +1,13 @@
 import './dashboard.css';
 import db from '../../database/DexieDatabase.js';
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import TaskItem from "../../components/TaskItem/TaskItem";
-import PlusIcon from "../../assets/plus-icon.svg";
-import { NavigationBar } from "../../components/NavigationBar/NavigationBar";
-import { useGlobal } from "../globalContext";
-import { activeReminder, getSortedTimes, compareTimes } from "../../utils/reminderUtils";
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import {NavigationBar} from "../../components/NavigationBar/NavigationBar";
+import {useGlobal} from "../globalContext";
+import {activeReminder, getSortedTimes, compareTimes} from "../../utils/reminderUtils";
+import {useLocation, useNavigate, useSearchParams} from "react-router-dom";
 
-export async function clientLoader({ request }) {
+export async function clientLoader({request}) {
 
     return {
         reminders,
@@ -32,15 +31,16 @@ function Dashboard() {
                 loadedReminders.map(async (reminder) => {
                     [reminder.medication, reminder.patient, reminder.done] = await Promise.all(
                         [
-                            db.medications.where({ id: reminder.medicationId }).first(), // .first(): get first as object, not as array like in .limit(1)
-                            db.profiles.where({ id: reminder.profileId }).first(),
-                            db.done.where({ reminderId: reminder.id }).and((done) => done.date === date).toArray()
+                            db.medications.where({id: reminder.medicationId}).first(), // .first(): get first as object, not as array like in .limit(1)
+                            db.profiles.where({id: reminder.profileId}).first(),
+                            db.done.where({reminderId: reminder.id}).and((done) => done.date === date).toArray()
                         ]
                     )
                 })
             )
             setReminders(loadedReminders)
         }
+
         dataLoader();
     }, [search])
 
@@ -52,7 +52,7 @@ function Dashboard() {
     const currentDate = new Date(date);
     const navigate = useNavigate();
 
-    const { resetTherapy } = useGlobal();
+    const {resetTherapy} = useGlobal();
 
     function addIntake() {
         resetTherapy();
@@ -63,7 +63,7 @@ function Dashboard() {
 
     function handleDayClick(day) {
         setActiveDay(day);
-        setSearch({ date: day.toISOString().split("T")[0] })
+        setSearch({date: day.toISOString().split("T")[0]}, {viewTransition: true})
     }
 
     return (
@@ -79,10 +79,10 @@ function Dashboard() {
                 <div className={"calendar__week"}>
                     {weekly.map(day => (
                         <div key={day.toISOString()}
-                            className={"calendar__weekday"}
-                            onClick={() => handleDayClick(day)}>
+                             className={"calendar__weekday"}
+                             onClick={() => handleDayClick(day)}>
                             <div className={"calendar__weekday-name"}>
-                                {day.toLocaleDateString("de-DE", { weekday: "short" })}
+                                {day.toLocaleDateString("de-DE", {weekday: "short"})}
                             </div>
                             <div
                                 className={`calendar__weekday-number ${activeDay.getDate() === day.getDate() ? "calendar__weekday-number--active" : ""}`}>
