@@ -1,15 +1,87 @@
-.navigationbar {
-    display: flex;
-    flex-direction: row;
-    background-color: #FFE6D6;
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
+:root {
+    --navigation-height: 4.5rem;
 }
 
+.navigation {
+    --mask-width: 7rem;
+    --mask-height: 2.5rem;
+    --mask-offset-left: 0.95;
 
-.navigationbar div {
-    flex-grow: 1;
+    display: flex;
+    position: sticky;
+    width: 100%;
+    height: var(--navigation-height);
+    max-width: 30rem;
+    left: 0;
+    bottom: 0;
+    margin-top: auto;
+    z-index: 2;
+}
+
+.navigation::before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: var(--charcoal-blue);
+    mask-image: linear-gradient(black, black), url("../../assets/navigation-mask.svg");
+    mask-composite: exclude;
+    mask-repeat: no-repeat;
+    mask-size: 100% 100%, var(--mask-width) var(--mask-height);
+    mask-position: 0 0, calc(100% * var(--mask-offset-left)) 0;
+    z-index: -1;
+}
+
+.navigation__buttons {
+    display: flex;
+    justify-content: center;
+    width: calc((100% - var(--mask-width)) * var(--mask-offset-left));
+}
+
+.navigation__button {
+    background: none;
+    border: none;
+    padding: 0;
+    margin-inline: var(--margin-base);
     text-align: center;
+}
+
+.navigation__button:focus-visible,
+.navigation__plus:focus-visible {
+    outline: 0.2rem solid var(--tangerine-dream);
+    outline-offset: 0.2rem;
+}
+
+.navigation__button-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: var(--snow);
+}
+
+.navigation__button.active .navigation__button-icon {
+    color: var(--tea-green);
+}
+
+.navigation__plus {
+    position: absolute;
+    width: 3.5rem;
+    height: 3.5rem;
+    aspect-ratio: 1;
+    left: calc((100% - var(--mask-width)) * var(--mask-offset-left));
+    transform: translate(50%, -50%);
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: var(--charcoal-blue);
+    box-shadow: 0 0 1.5rem 1rem color-mix(in oklab, var(--tea-green) 20%, transparent);
+}
+
+.navigation__plus-icon {
+    width: 1.2rem;
+    height: 1.2rem;
+    overflow: visible;
+    color: var(--tea-green);
 }

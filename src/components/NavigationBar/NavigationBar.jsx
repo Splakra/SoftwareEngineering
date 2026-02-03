@@ -1,24 +1,39 @@
 import "./NavigationBar.css";
-import {useNavigate} from "react-router";
+import {useLocation, useNavigate} from "react-router";
+import CalendarIcon from "../Icons/CalendarIcon";
+import PawIcon from "../Icons/PawIcon";
+import Medication from "../Icons/Medication";
+import PlusIcon from "../Icons/PlusIcon";
 
-export function NavigationBar() {
+export function NavigationBar({onPlusClick}) {
     const navigate = useNavigate();
+    const location = useLocation(); // aktuelle Route
+
     return (
-        <div className={"navigationbar"}>
-            <div>
-                <button onClick={() => navigate("/profile")}>
-                    Profile
+        <div className="navigation">
+            <div className="navigation__buttons">
+                <button
+                    className={`navigation__button ${location.pathname === "/" ? "active" : ""}`}
+                    onClick={() => navigate("/", {viewTransition: true})}>
+                    <CalendarIcon className="navigation__button-icon"/>
+                </button>
+                <button
+                    className={`navigation__button ${location.pathname === "/medication" ? "active" : ""}`}
+                    onClick={() => navigate("/medication", {viewTransition: true})}>
+                    <Medication className="navigation__button-icon"/>
+                </button>
+                <button
+                    className={`navigation__button ${location.pathname === "/profile" ? "active" : ""}`}
+                    onClick={() => navigate("/profile", {viewTransition: true})}>
+                    <PawIcon className="navigation__button-icon"/>
                 </button>
             </div>
-            <div>
-                <button onClick={() => navigate("/")}>
-                    Dashboard
-                </button>
-            </div>
-            <div>
-                <button onClick={() => navigate("/medication")}>
-                    Medis
-                </button>
-            </div>
-        </div>)
+            {/* Plus Button */}
+            <button
+                className="navigation__plus"
+                onClick={onPlusClick}>
+                <PlusIcon className="navigation__plus-icon"/>
+            </button>
+        </div>
+    )
 }

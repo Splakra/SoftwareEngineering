@@ -4,7 +4,20 @@
     justify-content: space-between;
     align-items: center;
     background-color: var(--snow);
-    z-index: 10;
+}
+
+.page-header__back,
+.page-header__quit {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.page-header__back:focus-visible,
+.page-header__quit:focus-visible {
+    outline: 0.2rem solid var(--tangerine-dream);
+    outline-offset: 0.2rem;
 }
 
 .page-header__title {

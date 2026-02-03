@@ -16,17 +16,17 @@ function PageHeader({title, quitPath}) {
 
     return (
         <header className="page-header">
-            <div className="page-header__back" onClick={handleBack}>
+            <button className="page-header__back" onClick={handleBack}>
                 <img alt="" className={"page-header__arrow"} src={ArrowIcon}/>
-            </div>
+            </button>
 
             <p className="page-header__title">
                 {title}
             </p>
 
-            <div className="page-header__quit" onClick={handleQuit}>
+            <button className="page-header__quit" onClick={handleQuit}>
                 <img alt="" className={"page-header__cross"} src={CrossIcon}/>
-            </div>
+            </button>
         </header>
     );
 }
