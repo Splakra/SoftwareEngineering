@@ -49,7 +49,7 @@ export default function InfoItem({
             <div className="info-item__infos">
                 <ToggleMenu className="info-item__toggle" items={menuItems}/>
 
-                <div className="info-item__title">
+                <div className="info-item__title with-ellipsis">
                     {medication?.name}
                 </div>
 
@@ -66,7 +66,7 @@ export default function InfoItem({
                     {rhythm === "daily" && (
                         <>
                             <dt>Uhrzeit</dt>
-                            <dd>{`${formatTimes(dailyTime)} Uhr`}</dd>
+                            <dd>{formatTimes(dailyTime)}</dd>
                         </>
                     )}
 

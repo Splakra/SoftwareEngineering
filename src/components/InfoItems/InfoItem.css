@@ -1,8 +1,9 @@
 .info-item__infos {
     position: relative;
     padding: var(--padding-inline-base);
+    padding-right: calc(2 * var(--padding-inline-base));
     border-radius: var(--border-radius-base);
-    background: color-mix(in oklab, var(--snow) 97%, black);
+    background: var(--snow-grey);
     /*box-shadow: 0.1rem 0.4rem 1.5rem color-mix(in oklab, var(--tangerine-dream) 30%, transparent);*/
 }
 

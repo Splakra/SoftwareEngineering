@@ -3,7 +3,7 @@ import db from "../../database/DexieDatabase";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router";
 import {useGlobal} from "../globalContext";
-import {getDoseUnit} from "../../utils/therapyFormat";
+import {getMedicationUnit} from "../../utils/therapyFormat";
 
 function addStock() {
     const navigate = useNavigate();
@@ -17,7 +17,7 @@ function addStock() {
     } = useGlobal();
 
     function nextPage() {
-        navigate("/addMedication/expirationDate")
+        navigate("/addMedication/expirationDate", {viewTransition: true})
     }
 
     return (
@@ -26,78 +26,89 @@ function addStock() {
                 title={medicationId ? "Medikament bearbeiten" : "Medikament hinzufügen"}
                 quitPath={"/medication"}
             />
+            <div className="view-transition-form">
+                <div className="query-wrapper">
+                    <h2 className={"title"}>
+                        Wie viel ist noch vorrätig?
+                    </h2>
 
-            <div className="query-wrapper">
-                <h2 className={"title"}>
-                    Wie viel ist noch vorrätig?
-                </h2>
+                    {/* Aktueller Vorrat */}
+                    <label htmlFor="stockInput">
+                        Aktueller Vorrat
+                    </label>
 
-                {/* Aktueller Vorrat */}
-                <label htmlFor="stockInput">
-                    Aktueller Vorrat
-                </label>
-
-                <div className="input-wrapper">
-                    <div className="input-line">
-                        <input
-                            className="control input"
-                            id="stockInput"
-                            type="number"
-                            inputMode="numeric" // opens numeric keypad on phone
-                            min="0"
-                            step="any"
-                            placeholder="1312"
-                            value={medicationStock ?? ""}
-                            onChange={e => setMedicationStock(e.target.value)}
-                        />
-                        <span
-                            className="unit">
-                            {getDoseUnit(medicationType)}
+                    <div className="input-wrapper">
+                        <div className="input-line">
+                            <input
+                                className="control input"
+                                id="stockInput"
+                                type="number"
+                                inputMode="numeric" // opens numeric keypad on phone
+                                min="0"
+                                step="any"
+                                placeholder="1312"
+                                value={medicationStock ?? ""}
+                                onChange={e => setMedicationStock(e.target.value)}
+                            />
+                            <span
+                                className="unit">
+                            {getMedicationUnit(medicationType)}
                         </span>
+                        </div>
                     </div>
+                    {medicationType === "drops" && (
+                        <div className="notice">
+                            <div className="notice__title">
+                                Vorrat bitte in Millilitern angeben.
+                            </div>
+                            <div className="notice__meta">
+                                1 Tropfen ≈ 0.05 ml
+                            </div>
+                        </div>
+                    )}
+                    {(medicationStock < 0) && (
+                        <div className="warning warning--spaced">
+                            Bitte gib eine gültige Menge ein.
+                        </div>
+                    )}
                 </div>
-                {(medicationStock < 0) && (
-                    <div className="warning warning--spaced">
-                        Bitte gib eine gültige Menge ein.
-                    </div>
-                )}
-            </div>
 
-            {/* Optionale Erinnerung */}
-            <div className="query-wrapper">
-                <h3 className="title">
-                    Erinnerung bei niedrigem Vorrat
-                    <span className="optional optional--title">(optional)</span>
-                </h3>
+                {/* Optionale Erinnerung */}
+                <div className="query-wrapper">
+                    <h3 className="title">
+                        Erinnerung bei niedrigem Vorrat
+                        <span className="optional optional--title">(optional)</span>
+                    </h3>
 
-                <label htmlFor="buyNewInput">
-                    Erinnerung ab
-                </label>
+                    <label htmlFor="buyNewInput">
+                        Erinnerung ab
+                    </label>
 
-                <div className="input-wrapper">
-                    <div className="input-line">
-                        <input
-                            className="control input"
-                            id="buyNewInput"
-                            type="number"
-                            inputMode="numeric" // opens numeric keypad on phone
-                            min="0"
-                            step="any"
-                            placeholder="161"
-                            value={medicationBuyNew ?? ""}
-                            onChange={e => setMedicationBuyNew(e.target.value)}
-                        />
-                        <span
-                            className="unit">
-                            {getDoseUnit(medicationType)}
+                    <div className="input-wrapper">
+                        <div className="input-line">
+                            <input
+                                className="control input"
+                                id="buyNewInput"
+                                type="number"
+                                inputMode="numeric" // opens numeric keypad on phone
+                                min="0"
+                                step="any"
+                                placeholder="161"
+                                value={medicationBuyNew ?? ""}
+                                onChange={e => setMedicationBuyNew(e.target.value)}
+                            />
+                            <span
+                                className="unit">
+                            {getMedicationUnit(medicationType)}
                         </span>
+                        </div>
                     </div>
+                    {(medicationBuyNew < 0) && (
+                        <div className="warning warning--spaced">
+                            Bitte gib eine gültige Menge ein.
+                        </div>
+                    )}
                 </div>
-                {(medicationBuyNew < 0) && (
-                    <div className="warning warning--spaced">
-                        Bitte gib eine gültige Menge ein.
-                    </div>
-                )}
             </div>
 
             <button

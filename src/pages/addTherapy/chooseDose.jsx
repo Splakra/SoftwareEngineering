@@ -11,48 +11,61 @@ function ChooseDose() {
     const {therapyMedication, therapyDose, setTherapyDose} = useGlobal();
 
     function nextPage() {
-        navigate("/addTherapy/reminder")
+        navigate("/addTherapy/reminder", {viewTransition: true})
     }
 
     return (
         <div className="choose-dose page">
             <PageHeader title="einnahme hinzufügen"/>
 
-            <div className="query-wrapper">
-                <h2 className="title">
-                    Wie hoch ist die Dosis?
-                </h2>
+            <div className="view-transition-form">
+                <div className="query-wrapper">
+                    <h2 className="title">
+                        Wie hoch ist die Dosis?
+                    </h2>
 
-                <label htmlFor="doseInput">
-                    Gewünschte Dosis eingeben
-                </label>
+                    <label htmlFor="doseInput">
+                        Gewünschte Dosis eingeben
+                    </label>
 
-                <div className="input-wrapper">
-                    <div className="input-line">
-                        <input
-                            className="control input"
-                            id="doseInput"
-                            type="number"
-                            inputMode="numeric" // opens numeric keypad on phone
-                            min="0"
-                            step="any"
-                            placeholder="42"
-                            value={therapyDose ?? ""}
-                            onChange={e => setTherapyDose(e.target.value)}
-                        />
-                        <span
-                            className="unit">
+                    <div className="input-wrapper">
+                        <div className="input-line">
+                            <input
+                                className="control input"
+                                id="doseInput"
+                                type="number"
+                                inputMode="numeric" // opens numeric keypad on phone
+                                min="0"
+                                step="any"
+                                placeholder="42"
+                                value={therapyDose ?? ""}
+                                onChange={e => setTherapyDose(e.target.value)}
+                            />
+                            <span
+                                className="unit">
                             {therapyMedication
                                 ? getDoseUnit(JSON.parse(therapyMedication).type)
                                 : ""}
                             </span>
+                        </div>
                     </div>
+                    {therapyMedication &&
+                        JSON.parse(therapyMedication).type === "drops" && (
+                            <div className="notice">
+                                <div className="notice__title">
+                                    Tropfen werden in Milliliter umgerechnet.
+                                </div>
+                                <div className="notice__meta">
+                                    1 Tropfen ≈ 0.05 ml
+                                </div>
+                            </div>
+                        )}
+                    {(therapyDose < 0) && (
+                        <div className="warning warning--spaced">
+                            Bitte gib eine gültige Menge ein.
+                        </div>
+                    )}
                 </div>
-                {(therapyDose < 0) && (
-                    <div className="warning warning--spaced">
-                        Bitte gib eine gültige Menge ein.
-                    </div>
-                )}
             </div>
 
             <button

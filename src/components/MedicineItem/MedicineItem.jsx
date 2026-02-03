@@ -9,7 +9,7 @@ import db from "../../database/DexieDatabase";
 import ToggleMenu from "../ToggleMenu/ToggleMenu";
 import {useNavigate, useRevalidator} from "react-router";
 import {useGlobal} from "../../pages/globalContext";
-import {getDoseUnit} from "../../utils/therapyFormat";
+import {getMedicationUnit} from "../../utils/therapyFormat";
 
 export default function MedicineItem({
                                          id,
@@ -27,7 +27,7 @@ export default function MedicineItem({
         type === "fluid" ? BottleIcon
             : type === "drops" ? DropIcon
                 : PillIcon;
-    const storageText = `${amount} ${getDoseUnit(type)}`;
+    const storageText = `${amount} ${getMedicationUnit(type)}`;
     const empty = Number(amount) <= Number(reminderBuyNew);
     const expDate = new Date(expiration);
     const expired = Date.now() > expDate.getTime();

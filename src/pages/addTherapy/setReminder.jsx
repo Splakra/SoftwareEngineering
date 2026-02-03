@@ -17,7 +17,7 @@ function SetReminder() {
     } = useGlobal();
 
     function nextPage() {
-        navigate("/addTherapy/review");
+        navigate("/addTherapy/review", {viewTransition: true});
     }
 
     const isEndDateBeforeStartDate = () => therapyEndDate === null ? false : new Date(therapyStartDate).getTime() > new Date(therapyEndDate).getTime();
@@ -54,74 +54,76 @@ function SetReminder() {
         <div className="set-reminder page">
             <PageHeader title="Einnahme hinzufügen"/>
 
-            <div className="query-wrapper">
-                <h2 className="title">
-                    Wann möchtest du erinnert werden?
-                </h2>
+            <div className="view-transition-form">
+                <div className="query-wrapper">
+                    <h2 className="title">
+                        Wann möchtest du erinnert werden?
+                    </h2>
 
-                <div className="set-reminder__rhythm">
-                    <label
-                        htmlFor="rhythmSelect">
-                        Rhythmus wählen
-                    </label>
-                    <div className="select-wrapper">
-                        <select
-                            className={`control select ${therapyRhythm === "" || therapyRhythm == null ? "is-placeholder" : ""}`}
-                            id="rhythmSelect"
-                            value={therapyRhythm ?? ""}
-                            onChange={e => setTherapyRhythm(e.target.value)}
-                        >
-                            <option value="daily">Jeden Tag</option>
-                            <option value="weekdays">Bestimmte Wochentage</option>
-                            <option value="interval">Intervall</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <div className="set-reminder__dates">
-                <div className="set-reminder__date-wrapper">
-                    <label>
-                        Startdatum
-                    </label>
-                    <div className="set-reminder__date-input-wrapper">
-                        <input
-                            type="date"
-                            id="startDate"
-                            className="date set-reminder__date"
-                            value={therapyStartDate ?? ""}
-                            onChange={e => setTherapyStartDate(e.target.value)}
-                        />
-                    </div>
-                </div>
-
-                <div className="set-reminder__date-wrapper">
-                    <div className="set-reminder__date-label">
-                        <label>
-                            Enddatum
+                    <div className="set-reminder__rhythm">
+                        <label
+                            htmlFor="rhythmSelect">
+                            Rhythmus wählen
                         </label>
-                        <span className="optional optional--small">optional</span>
-                    </div>
-
-                    <div className="set-reminder__date-input-wrapper">
-                        <input
-                            type="date"
-                            id="endDate"
-                            className="date set-reminder__date"
-                            value={therapyEndDate ?? ""}
-                            onChange={e => setTherapyEndDate(e.target.value)}
-                        />
+                        <div className="select-wrapper">
+                            <select
+                                className={`control select ${therapyRhythm === "" || therapyRhythm == null ? "is-placeholder" : ""}`}
+                                id="rhythmSelect"
+                                value={therapyRhythm ?? ""}
+                                onChange={e => setTherapyRhythm(e.target.value)}
+                            >
+                                <option value="daily">Jeden Tag</option>
+                                <option value="weekdays">Bestimmte Wochentage</option>
+                                <option value="interval">Intervall</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
-                {therapyEndDate && isEndDateBeforeStartDate() && (
-                    <div className="warning">
-                        Enddatum liegt vor dem Startdatum!
-                    </div>
-                )}
-            </div>
 
-            <div className="set-reminder__details">
-                {renderRhythm()}
+                <div className="set-reminder__dates">
+                    <div className="set-reminder__date-wrapper">
+                        <label>
+                            Startdatum
+                        </label>
+                        <div className="set-reminder__date-input-wrapper">
+                            <input
+                                type="date"
+                                id="startDate"
+                                className="date set-reminder__date"
+                                value={therapyStartDate ?? ""}
+                                onChange={e => setTherapyStartDate(e.target.value)}
+                            />
+                        </div>
+                    </div>
+
+                    <div className="set-reminder__date-wrapper">
+                        <div className="set-reminder__date-label">
+                            <label>
+                                Enddatum
+                            </label>
+                            <span className="optional optional--small">optional</span>
+                        </div>
+
+                        <div className="set-reminder__date-input-wrapper">
+                            <input
+                                type="date"
+                                id="endDate"
+                                className="date set-reminder__date"
+                                value={therapyEndDate ?? ""}
+                                onChange={e => setTherapyEndDate(e.target.value)}
+                            />
+                        </div>
+                    </div>
+                    {therapyEndDate && isEndDateBeforeStartDate() && (
+                        <div className="warning">
+                            Enddatum liegt vor dem Startdatum!
+                        </div>
+                    )}
+                </div>
+
+                <div className="set-reminder__details">
+                    {renderRhythm()}
+                </div>
             </div>
 
             <button

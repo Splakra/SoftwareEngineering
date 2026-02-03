@@ -46,9 +46,6 @@
 }
 
 .profiles__scroller-item-name {
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
     max-width: 100%;
 }
 
@@ -89,9 +86,10 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: var(--margin-base) 0;
+    margin-top: var(--margin-base);
     gap: var(--padding-inline-m);
-    background: color-mix(in oklab, var(--snow) 97%, black);
+    background: white;
+    background: var(--snow-grey);
     padding-inline: var(--padding-inline-base);
     padding-block: var(--padding-inline-s);
     border-radius: var(--border-radius-base);
@@ -100,18 +98,19 @@
 .profiles__active-profile-title {
     margin: 0;
     font-size: var(--font-size-xl);
+    word-break: break-word;
 }
 
 .profiles__active-profile-toggle .toggle-menu__button {
     display: flex;
-    /*position: relative;*/
     align-items: center;
     height: 100%;
     border-top-left-radius: unset;
     border-top-right-radius: var(--border-radius-base);
-    /*border-radius: 50%;*/
+    background: none;
 }
 
 .profiles__active-profile-toggle .toggle-menu__dots {
+    color: var(--rich-mahogany);
 }
 

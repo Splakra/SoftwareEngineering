@@ -2,6 +2,7 @@ import './setReminderInterval.css';
 import {useGlobal} from "../globalContext";
 import SetReminderIntervalMonths from "./setReminderIntervalMonths";
 import SetReminderIntervalHours from "./setReminderIntervalHours";
+import {useEffect} from "react";
 
 export default function SetReminderInterval() {
     const {
@@ -9,8 +10,15 @@ export default function SetReminderInterval() {
         setTherapyIntervalType,
         therapyIntervalValue,
         setTherapyIntervalValue,
-        therapyStartDate
+        therapyStartDate,
+        setTherapyIntervalHoursStartTime
     } = useGlobal();
+
+    useEffect(() => {
+        if (therapyIntervalType !== "hours") {
+            setTherapyIntervalHoursStartTime(null);
+        }
+    }, [therapyIntervalType]);
 
     const renderType = () => {
         const day = new Date(therapyStartDate).getDate();

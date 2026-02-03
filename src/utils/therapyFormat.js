@@ -1,3 +1,5 @@
+import PageHeader from "../components/PageHeader/PageHeader";
+
 export const WEEKDAYS_SHORT = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
 
 export function getDoseUnit(type) {
@@ -8,6 +10,18 @@ export function getDoseUnit(type) {
             return "ml";
         case "drops":
             return "Tropfen";
+        default:
+            return "Sonstige";
+    }
+}
+
+export function getMedicationUnit(type) {
+    switch (type) {
+        case "pills":
+            return "Tabletten";
+        case "fluid":
+        case "drops":
+            return "ml";
         default:
             return "Sonstige";
     }
@@ -57,4 +71,10 @@ export function formatDate(dateString) {
     if (!dateString) return "";
 
     return new Date(dateString).toLocaleDateString("de-DE");
+}
+
+export function truncate(text, maxLength = 30) {
+    return text.length > maxLength
+        ? text.slice(0, maxLength) + "…"
+        : text;
 }

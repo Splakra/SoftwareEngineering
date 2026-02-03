@@ -54,11 +54,11 @@ function Dashboard({loaderData}) {
 
     function handleDayClick(day) {
         setActiveDay(day);
-        setSearch({date: day.toISOString().split("T")[0]})
+        setSearch({date: day.toISOString().split("T")[0]}, {viewTransition: true})
     }
 
     return (
-        <div className={"dashboard"}>
+        <div className={"dashboard page-full"}>
             <section className={"calendar"}>
                 <h2 className={"calendar__date"}>
                     {currentDate.toLocaleDateString("de-DE", {
@@ -84,48 +84,44 @@ function Dashboard({loaderData}) {
                 </div>
             </section>
             <div className="dashboard__content">
-                {(() => {
-                    const allTasks = reminders
-                        .filter(reminder => activeReminder(reminder, activeDay))
-                        .flatMap(reminder => {
-                            const times = getSortedTimes(reminder, activeDay);
-                            return times.map(time => ({
-                                reminder,
-                                time
-                            }));
+                <div className="view-transition-task-items">
+                    {(() => {
+                        const allTasks = reminders
+                            .filter(reminder => activeReminder(reminder, activeDay))
+                            .flatMap(reminder => {
+                                const times = getSortedTimes(reminder, activeDay);
+                                return times.map(time => ({
+                                    reminder,
+                                    time
+                                }));
+                            });
+                        allTasks.sort((a, b) => compareTimes(a.time, b.time));
+
+                        let lastTime = null;
+
+                        return allTasks.map(({reminder, time}) => {
+                            if (!time) {
+                                time = "Ohne Zeit";
+                            }
+                            if (time === lastTime) {
+                                time = null;
+                            }
+                            lastTime = time;
+
+                            const date = activeDay.toISOString().split("T")[0];
+                            return (
+                                <TaskItem
+                                    key={`${reminder.id}-${date}-${time}`}
+                                    {...reminder}
+                                    time={time}
+                                    date={date}
+                                />
+                            );
                         });
-                    allTasks.sort((a, b) => compareTimes(a.time, b.time));
-
-                    let lastTime = null;
-
-                    return allTasks.map(({reminder, time}) => {
-                        if (!time) {
-                            time = "Ohne Zeit";
-                        }
-                        if (time === lastTime) {
-                            time = null;
-                        }
-                        lastTime = time;
-
-                        const date = activeDay.toISOString().split("T")[0];
-                        return (
-                            <TaskItem
-                                key={`${reminder.id}-${date}-${time}`}
-                                {...reminder}
-                                time={time}
-                                date={date}
-                            />
-                        );
-                    });
-                })()}
-
-                <button className={"dashboard__add-button"} onClick={addIntake}>
-                    <img alt="" className={"dashboard__plus-icon"} src={PlusIcon}/>
-                    Hinzufügen
-                </button>
-
+                    })()}
+                </div>
             </div>
-            <NavigationBar/>
+            <NavigationBar onPlusClick={addIntake}/>
         </div>
     );
 }

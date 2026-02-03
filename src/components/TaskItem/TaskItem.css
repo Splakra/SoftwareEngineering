@@ -26,7 +26,6 @@
 }
 
 .task-item__button {
-    all: unset; /* removes default button styles */
     position: relative; /* allows absolutely positioned checkmark inside */
     flex: 1; /* makes the button take up remaining space */
     border-radius: var(--border-radius-base);
@@ -59,7 +58,7 @@
 }
 
 .task-item__infos {
-    padding: 1rem;
+    padding: var(--padding-inline-m);
     border-left: var(--infos-border-left-width) solid var(--tangerine-dream);
 }
 
@@ -69,16 +68,22 @@
 }
 
 .task-item__profile {
-    display: inline-flex;
+    display: flex;
+    box-sizing: border-box;
     align-items: center;
+    max-width: fit-content;
     gap: var(--gap-small);
     margin-bottom: var(--margin-small);
     padding: var(--padding-block-small) var(--padding-inline-s);
-    background: var(--tangerine-dream);
-    color: white;
     border-radius: var(--border-radius-small);
+    background: var(--tangerine-dream);
+}
+
+.task-item__profile-name {
+    color: white;
     font-size: var(--font-size-l);
     font-weight: bold;
+    max-width: calc(100% - var(--padding-inline-m));
 }
 
 .task-item__icon {
@@ -92,7 +97,9 @@
 }
 
 .task-item__medication {
+    padding-right: var(--padding-inline-base);
     font-weight: bold;
+    word-break: break-word;
 }
 
 .task-item__details {

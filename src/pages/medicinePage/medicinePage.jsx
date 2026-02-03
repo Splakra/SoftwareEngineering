@@ -35,34 +35,35 @@ export default function MedicinePage({meds = []}) {
         navigate("/addMedication/name");
     }
 
-
     return (
-        <div className="medicine page">
-            <h2 className="title">
-                Mein Medizinschrank
-            </h2>
-            <div className="medicine__content">
-                {medication.map((shelf, index) => (
-                    <div className="medicine-shelf" key={index}>
-                        <div className="medicine-shelf__items">
-                            {shelf.map(medicine => (
-                                <MedicineItem
-                                    key={medicine.name}
-                                    {...medicine}
-                                />
-                            ))}
+        <div className="medicine page-full">
+            <div className="page-padding">
+                <h2 className="title">
+                    Mein Medizinschrank
+                </h2>
+                <div className="medicine__content">
+                    {medication.map((shelf, index) => (
+                        <div className="medicine-shelf" key={index}>
+                            <div className="medicine-shelf__items">
+                                {shelf.map(medicine => (
+                                    <MedicineItem
+                                        key={medicine.name}
+                                        {...medicine}
+                                    />
+                                ))}
+                            </div>
+                            <div className="medicine-shelf__board"/>
                         </div>
-                        <div className="medicine-shelf__board"/>
-                    </div>
-                ))}
-                <button
-                    className={"medicine__add-button"}
-                    onClick={addMed}>
-                    <img alt="" className={"medicine__plus-icon"} src={PlusIcon}/>
-                    Hinzufügen
-                </button>
+                    ))}
+                    {/*<button*/}
+                    {/*    className={"medicine__add-button"}*/}
+                    {/*    onClick={addMed}>*/}
+                    {/*    <img alt="" className={"medicine__plus-icon"} src={PlusIcon}/>*/}
+                    {/*    Hinzufügen*/}
+                    {/*</button>*/}
+                </div>
             </div>
-            <NavigationBar/>
+            <NavigationBar onPlusClick={addMed}/>
         </div>
     );
 }

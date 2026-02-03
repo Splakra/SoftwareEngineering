@@ -68,74 +68,76 @@ function Review() {
         <div className={"review page"}>
             <PageHeader title="Einnahme hinzufügen"/>
 
-            <div className="query-wrapper">
-                <h2 className="title">
-                    Stimmt alles?
-                </h2>
+            <div className="view-transition-form">
+                <div className="query-wrapper">
+                    <h2 className="title">
+                        Stimmt alles?
+                    </h2>
 
-                <dl className="review__table">
-                    <div className="review__row">
-                        <dt className="review__label">Profil</dt>
-                        <dd className="review__value">{parsedProfile?.name}</dd>
-                    </div>
-                    <div className="review__row">
-                        <dt className="review__label">Medikament</dt>
-                        <dd className="review__value">{parsedMedication?.name}</dd>
-                    </div>
-                    <div className="review__row">
-                        <dt className="review__label">Dosis</dt>
-                        <dd className="review__value">{therapyDose} {getDoseUnit(parsedMedication?.type)}</dd>
-                    </div>
-                    <div className="review__row">
-                        <dt className="review__label">Startdatum</dt>
-                        <dd className="review__value">{formatDate(therapyStartDate)}</dd>
-                    </div>
-                    <div className="review__row">
-                        <dt className="review__label">Enddatum</dt>
-                        <dd className="review__value">{therapyEndDate ? formatDate(therapyEndDate) : "Kein Enddatum"}</dd>
-                    </div>
-                    <div className="review__row">
-                        <dt className="review__label">Rhythmus</dt>
-                        <dd className="review__value">{rhythmLabel}</dd>
-                    </div>
-
-                    {therapyRhythm === "daily" && (
+                    <dl className="review__table">
                         <div className="review__row">
-                            <dt className="review__label">Uhrzeit</dt>
-                            <dd className="review__value">{formatTimes(therapyDailyTime)}</dd>
+                            <dt className="review__label">Profil</dt>
+                            <dd className="review__value review__value--long">{parsedProfile?.name}</dd>
                         </div>
-                    )}
+                        <div className="review__row">
+                            <dt className="review__label">Medikament</dt>
+                            <dd className="review__value review__value--long">{parsedMedication?.name}</dd>
+                        </div>
+                        <div className="review__row">
+                            <dt className="review__label">Dosis</dt>
+                            <dd className="review__value">{therapyDose} {getDoseUnit(parsedMedication?.type)}</dd>
+                        </div>
+                        <div className="review__row">
+                            <dt className="review__label">Startdatum</dt>
+                            <dd className="review__value">{formatDate(therapyStartDate)}</dd>
+                        </div>
+                        <div className="review__row">
+                            <dt className="review__label">Enddatum</dt>
+                            <dd className="review__value">{therapyEndDate ? formatDate(therapyEndDate) : "Kein Enddatum"}</dd>
+                        </div>
+                        <div className="review__row">
+                            <dt className="review__label">Rhythmus</dt>
+                            <dd className="review__value">{rhythmLabel}</dd>
+                        </div>
 
-                    {therapyRhythm === "weekdays" && (
-                        <>
+                        {therapyRhythm === "daily" && (
                             <div className="review__row">
-                                <dt className="review__label">Wochentage</dt>
+                                <dt className="review__label">Uhrzeit</dt>
+                                <dd className="review__value">{formatTimes(therapyDailyTime)}</dd>
+                            </div>
+                        )}
+
+                        {therapyRhythm === "weekdays" && (
+                            <>
+                                <div className="review__row">
+                                    <dt className="review__label">Wochentage</dt>
+                                    <dd className="review__value">
+                                        {formatWeekdays(therapyWeekday)}
+                                    </dd>
+                                </div>
+                                {therapyWeekdayTime && (
+                                    <div className="review__row">
+                                        <dt className="review__label">Uhrzeit</dt>
+                                        <dd className="review__value">{therapyWeekdayTime}</dd>
+                                    </div>
+                                )}
+                            </>
+                        )}
+
+                        {therapyRhythm === "interval" && (
+                            <div className="review__row">
+                                <dt className="review__label">Intervall</dt>
                                 <dd className="review__value">
-                                    {formatWeekdays(therapyWeekday)}
+                                    {formatInterval({
+                                        intervalValue: therapyIntervalValue,
+                                        intervalType: therapyIntervalType,
+                                        intervalStartTime: therapyIntervalHoursStartTime
+                                    })}
                                 </dd>
                             </div>
-                            {therapyWeekdayTime && (
-                                <div className="review__row">
-                                    <dt className="review__label">Uhrzeit</dt>
-                                    <dd className="review__value">{therapyWeekdayTime} Uhr</dd>
-                                </div>
-                            )}
-                        </>
-                    )}
-
-                    {therapyRhythm === "interval" && (
-                        <div className="review__row">
-                            <dt className="review__label">Intervall</dt>
-                            <dd className="review__value">
-                                {formatInterval({
-                                    intervalValue: therapyIntervalValue,
-                                    intervalType: therapyIntervalType,
-                                    intervalStartTime: therapyIntervalHoursStartTime
-                                })}
-                            </dd>
-                        </div>
-                    )}
-                </dl>
+                        )}
+                    </dl>
+                </div>
             </div>
 
             <button

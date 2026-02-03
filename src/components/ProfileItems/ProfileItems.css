@@ -1,5 +1,5 @@
 .profiles__reminder-group {
-    margin-block: calc(1.5 * var(--margin-base));
+    margin-block: var(--margin-base);
 }
 
 .profiles__reminder-group-title {
@@ -9,7 +9,7 @@
     font-weight: bold;
     /*display: flex;*/
     /*justify-content: center;*/
-    color: var(--rich-mahogany);
+    color: var(--tangerine-dream);
 }
 
 .profiles__reminder-list {

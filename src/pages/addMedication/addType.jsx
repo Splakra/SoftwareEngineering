@@ -9,7 +9,7 @@ function addType() {
     const {medicationType, setMedicationType, medicationId} = useGlobal();
 
     async function nextPage() {
-        navigate("/addMedication/stock")
+        navigate("/addMedication/stock", {viewTransition: true})
     }
 
     return (
@@ -17,30 +17,41 @@ function addType() {
             <PageHeader title={medicationId ? "Medikament bearbeiten" : "Medikament hinzufügen"}
                         quitPath={"/medication"}
             />
+            <div className="view-transition-form">
+                <div className="query-wrapper">
+                    <h2 className={"title"}>
+                        Wie wird dieses Medikament verabreicht?
+                    </h2>
 
-            <div className="query-wrapper">
-                <h2 className={"title"}>
-                    Wie wird dieses Medikament verabreicht?
-                </h2>
-
-                <label htmlFor="medication-type">
-                    Einheit wählen
-                </label>
-                <div className="select-wrapper">
-                    <select
-                        id="medication-type"
-                        className={`control select ${!medicationType ? "is-placeholder" : ""}`}
-                        value={medicationType || ""}
-                        onChange={e => setMedicationType(e.target.value)}
-                    >
-                        <option value="" hidden>
-                            Glitzer
-                        </option>
-                        <option value="pills">Tabletten</option>
-                        <option value="fluid">Flüssig (ml)</option>
-                        <option value="drops">Tropfen</option>
-                        <option value="other">Sonstige</option>
-                    </select>
+                    <label htmlFor="medication-type">
+                        Einheit wählen
+                    </label>
+                    <div className="select-wrapper">
+                        <select
+                            id="medication-type"
+                            className={`control select ${!medicationType ? "is-placeholder" : ""}`}
+                            value={medicationType || ""}
+                            onChange={e => setMedicationType(e.target.value)}
+                        >
+                            <option value="" hidden>
+                                Glitzer
+                            </option>
+                            <option value="pills">Tabletten</option>
+                            <option value="fluid">Flüssig (ml)</option>
+                            <option value="drops">Tropfen</option>
+                            <option value="other">Sonstige</option>
+                        </select>
+                    </div>
+                    {medicationType === "drops" && (
+                        <div className="notice">
+                            <div className="notice__title">
+                                Tropfen werden in Milliliter umgerechnet.
+                            </div>
+                            <div className="notice__meta">
+                                1 Tropfen ≈ 0.05 ml
+                            </div>
+                        </div>
+                    )}
                 </div>
             </div>
 

@@ -15,26 +15,26 @@
     height: 0.8rem;
     background: white;
     border-radius: 0 0 var(--border-radius-large) var(--border-radius-large);
-    box-shadow: 0.3rem 0.3rem 0.8em 0.1rem color-mix(in oklab, var(--tangerine-dream) 15%, transparent);
+    box-shadow: 0.3rem 0.3rem 0.8em 0.1rem var(--snow-grey);
 }
 
-.medicine__add-button {
-    all: unset;
-    display: inline-flex;
-    align-items: center;
-    gap: var(--gap-small);
-    margin-top: 0.5rem;
-    padding: calc(2 * var(--padding-block-small)) calc(2 * var(--padding-inline-s));
-    align-self: flex-end; /* align button to the right */
-    background: var(--tea-green);
-    border-radius: var(--border-radius-large);
-    font-size: var(--font-size-l);
-    font-weight: bold;
-}
+/*.medicine__add-button {*/
+/*    all: unset;*/
+/*    display: inline-flex;*/
+/*    align-items: center;*/
+/*    gap: var(--gap-small);*/
+/*    margin-top: 0.5rem;*/
+/*    padding: calc(2 * var(--padding-block-small)) calc(2 * var(--padding-inline-s));*/
+/*    align-self: flex-end; !* align button to the right *!*/
+/*    background: var(--tea-green);*/
+/*    border-radius: var(--border-radius-large);*/
+/*    font-size: var(--font-size-l);*/
+/*    font-weight: bold;*/
+/*}*/
 
-.medicine__plus-icon {
-    width: 0.8rem;
-    padding: 0.2rem;
-    border: 0.1rem solid var(--rich-mahogany);
-    border-radius: 50%;
-}
+/*.medicine__plus-icon {*/
+/*    width: 0.8rem;*/
+/*    padding: 0.2rem;*/
+/*    border: 0.1rem solid var(--rich-mahogany);*/
+/*    border-radius: 50%;*/
+/*}*/

@@ -5,7 +5,7 @@
     background: var(--tangerine-dream);
     background-image: radial-gradient(circle at 15% 25%, var(--tangerine-dream) 10%, var(--tomato) 100%);
     background-repeat: no-repeat;
-    box-shadow: 0.3rem 0.3rem color-mix(in oklab, var(--tangerine-dream) 70%, transparent);
+    /*box-shadow: 0.3rem 0.3rem color-mix(in oklab, var(--tangerine-dream) 70%, transparent);*/
 }
 
 .medicine-item__infos {
@@ -50,7 +50,7 @@
 }
 
 .medicine-item__storage--empty {
-    color: var(--warning-red);
+    color: #F52D00;
 }
 
 .medicine-item__status {
@@ -58,6 +58,6 @@
 }
 
 .medicine-item__status--expired {
-    color: var(--warning-red);
+    color: #F52D00;
     font-weight: bold;
 }

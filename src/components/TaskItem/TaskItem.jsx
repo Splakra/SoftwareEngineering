@@ -35,6 +35,7 @@ export default function TaskItem({patient, medication, time, date, dose, id, don
         const timeString = now.toLocaleTimeString(navigator.language, {hour: "2-digit", minute: "2-digit"});
 
         const doseTaken = Number(convertDoseToAmount(dose, medication.type));
+        const updatedMedication = await db.medications.get(medication.id);
 
         // save as "done"
         await db.done.add({
@@ -46,7 +47,7 @@ export default function TaskItem({patient, medication, time, date, dose, id, don
         });
 
         // reduce medication inventory
-        await db.medications.update(medication.id, {amount: Number(medication.amount) - doseTaken});
+        await db.medications.update(medication.id, {amount: Number(updatedMedication.amount) - doseTaken});
 
         setChecked(true);
         setCheckedTime(timeString);
@@ -109,7 +110,9 @@ export default function TaskItem({patient, medication, time, date, dose, id, don
                 <div className={"task-item__infos"}>
                     <div className={"task-item__profile"}>
                         <PawIcon className="task-item__icon"/>
-                        {patient.name}
+                        <div className={"task-item__profile-name with-ellipsis"}>
+                            {patient.name}
+                        </div>
                     </div>
                     <div className={"task-item__medication"}>
                         {medication.name}

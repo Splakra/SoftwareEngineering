@@ -35,7 +35,7 @@ export default function Profile() {
         }
     }
 
-    function handleClick() {
+    function addProfile() {
         resetProfile();
         navigate("/profile/add");
     }
@@ -79,73 +79,75 @@ export default function Profile() {
     };
 
     return (
-        <div className="profiles page">
-            <h2 className="profiles__title title">
-                Meine Patient*innen
-            </h2>
+        <div className="profiles page-full">
+            <div className="page-padding">
+                <h2 className="profiles__title title">
+                    Meine Patient*innen
+                </h2>
 
-            <section className="profiles__profile-section">
-                <ul className="profiles__scroller">
-                    {patients.map((therapyProfile) => (
-                        <li
-                            className={`profiles__scroller-item ${
-                                profileActiveProfile?.id === therapyProfile.id
-                                    ? "profiles__scroller-item--active"
-                                    : ""
-                            }`}
-                            key={therapyProfile.id}
-                            ref={setActiveProfileRef(therapyProfile.id)}
-                        >
-                            <button
-                                className="profiles__scroller-item-button"
-                                onClick={() => handleActiveProfile(therapyProfile)}
-                                aria-label={`Profil ${therapyProfile.name} auswählen`}
+                <section className="profiles__profile-section">
+                    <ul className="profiles__scroller">
+                        {patients.map((therapyProfile) => (
+                            <li
+                                className={`profiles__scroller-item ${
+                                    profileActiveProfile?.id === therapyProfile.id
+                                        ? "profiles__scroller-item--active"
+                                        : ""
+                                }`}
+                                key={therapyProfile.id}
+                                ref={setActiveProfileRef(therapyProfile.id)}
                             >
-                                <PawIcon className="profiles__scroller-item-icon"/>
-                                <div className="profiles__scroller-item-name">
-                                    {therapyProfile.name}
-                                </div>
-                            </button>
+                                <button
+                                    className="profiles__scroller-item-button"
+                                    onClick={() => handleActiveProfile(therapyProfile)}
+                                    aria-label={`Profil ${therapyProfile.name} auswählen`}
+                                >
+                                    <PawIcon className="profiles__scroller-item-icon"/>
+                                    <div className="profiles__scroller-item-name with-ellipsis">
+                                        {therapyProfile.name}
+                                    </div>
+                                </button>
 
-                        </li>
-                    ))}
-                </ul>
-            </section>
-
-            {profileActiveProfile && (
-                <section className="profiles__active-profile-section">
-                    <div className="profiles__active-profile-header">
-                        <h3 className="profiles__active-profile-title">
-                            {formatTherapyTitle(profileActiveProfile?.name)}
-                        </h3>
-                        <ToggleMenu
-                            className="profiles__active-profile-toggle"
-                            items={[
-                                {
-                                    label: "Profil löschen",
-                                    icon: TrashIcon,
-                                    onClick: () => handleDelete(profileActiveProfile.id),
-                                },
-                                {
-                                    label: "Profil bearbeiten",
-                                    icon: PencilIcon,
-                                    onClick: () => editProfile(profileActiveProfile),
-                                },
-                            ]}
-                        />
-                    </div>
-                    <ProfileItems activeProfile={profileActiveProfile}/>
+                            </li>
+                        ))}
+                    </ul>
                 </section>
-            )}
 
-            <button
-                className="control button profiles__add-button"
-                onClick={handleClick}
-            >
-                Profil hinzufügen
-            </button>
+                {profileActiveProfile && (
+                    <section className="profiles__active-profile-section">
+                        <div className="profiles__active-profile-header">
+                            <h3 className="profiles__active-profile-title">
+                                {formatTherapyTitle(profileActiveProfile?.name)}
+                            </h3>
+                            <ToggleMenu
+                                className="profiles__active-profile-toggle"
+                                items={[
+                                    {
+                                        label: "Profil löschen",
+                                        icon: TrashIcon,
+                                        onClick: () => handleDelete(profileActiveProfile.id),
+                                    },
+                                    {
+                                        label: "Profil bearbeiten",
+                                        icon: PencilIcon,
+                                        onClick: () => editProfile(profileActiveProfile),
+                                    },
+                                ]}
+                            />
+                        </div>
+                        <ProfileItems activeProfile={profileActiveProfile}/>
+                    </section>
+                )}
 
-            <NavigationBar/>
+                {/*<button*/}
+                {/*    className="control button profiles__add-button"*/}
+                {/*    onClick={addProfile}*/}
+                {/*>*/}
+                {/*    Profil hinzufügen*/}
+                {/*</button>*/}
+
+            </div>
+            <NavigationBar onPlusClick={addProfile}/>
         </div>
     );
 }

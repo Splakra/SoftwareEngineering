@@ -4,6 +4,7 @@ import db from "../../database/DexieDatabase";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router";
 import {useGlobal} from "../globalContext";
+import {truncate} from "../../utils/therapyFormat";
 
 function ChooseProfile() {
     const navigate = useNavigate();
@@ -26,49 +27,53 @@ function ChooseProfile() {
     }
 
     function nextPage() {
-        navigate("/addTherapy/medication")
+        navigate("/addTherapy/medication", {viewTransition: true})
     }
 
     return (
         <div className="choose-profile page">
             <PageHeader title="einnahme hinzufügen"/>
 
-            <div className="query-wrapper">
-                <h2 className="title">
-                    Für wen ist die Einnahme?
-                </h2>
+            <div className="view-transition-form">
+                <div className="query-wrapper">
+                    <h2 className="title">
+                        Für wen ist die Einnahme?
+                    </h2>
 
-                <div className={"choose-profile__existing"}>
-                    <label>
-                        Profil auswählen
-                        <div className="select-wrapper">
-                            <select
-                                className={`control select ${therapyProfile === "" || therapyProfile == null ? "is-placeholder" : ""}`}
-                                value={therapyProfile ?? ""}
-                                onChange={e => setTherapyProfile(e.target.value)}
-                                disabled={patients.length === 0}
-                            >
-                                <option value="" hidden>
-                                    {patients.length === 0 ? "Noch nichts angelegt" : "Schnurzipups"}
-                                </option>
-                                {patients.map(profile => (
-                                    <option key={profile.id} value={JSON.stringify(profile)}>
-                                        {profile.name}
+                    <div className={"choose-profile__existing"}>
+                        <label>
+                            Profil auswählen
+                            <div className="select-wrapper">
+                                <select
+                                    className={`control select with-ellipsis ${therapyProfile === "" || therapyProfile == null ? "is-placeholder" : ""}`}
+                                    value={therapyProfile ?? ""}
+                                    onChange={e => setTherapyProfile(e.target.value)}
+                                    disabled={patients.length === 0}
+                                >
+                                    <option value="" hidden>
+                                        {patients.length === 0 ? "Noch nichts angelegt" : "Schnurzipups"}
                                     </option>
-                                ))}
-                            </select>
-                        </div>
-                    </label>
-                </div>
+                                    {patients.map(profile => (
+                                        <option
+                                            key={profile.id}
+                                            value={JSON.stringify(profile)}>
+                                            {truncate(profile.name)}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+                        </label>
+                    </div>
 
-                <div className="choose-profile__alternative">
-                    <span className="choose-profile__or">oder</span>
-                    <button
-                        className="control button choose-profile__new"
-                        onClick={addProfile}
-                    >
-                        Profil hinzufügen
-                    </button>
+                    <div className="choose-profile__alternative">
+                        <span className="choose-profile__or">oder</span>
+                        <button
+                            className="control button choose-profile__new"
+                            onClick={addProfile}
+                        >
+                            Profil hinzufügen
+                        </button>
+                    </div>
                 </div>
             </div>
 
