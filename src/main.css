@@ -1,13 +1,21 @@
 :root {
     /* color theme */
-    --snow: #fbf3f4ff; /* primary background color */
-    --snow-grey: color-mix(in oklab, var(--snow) 97%, black); /* secondary background color */
-    --rich-mahogany: #291000ff; /* primary text color */
-    --tangerine-dream: #fe8c46ff; /* primary color */
-    --tangerine-dream-light: color-mix(in oklab, var(--tangerine-dream), transparent); /* primary accent color */
-    --tomato: #ff5733ff; /* secondary accent color */
-    --tea-green: #c5edacff; /* secondary accent color */
-    --charcoal-blue: #0E4257; /* secondary accent color */
+    --snow: #fbf3f4ff;
+    /* primary background color */
+    --snow-grey: color-mix(in oklab, var(--snow) 97%, black);
+    /* secondary background color */
+    --rich-mahogany: #291000ff;
+    /* primary text color */
+    --tangerine-dream: #fe8c46ff;
+    /* primary color */
+    --tangerine-dream-light: color-mix(in oklab, var(--tangerine-dream), transparent);
+    /* primary accent color */
+    --tomato: #ff5733ff;
+    /* secondary accent color */
+    --tea-green: #c5edacff;
+    /* secondary accent color */
+    --charcoal-blue: #0E4257;
+    /* secondary accent color */
     --sunflower-gold: #fec34bff;
 
     /* general colors */
@@ -49,13 +57,13 @@
 @font-face {
     font-family: "Ysabeau Office";
     src: local("Ysabeau Office"),
-    url("./assets/ysabeau-office-variable.ttf") format("truetype");
+        url("./assets/ysabeau-office-variable.ttf") format("truetype");
 }
 
 @font-face {
     font-family: "Ysabeau Office";
     src: local("Ysabeau Office"),
-    url("./assets/ysabeau-office-italic-variable.ttf") format("truetype");
+        url("./assets/ysabeau-office-italic-variable.ttf") format("truetype");
     font-style: italic;
 }
 
@@ -69,6 +77,8 @@ body {
     max-width: 30rem;
     margin: 0;
     padding: 0;
+    /* padding für android navigation bar */
+    padding-bottom: var(--safe-area-inset-bottom, 0px);
     line-height: var(--line-height-base);
     background-color: var(--snow);
     font-family: var(--font-family-base), sans-serif;
@@ -103,15 +113,18 @@ fieldset {
 
 /* base classes */
 
-.page-full, .view-transition-wrapper {
-    min-height: 100dvh; /* 100% of the height of the visible browser window */
+.page-full,
+.view-transition-wrapper {
+    min-height: 100dvh;
+    /* 100% of the height of the visible browser window */
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
 }
 
 .page {
-    min-height: 100dvh; /* 100% of the height of the visible browser window */
+    min-height: 100dvh;
+    /* 100% of the height of the visible browser window */
     box-sizing: border-box;
     padding: var(--padding-inline-base);
     display: flex;
@@ -220,11 +233,9 @@ select.is-placeholder {
     margin-top: auto;
     position: sticky;
     bottom: var(--padding-inline-base);
-    background-image: radial-gradient(
-            circle at 15% 25%,
+    background-image: radial-gradient(circle at 15% 25%,
             var(--tangerine-dream) 10%,
-            var(--tomato) 100%
-    );
+            var(--tomato) 100%);
     color: var(--snow);
     font-size: var(--font-size-xl);
 }
@@ -301,6 +312,7 @@ select.is-placeholder {
     from {
         transform: translateX(100vw);
     }
+
     to {
         transform: translateX(0);
     }
@@ -310,6 +322,7 @@ select.is-placeholder {
     from {
         transform: translateX(0);
     }
+
     to {
         transform: translateX(100vw);
     }
@@ -355,12 +368,14 @@ input::-moz-placeholder {
 }
 
 input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button { /* hide arrows for number inputs in Chrome, Safari, Edge, Opera */
+input::-webkit-inner-spin-button {
+    /* hide arrows for number inputs in Chrome, Safari, Edge, Opera */
     -webkit-appearance: none;
     margin: 0;
 }
 
-input[type=number] { /* hide arrows for number inputs in Firefox */
+input[type=number] {
+    /* hide arrows for number inputs in Firefox */
     -moz-appearance: textfield;
 }
 
@@ -382,7 +397,8 @@ input[type="time"]::-webkit-calendar-picker-indicator {
     background-image: url("./assets/clock.svg");
 }
 
-input[type="date"]:focus-visible, /* my own focus style */
+input[type="date"]:focus-visible,
+/* my own focus style */
 input[type="time"]:focus-visible {
     outline: 0.2rem solid var(--tangerine-dream);
 }
