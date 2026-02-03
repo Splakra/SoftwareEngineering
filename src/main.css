@@ -73,12 +73,17 @@
     text-rendering: optimizeLegibility;
 }
 
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 body {
     max-width: 30rem;
     margin: 0;
     padding: 0;
-    /* padding für android navigation bar */
-    padding-bottom: var(--safe-area-inset-bottom, 0px);
     line-height: var(--line-height-base);
     background-color: var(--snow);
     font-family: var(--font-family-base), sans-serif;

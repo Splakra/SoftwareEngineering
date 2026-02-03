@@ -11,6 +11,7 @@
     position: sticky;
     width: 100%;
     height: var(--navigation-height);
+    padding-bottom: var(--safe-area-inset-bottom, 0px);
     max-width: 30rem;
     left: 0;
     bottom: 0;
