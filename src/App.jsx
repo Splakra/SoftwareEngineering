@@ -17,26 +17,50 @@ import ManualIntake from "./pages/medicinePage/manualIntake.jsx"
 import Profiles from "./pages/profiles/profiles.jsx"
 import NewProfile from "./pages/profiles/newProfile.jsx"
 
+import { useLocation, Outlet } from "react-router-dom";
+import { useEffect } from "react";
+
+function ViewTransitionWrapper() {
+    const location = useLocation();
+
+    useEffect(() => {
+        if (!document.startViewTransition) return;
+
+        document.startViewTransition(() => {
+            // React Router rendert automatisch neu
+        });
+    }, [location.pathname]);
+
+    return (
+        <div className="view-transition-wrapper">
+            <Outlet />
+        </div>
+    );
+}
+
+
 export default function App() {
     return (
         <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/addTherapy/profile" element={<ChooseProfile />} />
-            <Route path="/addTherapy/medication" element={<ChooseMedication />} />
-            <Route path="/addTherapy/dose" element={<ChooseDose />} />
-            <Route path="/addTherapy/reminder" element={<SetReminder />} />
-            <Route path="/addTherapy/review" element={<ReviewTherapy />} />
-            <Route path="/addMedication/name" element={<AddName />} />
-            <Route path="/addMedication/type" element={<AddType />} />
-            <Route path="/addMedication/stock" element={<AddStock />} />
-            <Route path="/addMedication/expirationDate" element={<AddExpirationDate />} />
-            <Route path="/addMedication/review" element={<ReviewMedication />} />
-            <Route path="/medication" element={<MedicinePage />} />
-            <Route path="/manualIntake/:id" element={<ManualIntake />} />
-            <Route path="/profile" element={<Profiles />} />
-            <Route path="/profile/add" element={<NewProfile />} />
-            {/* * matches all URLs, the ? makes it optional so it will match / as well */}
-            <Route path="*?" element={<CatchAll />} />
+            <Route element={<ViewTransitionWrapper />}>
+                <Route path="/" element={<Dashboard />} />
+                <Route path="/addTherapy/profile" element={<ChooseProfile />} />
+                <Route path="/addTherapy/medication" element={<ChooseMedication />} />
+                <Route path="/addTherapy/dose" element={<ChooseDose />} />
+                <Route path="/addTherapy/reminder" element={<SetReminder />} />
+                <Route path="/addTherapy/review" element={<ReviewTherapy />} />
+                <Route path="/addMedication/name" element={<AddName />} />
+                <Route path="/addMedication/type" element={<AddType />} />
+                <Route path="/addMedication/stock" element={<AddStock />} />
+                <Route path="/addMedication/expirationDate" element={<AddExpirationDate />} />
+                <Route path="/addMedication/review" element={<ReviewMedication />} />
+                <Route path="/medication" element={<MedicinePage />} />
+                <Route path="/manualIntake/:id" element={<ManualIntake />} />
+                <Route path="/profile" element={<Profiles />} />
+                <Route path="/profile/add" element={<NewProfile />} />
+                {/* * matches all URLs, the ? makes it optional so it will match / as well */}
+                <Route path="*?" element={<CatchAll />} />
+            </Route>
         </Routes>
     );
 }
