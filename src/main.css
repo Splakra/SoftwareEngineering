@@ -74,6 +74,7 @@ body {
     font-family: var(--font-family-base), sans-serif;
     font-size: var(--font-size-base);
     color: var(--rich-mahogany);
+    view-transition-name: unset;
 }
 
 img {
@@ -102,7 +103,7 @@ fieldset {
 
 /* base classes */
 
-.page-full {
+.page-full, .view-transition-wrapper {
     min-height: 100dvh; /* 100% of the height of the visible browser window */
     box-sizing: border-box;
     display: flex;
