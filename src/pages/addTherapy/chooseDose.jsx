@@ -36,10 +36,19 @@ function ChooseDose() {
                                 type="number"
                                 inputMode="numeric" // opens numeric keypad on phone
                                 min="0"
-                                step="any"
+                                step="0.01"
                                 placeholder="42"
                                 value={therapyDose ?? ""}
                                 onChange={e => setTherapyDose(e.target.value)}
+
+                                onBlur={() => {
+                                    setTherapyDose(prev => {
+                                        if (prev === "" || isNaN(prev)) return "";
+                                        return Number(prev).toFixed(2);
+                                    });
+                                }}
+
+
                             />
                             <span
                                 className="unit">

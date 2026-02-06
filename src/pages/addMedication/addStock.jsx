@@ -45,11 +45,17 @@ function AddStock() {
                                 type="number"
                                 inputMode="numeric" // opens numeric keypad on phone
                                 min="0"
-                                step="any"
+                                step="0.01"
                                 placeholder="1312"
                                 value={medicationStock ?? ""}
                                 onChange={e => setMedicationStock(e.target.value)}
-                            />
+
+                                onBlur={() => {
+                                    setMedicationStock(prev => {
+                                        if (prev === "" || isNaN(prev)) return "";
+                                        return Number(prev).toFixed(2);
+                                    });
+                                }}/>
                             <span
                                 className="unit">
                             {getMedicationUnit(medicationType)}
@@ -92,10 +98,17 @@ function AddStock() {
                                 type="number"
                                 inputMode="numeric" // opens numeric keypad on phone
                                 min="0"
-                                step="any"
+                                step="0.01"
                                 placeholder="161"
                                 value={medicationBuyNew ?? ""}
                                 onChange={e => setMedicationBuyNew(e.target.value)}
+
+                                onBlur={() => {
+                                    setMedicationBuyNew(prev => {
+                                        if (prev === "" || isNaN(prev)) return "";
+                                        return Number(prev).toFixed(2);
+                                    });
+                                }}
                             />
                             <span
                                 className="unit">
