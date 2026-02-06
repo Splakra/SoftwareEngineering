@@ -14,6 +14,7 @@ function ChooseDose() {
         navigate("/addTherapy/reminder", {viewTransition: true})
     }
 
+
     return (
         <div className="choose-dose page">
             <PageHeader title="einnahme hinzufügen"/>

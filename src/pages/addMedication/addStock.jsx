@@ -20,6 +20,7 @@ function AddStock() {
         navigate("/addMedication/expirationDate", {viewTransition: true})
     }
 
+
     return (
         <div className="page">
             <PageHeader
