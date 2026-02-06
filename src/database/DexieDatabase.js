@@ -8,4 +8,5 @@ db.version(1).stores({
     done: '++id, reminderId, date, time, intakeTime, doseTaken'
 });
 
+
 export default db

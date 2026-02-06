@@ -27,7 +27,7 @@ export default function MedicineItem({
         type === "fluid" ? BottleIcon
             : type === "drops" ? DropIcon
                 : PillIcon;
-    const storageText = `${amount} ${getMedicationUnit(type)}`;
+    const storageText = `${Number(amount).toFixed(2)} ${getMedicationUnit(type)}`;
     const empty = Number(amount) <= Number(reminderBuyNew);
     const expDate = new Date(expiration);
     const expired = Date.now() > expDate.getTime();
