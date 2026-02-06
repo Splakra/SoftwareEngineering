@@ -1,22 +1,13 @@
 :root {
     /* color theme */
-    --snow: #fbf3f4ff;
-    /* primary background color */
-    --snow-grey: color-mix(in oklab, var(--snow) 97%, black);
-    /* secondary background color */
-    --rich-mahogany: #291000ff;
-    /* primary text color */
-    --tangerine-dream: #fe8c46ff;
-    /* primary color */
-    --tangerine-dream-light: color-mix(in oklab, var(--tangerine-dream), transparent);
-    /* primary accent color */
-    --tomato: #ff5733ff;
-    /* secondary accent color */
-    --tea-green: #c5edacff;
-    /* secondary accent color */
-    --charcoal-blue: #0E4257;
-    /* secondary accent color */
-    --sunflower-gold: #fec34bff;
+    --snow: #fbf3f4ff; /* primary background color */
+    --snow-grey: color-mix(in oklab, var(--snow) 97%, black); /* secondary background color */
+    --rich-mahogany: #291000ff; /* primary text color */
+    --tangerine-dream: #fe8c46ff; /* primary color */
+    --tomato: #ff5733ff; /* secondary color */
+    --tangerine-dream-light: color-mix(in oklab, var(--tangerine-dream), transparent); /* primary accent color */
+    --charcoal-blue: #0E4257; /* secondary accent color */
+    --tea-green: #c5edacff; /* tertiary accent color */
 
     /* general colors */
     --color-text: var(--rich-mahogany);
@@ -57,13 +48,13 @@
 @font-face {
     font-family: "Ysabeau Office";
     src: local("Ysabeau Office"),
-        url("./assets/ysabeau-office-variable.ttf") format("truetype");
+    url("./assets/ysabeau-office-variable.ttf") format("truetype");
 }
 
 @font-face {
     font-family: "Ysabeau Office";
     src: local("Ysabeau Office"),
-        url("./assets/ysabeau-office-italic-variable.ttf") format("truetype");
+    url("./assets/ysabeau-office-italic-variable.ttf") format("truetype");
     font-style: italic;
 }
 
@@ -237,10 +228,10 @@ select.is-placeholder {
 .button-next {
     margin-top: auto;
     position: sticky;
-    bottom: var(--padding-inline-base);
+    bottom: calc(var(--padding-inline-base) + env(safe-area-inset-bottom));
     background-image: radial-gradient(circle at 15% 25%,
-            var(--tangerine-dream) 10%,
-            var(--tomato) 100%);
+    var(--tangerine-dream) 10%,
+    var(--tomato) 100%);
     color: var(--snow);
     font-size: var(--font-size-xl);
 }
@@ -403,7 +394,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 }
 
 input[type="date"]:focus-visible,
-/* my own focus style */
+    /* my own focus style */
 input[type="time"]:focus-visible {
     outline: 0.2rem solid var(--tangerine-dream);
 }
