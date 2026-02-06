@@ -237,7 +237,7 @@ select.is-placeholder {
 .button-next {
     margin-top: auto;
     position: sticky;
-    bottom: var(--padding-inline-base);
+    bottom: calc(var(--padding-inline-base) + env(safe-area-inset-bottom));
     background-image: radial-gradient(circle at 15% 25%,
             var(--tangerine-dream) 10%,
             var(--tomato) 100%);
