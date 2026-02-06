@@ -27,7 +27,22 @@ export default function MedicineItem({
         type === "fluid" ? BottleIcon
             : type === "drops" ? DropIcon
                 : PillIcon;
-    const storageText = `${amount} ${getMedicationUnit(type)}`;
+
+    function formatStock(value) {
+        if (value === null || value === undefined || value === "") return "";
+        const num = Number(value);
+        if (Number.isNaN(num)) return value;
+        const [intPart, decPart] = String(value).replace(",", ".").split(".");
+        if (!decPart || decPart.length === 0) {
+            return intPart;
+        }
+        if (decPart.length <= 2) {
+            return `${intPart}.${decPart}`;
+        }
+        return num.toFixed(2);
+    }
+
+    const storageText = `${formatStock(amount)} ${getMedicationUnit(type)}`;
     const empty = Number(amount) <= Number(reminderBuyNew);
     const expDate = new Date(expiration);
     const expired = Date.now() > expDate.getTime();
