@@ -15,13 +15,15 @@ export async function clientLoader({ request }) {
     };
 }
 
+const systemDate = new Date();
+systemDate.setHours(12, 0, 0, 0)
+
 function Dashboard() {
     const [reminders, setReminders] = useState([]);
 
     const [search, setSearch] = useSearchParams();
     const query = new URLSearchParams(search);
-    const date = query.get("date") ?? new Date().toISOString().split("T")[0];
-    const location = useLocation();
+    const date = query.get("date") ?? systemDate.toISOString().split("T")[0];
 
 
     useEffect(() => {
@@ -47,6 +49,7 @@ function Dashboard() {
 
     const weekly = [-2, -1, 0, 1, 2].map(value => {
         const today = new Date();
+        today.setHours(12, 0, 0, 0);
         today.setDate(today.getDate() + value);
         return today;
     })
