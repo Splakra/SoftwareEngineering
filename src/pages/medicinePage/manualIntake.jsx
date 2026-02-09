@@ -1,13 +1,14 @@
 import PageHeader from "../../components/PageHeader/PageHeader";
-import { useNavigate, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import {useNavigate, useParams} from "react-router-dom";
+import {useEffect, useState} from "react";
 import db from "../../database/DexieDatabase";
-import {getDoseUnit} from "../../utils/therapyFormat";
+import {getDoseUnit, convertDoseToAmount} from "../../utils/therapyFormat";
+
 
 export default function ManualIntake() {
     const navigate = useNavigate();
     const [amount, setAmount] = useState("");
-    const { id } = useParams();
+    const {id} = useParams();
 
     const [medication, setMedication] = useState()
     useEffect(() => {
@@ -19,15 +20,19 @@ export default function ManualIntake() {
         loadMedication();
     }, [])
 
+
+    const doseTaken = Number(convertDoseToAmount(amount, medication?.type));
+
+
     async function nextPage() {
-        await db.medications.update(Number.parseInt(id), { amount: medication?.amount - Number.parseFloat(amount) })
+        await db.medications.update(Number.parseInt(id), {amount: (medication?.amount - Number.parseFloat(doseTaken)).toFixed(2)})
         navigate("/medication")
     }
 
     return (
         <div className="manual-intake page">
             <PageHeader title={"Einzelgabe hinzufügen"}
-                quitPath={"/medication"} />
+                        quitPath={"/medication"}/>
 
             <div className="query-wrapper">
                 <h2 className="title">

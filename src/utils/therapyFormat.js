@@ -78,3 +78,8 @@ export function truncate(text, maxLength = 30) {
         ? text.slice(0, maxLength) + "…"
         : text;
 }
+
+export function convertDoseToAmount(dose, type) {
+    if (type === "drops") return dose * 0.05; // 1 drop = 0.05ml
+    return dose; // pills or ml remain as they are
+}
