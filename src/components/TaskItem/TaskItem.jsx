@@ -6,7 +6,7 @@ import ReverseIcon from "../../assets/reverse.svg";
 import "./TaskItem.css";
 import ToggleMenu from "../ToggleMenu/ToggleMenu";
 import db from "../../database/DexieDatabase";
-import {getDoseUnit} from "../../utils/therapyFormat";
+import {getDoseUnit, convertDoseToAmount} from "../../utils/therapyFormat";
 
 export default function TaskItem({patient, medication, time, date, dose, id, done}) {
     const doseText = `${dose} ${getDoseUnit(medication.type)}`;
@@ -20,12 +20,7 @@ export default function TaskItem({patient, medication, time, date, dose, id, don
             setCheckedTime(isDone.intakeTime);
         }
     }, [isDone]);
-
-    // convert drops to ml
-    function convertDoseToAmount(dose, type) {
-        if (type === "drops") return dose * 0.05; // 1 drop = 0.05ml
-        return dose; // pills or ml remain as they are
-    }
+    
 
     // check off and reduce inventory
     const handleChecked = async () => {

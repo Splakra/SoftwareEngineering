@@ -25,7 +25,7 @@ export default function ManualIntake() {
 
 
     async function nextPage() {
-        await db.medications.update(Number.parseInt(id), {amount: (medication?.amount - Number.parseFloat(doseTaken)).toFixed(2)})
+        await db.medications.update(Number.parseInt(id), {amount: (medication?.amount - Number.parseFloat(doseTaken))})
         navigate("/medication")
     }
 
