@@ -10,6 +10,7 @@ import ToggleMenu from "../ToggleMenu/ToggleMenu";
 import {useNavigate, useRevalidator} from "react-router-dom";
 import {useGlobal} from "../../pages/globalContext";
 import {getMedicationUnit} from "../../utils/therapyFormat";
+import * as medication from "@testing-library/user-event/dist/type";
 
 export default function MedicineItem({
                                          id,
@@ -70,6 +71,7 @@ export default function MedicineItem({
         navigate("/addMedication/name");
     }
 
+
     function addIntake() {
         navigate("/manualIntake/" + id);
     }
@@ -106,4 +108,4 @@ export default function MedicineItem({
             </div>
         </div>
     )
-}
+};
