@@ -1,8 +1,3 @@
-# Installation on your Phone
-
-1. Download the petMeds.apk from this directory to your phone.
-2. Run the apk on your Phone (It might prompt you with warnings but since it works offline its going to be safe).
-3. Enjoy!
 
 # Installation on PC
 
